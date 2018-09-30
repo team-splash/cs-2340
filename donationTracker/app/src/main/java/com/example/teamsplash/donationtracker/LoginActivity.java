@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -157,6 +158,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public void onCancel() {
         Toast.makeText(LoginActivity.this, "User cancelled", Toast.LENGTH_SHORT).show();
     }
+
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the

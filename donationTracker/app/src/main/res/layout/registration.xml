@@ -11,9 +11,9 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".LoginActivity">
 
-    <!-- Login progress -->
+    <!-- Registration Progress -->
     <ProgressBar
-        android:id="@+id/login_progress"
+        android:id="@+id/registration_progress"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,13 +23,27 @@
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="365dp"
-        android:layout_height="261dp">
+        android:layout_height="385dp">
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_name"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -43,7 +57,6 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true" />
-
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -64,42 +77,20 @@
 
             </android.support.design.widget.TextInputLayout>
 
+
             <Button
-                android:id="@+id/email_sign_in_button"
+                android:id="@+id/create_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:text="@string/action_sign_in_short"
+                android:text="@string/create_account"
                 android:textStyle="bold" />
 
 
-            <Button
-                android:id="@+id/cleared"
-                android:layout_width="match_parent"
-                android:layout_height="59dp"
-                android:text="cancel" />
-
-
         </LinearLayout>
+
     </ScrollView>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="New User?"
-        android:textAlignment="center"
-        android:textSize="24sp" />
-
-    <Button
-        android:id="@+id/create_account_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:textStyle="bold" />
 
 
 </LinearLayout>
