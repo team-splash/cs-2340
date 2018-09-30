@@ -97,7 +97,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
+        //TODO: Replace this with database logic?
         return password.equals("password");
     }
 
