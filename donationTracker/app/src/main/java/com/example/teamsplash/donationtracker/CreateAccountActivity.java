@@ -11,6 +11,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     private EditText firstNameField;
     private EditText lastNameField;
+    private String PersonNameField = firstNameField.getText() + " " + lastNameField.getText();
     private EditText emailAddressField;
     private EditText passwordField;
     private EditText confirmPasswordField;
@@ -51,7 +52,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!TextUtils.isEmpty(password) && !isPasswordValid()) {
             passwordField.setError(getString(R.string.error_invalid_password));
             focusView = passwordField;
             cancel = true;
@@ -79,14 +80,14 @@ public class CreateAccountActivity extends AppCompatActivity {
             // showProgress(true);
     }
 
-
+    // Checks for an @ symbol and a period
     private boolean isEmailValid(String email) {
-        return email.contains("@");
+        return email.contains("@") && email.contains(".");
     }
 
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with database logic?
-        return password.equals("password");
+    // Confirms that the entries in ""enter password" and "confirm password" are equivalent
+    private boolean isPasswordValid() {
+        return passwordField.getText().equals(confirmPasswordField.getText());
     }
 
 
