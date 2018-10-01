@@ -15,7 +15,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
     private EditText firstNameField;
     private EditText lastNameField;
-    private String PersonNameField = firstNameField.getText() + " " + lastNameField.getText();
     private Spinner userTypeField;
     private EditText emailAddressField;
     private EditText passwordField;
@@ -41,6 +40,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Tries to create a new account when the "Create account" button is clicked.
+     */
     private void onCreateAccount() {}
 
     /**
