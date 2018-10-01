@@ -4,13 +4,18 @@ import android.os.Bundle;
 import android.view.View;
 
 import android.text.TextUtils;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 
 public class CreateAccountActivity extends AppCompatActivity {
 
     private EditText firstNameField;
     private EditText lastNameField;
+    private Spinner userTypeField;
     private EditText emailAddressField;
     private EditText passwordField;
     private EditText confirmPasswordField;
@@ -20,6 +25,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         setContentView(R.layout.create_account);
         firstNameField = findViewById(R.id.first_name_field);
         lastNameField = findViewById(R.id.last_name_field);
+        userTypeField = findViewById(R.id.user_type_field);
+        ArrayAdapter<UserType> userTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, UserType.values());
+        userTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        userTypeField.setAdapter(userTypeAdapter);
         emailAddressField = findViewById(R.id.email_address_field);
         passwordField = findViewById(R.id.password_field);
         confirmPasswordField = findViewById(R.id.confirm_password_field);

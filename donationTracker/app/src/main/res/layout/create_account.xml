@@ -30,6 +30,11 @@
         android:inputType="textPersonName"
         android:hint="@string/last_name" />
 
+    <Spinner
+        android:id="@+id/user_type_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <EditText
         android:id="@+id/email_address_field"
         android:layout_width="match_parent"
