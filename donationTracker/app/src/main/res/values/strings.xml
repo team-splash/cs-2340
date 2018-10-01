@@ -2,8 +2,8 @@
     <string name="app_name">donationTracker</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
+    <string name="prompt_email">Email address</string>
+    <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="register">Register</string>
     <string name="create_account">Create Account</string>
@@ -15,6 +15,11 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="prompt_name">Enter your name</string>
+    <string name="prompt_name">Your name</string>
     <string name="prompt_user_id">Enter a user id</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
 </resources>

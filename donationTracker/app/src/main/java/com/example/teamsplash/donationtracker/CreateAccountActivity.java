@@ -3,52 +3,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
-import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.content.Intent;
-import android.content.IntentSender;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class CreateAccountActivity extends AppCompatActivity {
 
-    private AutoCompleteTextView mEmailView;
-    private AutoCompleteTextView mNameView;
-    private EditText mPasswordView;
+    private EditText firstNameField;
+    private EditText lastNameField;
+    private EditText emailAddressField;
+    private EditText passwordField;
+    private EditText confirmPasswordField;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account);
+        firstNameField = findViewById(R.id.first_name_field);
+        lastNameField = findViewById(R.id.last_name_field);
+        emailAddressField = findViewById(R.id.email_address_field);
+        passwordField = findViewById(R.id.password_field);
+        confirmPasswordField = findViewById(R.id.confirm_password_field);
+        findViewById(R.id.create_account_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCreateAccount();
+            }
+        });
     }
+
+    private void onCreateAccount() {}
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -57,31 +40,31 @@ public class CreateAccountActivity extends AppCompatActivity {
      */
     private void attemptLogin() {
         // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
+        emailAddressField.setError(null);
+        passwordField.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String email = emailAddressField.getText().toString();
+        String password = passwordField.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+            passwordField.setError(getString(R.string.error_invalid_password));
+            focusView = passwordField;
             cancel = true;
         }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            emailAddressField.setError(getString(R.string.error_field_required));
+            focusView = emailAddressField;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            emailAddressField.setError(getString(R.string.error_invalid_email));
+            focusView = emailAddressField;
             cancel = true;
         }
 
