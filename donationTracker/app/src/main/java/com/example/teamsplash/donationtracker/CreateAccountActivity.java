@@ -1,4 +1,5 @@
 package com.example.teamsplash.donationtracker;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -6,9 +7,7 @@ import android.view.View;
 import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 
 public class CreateAccountActivity extends AppCompatActivity {
@@ -38,12 +37,30 @@ public class CreateAccountActivity extends AppCompatActivity {
                 onCreateAccount();
             }
         });
+        findViewById(R.id.cancel_account_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCancelPressed();
+            }
+        });
+    }
+
+    /**
+     * Button handler for cancel
+     */
+    public void onCancelPressed() {
+        startActivity(new Intent(CreateAccountActivity.this, LoginActivity.class));
+        finish();
     }
 
     /**
      * Tries to create a new account when the "Create account" button is clicked.
      */
-    private void onCreateAccount() {}
+    private void onCreateAccount() {
+
+
+
+    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.

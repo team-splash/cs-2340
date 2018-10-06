@@ -64,4 +64,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Create account" />
+
+    <Button
+        android:id="@+id/cancel_account_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel" />
 </LinearLayout>
