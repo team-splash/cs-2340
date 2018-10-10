@@ -1,4 +1,5 @@
-package com.example.teamsplash.donationtracker;
+package com.example.teamsplash.donationtracker.controller;
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,11 @@ import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.example.teamsplash.donationtracker.R;
+import com.example.teamsplash.donationtracker.model.User;
+import com.example.teamsplash.donationtracker.model.Users;
+import com.example.teamsplash.donationtracker.model.UserType;
 
 
 public class CreateAccountActivity extends AppCompatActivity {
@@ -49,7 +55,7 @@ public class CreateAccountActivity extends AppCompatActivity {
      * Button handler for cancel
      */
     public void onCancelPressed() {
-        startActivity(new Intent(CreateAccountActivity.this, LoginActivity.class));
+        startActivity(new Intent(com.example.teamsplash.donationtracker.controller.CreateAccountActivity.this, LoginActivity.class));
         finish();
     }
 
@@ -57,9 +63,34 @@ public class CreateAccountActivity extends AppCompatActivity {
      * Tries to create a new account when the "Create account" button is clicked.
      */
     private void onCreateAccount() {
+        Users users = Users.getInstance();
+        String firstname = firstNameField.getText().toString();
+        String lastname = lastNameField.getText().toString();
+        String email = emailAddressField.getText().toString();;
+
+        String password = passwordField.getText().toString();
+        String confirmPass = confirmPasswordField.getText().toString();
+
+        if (!isPasswordValid()) {
+            // Warn user that passwords don't match
+        }
+
+        if (!isEmailValid(email)) {
+            // Warn user that email is not valid
+        }
 
 
-
+        UserType usertype = (UserType) userTypeField.getSelectedItem();
+        User newUser = new User(firstname, lastname, email, password, usertype);
+        if (users.contains(newUser)) {
+            // Warn user that account exists
+            return;
+        } else {
+            users.add(newUser);
+            users.setCurrentUser(newUser);
+            Intent accountCreated = new Intent(com.example.teamsplash.donationtracker.controller.CreateAccountActivity.this, LoginActivity.class);
+            startActivity(accountCreated);
+        }
     }
 
     /**
@@ -102,10 +133,10 @@ public class CreateAccountActivity extends AppCompatActivity {
             // form field with an error.
             focusView.requestFocus();
         }
-            //TODO: figure out of we need this?
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            // showProgress(true);
+        //TODO: figure out of we need this?
+        // Show a progress spinner, and kick off a background task to
+        // perform the user login attempt.
+        // showProgress(true);
     }
 
     // Checks for an @ symbol and a period

@@ -1,4 +1,5 @@
-package com.example.teamsplash.donationtracker;
+package com.example.teamsplash.donationtracker.controller;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +32,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.teamsplash.donationtracker.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    private com.example.teamsplash.donationtracker.controller.LoginActivity.UserLoginTask mAuthTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -109,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         ((Button) findViewById(R.id.create_account_button)).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, CreateAccountActivity.class));
+                startActivity(new Intent(com.example.teamsplash.donationtracker.controller.LoginActivity.this, CreateAccountActivity.class));
                 finish();
             }
         });
@@ -160,7 +163,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     public void onCancel() {
-        Toast.makeText(LoginActivity.this, "User cancelled", Toast.LENGTH_SHORT).show();
+        Toast.makeText(com.example.teamsplash.donationtracker.controller.LoginActivity.this, "User cancelled", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -210,7 +213,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new com.example.teamsplash.donationtracker.controller.LoginActivity.UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
     }
@@ -266,7 +269,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         return new CursorLoader(this,
                 // Retrieve data rows for the device user's 'profile' contact.
                 Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
-                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
+                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), com.example.teamsplash.donationtracker.controller.LoginActivity.ProfileQuery.PROJECTION,
 
                 // Select only email addresses.
                 ContactsContract.Contacts.Data.MIMETYPE +
@@ -283,7 +286,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         List<String> emails = new ArrayList<>();
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            emails.add(cursor.getString(ProfileQuery.ADDRESS));
+            emails.add(cursor.getString(com.example.teamsplash.donationtracker.controller.LoginActivity.ProfileQuery.ADDRESS));
             cursor.moveToNext();
         }
 
@@ -298,7 +301,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(LoginActivity.this,
+                new ArrayAdapter<>(com.example.teamsplash.donationtracker.controller.LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
@@ -358,7 +361,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                Intent intent = new Intent(LoginActivity.this, NextActivity.class);
+                Intent intent = new Intent(com.example.teamsplash.donationtracker.controller.LoginActivity.this, NextActivity.class);
 
                 startActivity(intent);
                 finish();

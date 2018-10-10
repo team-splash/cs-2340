@@ -1,4 +1,4 @@
-package com.example.teamsplash.donationtracker;
+package com.example.teamsplash.donationtracker.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.widget.Button;
 import android.os.Handler;
 import android.os.Message;
+
+import com.example.teamsplash.donationtracker.R;
 
 
 public class NextActivity extends AppCompatActivity {
@@ -33,7 +35,7 @@ public class NextActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             String loginmsg=(String)msg.obj;
             if(loginmsg.equals("NOTSUCCESS")) {
-                Intent intent = new Intent(NextActivity.this,LoginActivity.class);
+                Intent intent = new Intent(com.example.teamsplash.donationtracker.controller.NextActivity.this,LoginActivity.class);
                 startActivity(intent);
                 finish();
                 removeDialog(0);
