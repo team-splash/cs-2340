@@ -24,6 +24,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText emailAddressField;
     private EditText passwordField;
     private EditText confirmPasswordField;
+    public final int MIN_PASSWORD_LENGTH = 8;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,55 +68,13 @@ public class CreateAccountActivity extends AppCompatActivity {
         String firstname = firstNameField.getText().toString();
         String lastname = lastNameField.getText().toString();
         String email = emailAddressField.getText().toString();;
-
         String password = passwordField.getText().toString();
         String confirmPass = confirmPasswordField.getText().toString();
 
-        if (!isPasswordValid()) {
-            // Warn user that passwords don't match
-        }
-
-        if (!isEmailValid(email)) {
-            // Warn user that email is not valid
-        }
-
-
-        UserType usertype = (UserType) userTypeField.getSelectedItem();
-        User newUser = new User(firstname, lastname, email, password, usertype);
-        if (users.contains(newUser)) {
-            // Warn user that account exists
-            return;
-        } else {
-            users.add(newUser);
-            users.setCurrentUser(newUser);
-            Intent accountCreated = new Intent(com.example.teamsplash.donationtracker.controller.CreateAccountActivity.this, LoginActivity.class);
-            startActivity(accountCreated);
-        }
-    }
-
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
-    private void attemptLogin() {
-        // Reset errors.
-        emailAddressField.setError(null);
-        passwordField.setError(null);
-
-        // Store values at the time of the login attempt.
-        String email = emailAddressField.getText().toString();
-        String password = passwordField.getText().toString();
+        // Check if everything during the creation of the account is valid
 
         boolean cancel = false;
         View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid()) {
-            passwordField.setError(getString(R.string.error_invalid_password));
-            focusView = passwordField;
-            cancel = true;
-        }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
@@ -128,15 +87,36 @@ public class CreateAccountActivity extends AppCompatActivity {
             cancel = true;
         }
 
+        // Check for a valid password, if the user entered one.
+        if (password.length() < MIN_PASSWORD_LENGTH) {
+            passwordField.setError(getString(R.string.error_invalid_password));
+            focusView = passwordField;
+            cancel = true;
+        }
+        // TODO fix this password verification??? I don't understand???? -Sara
+        /** else if (!isPasswordValid()) {
+            confirmPasswordField.setError(getString(R.string.error_mismatched_password));
+            focusView = confirmPasswordField;
+            cancel = true;
+        } **/
+
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
+            // There was an error; don't attempt to create and focus the first
             // form field with an error.
             focusView.requestFocus();
+        } else {
+            UserType usertype = (UserType) userTypeField.getSelectedItem();
+            User newUser = new User(firstname, lastname, email, password, usertype);
+            if (!users.add(newUser)) {
+                emailAddressField.setError(getString(R.string.error_user_exists));
+                focusView = emailAddressField;
+                focusView.requestFocus();
+            } else {
+                users.setCurrentUser(newUser);
+                Intent accountCreated = new Intent(com.example.teamsplash.donationtracker.controller.CreateAccountActivity.this, LoginActivity.class);
+                startActivity(accountCreated);
+            }
         }
-        //TODO: figure out of we need this?
-        // Show a progress spinner, and kick off a background task to
-        // perform the user login attempt.
-        // showProgress(true);
     }
 
     // Checks for an @ symbol and a period
@@ -144,7 +124,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         return email.contains("@") && email.contains(".");
     }
 
-    // Confirms that the entries in ""enter password" and "confirm password" are equivalent
+    // Confirms that the entries in "enter password" and "confirm password" are equivalent
     private boolean isPasswordValid() {
         return passwordField.getText().equals(confirmPasswordField.getText());
     }

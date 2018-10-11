@@ -1,5 +1,4 @@
 package com.example.teamsplash.donationtracker.model;
-import com.example.teamsplash.donationtracker.model.UserType;
 
 public class User {
     private String firstname;
@@ -25,31 +24,52 @@ public class User {
             return false;
         }
 
-        return (((User) o).getFirstname().equals(this.firstname)
-                && ((User) o).getLastname().equals(this.lastname)
+        return (((User) o).getFirstName().equals(this.firstname)
+                && ((User) o).getLastName().equals(this.lastname)
                 && ((User) o).getEmail().equals(this.email)
-                && ((User) o).getPassword().equals(this.getPassword())
-                && ((User) o).usertype.equals(this.usertype));
+                && ((User) o).getPassword().equals(this.password)
+                && ((User) o).getUserType().equals(this.usertype));
 
     }
 
-    private String getFirstname() {
+    // Getter and Setter for first name
+    private String getFirstName() {
         return firstname;
     }
-    private void setFirstname(String name) { firstname = name;}
 
-    private String getLastname() {
+    private void setFirstName(String name) {
+        this.firstname = name;
+    }
+
+    // Getter and setter for last name
+    private String getLastName() {
         return lastname;
     }
-    private void setLastname(String name) { lastname = name;}
 
-    public String getEmail() {return email;}
-    public void setEmail(String address) {email = address;}
+    private void setLastName(String name) {
+        this.lastname = name;
+    }
 
-    public String getPassword() {return password;}
-    public void setPassword(String updated) {password = updated;}
+    // Getter and Setter for email
+    public String getEmail() {
+        return email;
+    }
 
-    public UserType getUsertype() {
+    public void setEmail(String address) {
+        this.email = address;
+    }
+
+    // Getter and Setter for password
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String updated) {
+        this.password = updated;
+    }
+
+    // Getter and Setter for User Type
+    public UserType getUserType() {
         return usertype;
     }
 
