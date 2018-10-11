@@ -1,33 +1,46 @@
 package com.example.teamsplash.donationtracker.model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Users {
+
+    // TODO add error messaging letting users know why different things may have failed
+
     private static final Users _instance = new Users();
-    public static Users getInstance() { return _instance; }
-    private ArrayList<User> users;
+    public static Users getInstance() {
+        return _instance;
+    }
+
+    public static HashMap<User, String> UserData;
     private User currUser;
 
     private Users() {
-        users = new ArrayList<>();
+        UserData = new HashMap<User, String>();
+        // Hardcode sample user for test login convenience
+        UserData.put(new User("First", "Last", "user", "password", UserType.USER), "password");
     }
 
     public boolean add(User user) {
-        users.add(user);
+        for (User u : UserData.keySet()) {
+            if (user.getEmail().equals(u.getEmail())) {
+                return false;
+            }
+        }
+        UserData.put(user, user.getPassword());
         return true;
     }
 
     public User get(String email, String password) {
-        for (User user : users) {
-            if (user.getPassword().equals(password) && user.getEmail().equals(email)) {
-                return user;
+        for (User u : UserData.keySet()) {
+            if (u.getPassword().equals(password) && u.getEmail().equals(email)) {
+                return u;
             }
         }
         return null;
     }
 
     public boolean contains(User user) {
-        return users.contains(user);
+        return UserData.containsKey(user);
     }
 
     public boolean contains(String email, String password) {
@@ -35,24 +48,25 @@ public class Users {
     }
 
     public boolean remove(User user) {
-        users.remove(user);
+        UserData.remove(user);
         return true;
     }
 
-    public User getCurrentUser()
-    {
+    // Getter and setter for current user
+    // TODO : not sure what the functionality of this is?
+    public User getCurrentUser() {
         return currUser;
     }
-    public void setCurrentUser(User user)
-    {
+
+    public void setCurrentUser(User user) {
         currUser = user;
     }
 
     @Override
     public String toString() {
         String str = "";
-        for (User user : users) {
-            str += user + "\n, ";
+        for (User u : UserData.keySet()) {
+            str += u + "\n, ";
         }
         return str;
     }
