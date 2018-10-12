@@ -1,30 +1,26 @@
 package com.example.teamsplash.donationtracker.controller;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
+import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.text.TextUtils;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.content.Intent;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -33,10 +29,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.teamsplash.donationtracker.R;
+import com.example.teamsplash.donationtracker.model.Model;
 import com.example.teamsplash.donationtracker.model.User;
-import com.example.teamsplash.donationtracker.model.Users;
-import static com.example.teamsplash.donationtracker.model.Users.UserData;
-import com.example.teamsplash.donationtracker.model.UserType;
+import com.example.teamsplash.donationtracker.model.Users.UserEmailAddressNotRegistered;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +41,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -66,11 +61,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private com.example.teamsplash.donationtracker.controller.LoginActivity.UserLoginTask mAuthTask = null;
+    private com.example.teamsplash.donationtracker.controller.LoginActivity.UserLoginTask authenticationTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
+    private AutoCompleteTextView emailAddressField;
+    private EditText passwordField;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -79,11 +74,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        emailAddressField = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        passwordField = (EditText) findViewById(R.id.password);
+        passwordField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
@@ -140,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             return true;
         }
         if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(emailAddressField, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
                     .setAction(android.R.string.ok, new View.OnClickListener() {
                         @Override
                         @TargetApi(Build.VERSION_CODES.M)
@@ -178,73 +173,48 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
+        // Do not try to authenticate if an authentication task is already running.
+        if (authenticationTask != null)
+            return;
+
+        // Reset error messages displayed in the login fields.
+        emailAddressField.setError(null);
+        passwordField.setError(null);
+
+        // Store values at the time of the login attempt.
+        final String emailAddress = emailAddressField.getText().toString();
+        final String password = passwordField.getText().toString();
+
+        View firstFieldWithInvalidText = null;
+
+        if (password.isEmpty()) {
+            passwordField.setError(getString(R.string.field_required));
+            firstFieldWithInvalidText = passwordField;
+        } else {
+            if (!Model.validatePassword(password)) {
+                passwordField.setError(getText(R.string.password_invalid));
+                firstFieldWithInvalidText = passwordField;
+            }
+        }
+
+        if (emailAddress.isEmpty()) {
+            emailAddressField.setError(getString(R.string.field_required));
+            firstFieldWithInvalidText = emailAddressField;
+        } else {
+            if (!Model.validateEmailAddress(emailAddress)) {
+                emailAddressField.setError(getText(R.string.email_address_invalid));
+                firstFieldWithInvalidText = emailAddressField;
+            }
+        }
+
+        if (firstFieldWithInvalidText != null) {
+            firstFieldWithInvalidText.requestFocus();
             return;
         }
 
-        // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
-
-        // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-
-        boolean cancel = false;
-        View focusView = null;
-
-        // Check for a valid password, if the user entered one.
-        if (password.length() < MIN_PASSWORD_LENGTH) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-        if (!isPasswordValid(email, password)) {
-            mPasswordView.setError(getString(R.string.error_incorrect_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new com.example.teamsplash.donationtracker.controller.LoginActivity.UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
-        }
-    }
-
-    private boolean isEmailValid(String email) {
-        for (User u : UserData.keySet()) {
-            if (u.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isPasswordValid(String email, String password) {
-        for (User u : UserData.keySet()) {
-            if (u.getEmail().equals(email)) {
-                return u.getPassword().equals(password);
-            }
-        }
-        return false;
+        showProgress(true);
+        authenticationTask = new com.example.teamsplash.donationtracker.controller.LoginActivity.UserLoginTask(emailAddress, password);
+        authenticationTask.execute((Void) null);
     }
 
     /**
@@ -323,7 +293,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 new ArrayAdapter<>(com.example.teamsplash.donationtracker.controller.LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mEmailView.setAdapter(adapter);
+        emailAddressField.setAdapter(adapter);
     }
 
 
@@ -337,63 +307,73 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
+    private enum AuthenticationResult {
+        ERROR,
+        SUCCESS,
+        EMAIL_ADDRESS_NOT_REGISTERED,
+        THE_PASSWORD_INCORRECT
+    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Void, Void, AuthenticationResult> {
+        private final String emailAddress;
+        private final String password;
 
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
+        UserLoginTask(String emailAddress, String password) {
+            this.emailAddress = emailAddress;
+            this.password = password;
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected AuthenticationResult doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
+            } catch (InterruptedException exception) {
+                return AuthenticationResult.ERROR;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
+            try {
+                final User user = Model.getUserByEmailAddress(emailAddress);
+                if (!(user.getPassword().equals(password)))
+                    return AuthenticationResult.THE_PASSWORD_INCORRECT;
 
-            // TODO: register the new account here.
-            return true;
+                return AuthenticationResult.SUCCESS;
+            } catch (UserEmailAddressNotRegistered exception) {
+                return AuthenticationResult.EMAIL_ADDRESS_NOT_REGISTERED;
+            }
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
+        protected void onPostExecute(final AuthenticationResult result) {
             showProgress(false);
+            authenticationTask = null;
 
-            if (success) {
-                Intent intent = new Intent(com.example.teamsplash.donationtracker.controller.LoginActivity.this, NextActivity.class);
-
-                startActivity(intent);
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+            switch (result) {
+                case ERROR:
+                    return;
+                case SUCCESS:
+                    startActivity(new Intent(com.example.teamsplash.donationtracker.controller.LoginActivity.this, NextActivity.class));
+                    finish();
+                    return;
+                case EMAIL_ADDRESS_NOT_REGISTERED:
+                    emailAddressField.setError(getText(R.string.email_address_not_registered));
+                    emailAddressField.requestFocus();
+                    return;
+                case THE_PASSWORD_INCORRECT:
+                    passwordField.setError(getText(R.string.the_password_incorrect));
             }
         }
 
         @Override
         protected void onCancelled() {
-            mAuthTask = null;
             showProgress(false);
+            authenticationTask = null;
         }
     }
 }

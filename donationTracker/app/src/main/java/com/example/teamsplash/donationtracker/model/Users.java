@@ -3,72 +3,43 @@ package com.example.teamsplash.donationtracker.model;
 import java.util.HashMap;
 
 public class Users {
-
-    // TODO add error messaging letting users know why different things may have failed
-
-    private static final Users _instance = new Users();
-    public static Users getInstance() {
-        return _instance;
+    public class UserEmailAddressAlreadyRegistered extends Exception {
     }
 
-    public static HashMap<User, String> UserData;
-    private User currUser;
+    public class UserEmailAddressNotRegistered extends Exception {
+    }
+
+    private static final Users instance = new Users();
+
+    public static Users getInstance() {
+        return instance;
+    }
+
+    private static HashMap<String, User> users;
 
     private Users() {
-        UserData = new HashMap<User, String>();
-        // Hardcode sample user for test login convenience
-        UserData.put(new User("First", "Last", "user", "password", UserType.USER), "password");
+        users = new HashMap<String, User>();
     }
 
-    public boolean add(User user) {
-        for (User u : UserData.keySet()) {
-            if (user.getEmail().equals(u.getEmail())) {
-                return false;
-            }
+    /**
+     * Register a user only if the user's email address is not already registered.
+     */
+    public void add(final User user) throws UserEmailAddressAlreadyRegistered {
+        final String userEmailAddress = user.getEmail();
+        final User previousUser = users.put(userEmailAddress, user);
+
+        if (previousUser != null) {
+            users.put(userEmailAddress, previousUser);
+            throw new UserEmailAddressAlreadyRegistered();
         }
-        UserData.put(user, user.getPassword());
-        return true;
     }
 
-    public User get(String email, String password) {
-        for (User u : UserData.keySet()) {
-            if (u.getPassword().equals(password) && u.getEmail().equals(email)) {
-                return u;
-            }
-        }
-        return null;
-    }
+    public User getByEmailAddress(final String userEmailAddress) throws UserEmailAddressNotRegistered {
+        final User user = users.get(userEmailAddress);
 
-    public boolean contains(User user) {
-        return UserData.containsKey(user);
-    }
+        if (user == null)
+            throw new UserEmailAddressNotRegistered();
 
-    public boolean contains(String email, String password) {
-        return (get(email, password) != null);
+        return user;
     }
-
-    public boolean remove(User user) {
-        UserData.remove(user);
-        return true;
-    }
-
-    // Getter and setter for current user
-    // TODO : not sure what the functionality of this is?
-    public User getCurrentUser() {
-        return currUser;
-    }
-
-    public void setCurrentUser(User user) {
-        currUser = user;
-    }
-
-    @Override
-    public String toString() {
-        String str = "";
-        for (User u : UserData.keySet()) {
-            str += u + "\n, ";
-        }
-        return str;
-    }
-
 }

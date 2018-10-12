@@ -78,18 +78,18 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            emailAddressField.setError(getString(R.string.error_field_required));
+            emailAddressField.setError(getString(R.string.field_required));
             focusView = emailAddressField;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            emailAddressField.setError(getString(R.string.error_invalid_email));
+            emailAddressField.setError(getString(R.string.email_address_invalid));
             focusView = emailAddressField;
             cancel = true;
         }
 
         // Check for a valid password, if the user entered one.
         if (password.length() < MIN_PASSWORD_LENGTH) {
-            passwordField.setError(getString(R.string.error_invalid_password));
+            passwordField.setError(getString(R.string.password_invalid));
             focusView = passwordField;
             cancel = true;
         }
@@ -107,14 +107,15 @@ public class CreateAccountActivity extends AppCompatActivity {
         } else {
             UserType usertype = (UserType) userTypeField.getSelectedItem();
             User newUser = new User(firstname, lastname, email, password, usertype);
-            if (!users.add(newUser)) {
-                emailAddressField.setError(getString(R.string.error_user_exists));
-                focusView = emailAddressField;
-                focusView.requestFocus();
-            } else {
-                users.setCurrentUser(newUser);
+
+            try {
+                users.add(newUser);
                 Intent accountCreated = new Intent(com.example.teamsplash.donationtracker.controller.CreateAccountActivity.this, LoginActivity.class);
                 startActivity(accountCreated);
+            } catch (Users.UserEmailAddressAlreadyRegistered exception) {
+                emailAddressField.setError(getString(R.string.email_address_already_registered));
+                focusView = emailAddressField;
+                focusView.requestFocus();
             }
         }
     }
