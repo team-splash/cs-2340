@@ -9,6 +9,10 @@ public class Model {
         return Login.validatePassword(password);
     }
 
+    public static void addUser(final User user) throws Users.UserEmailAddressAlreadyRegistered {
+        Users.getInstance().add(user);
+    }
+
     public static User getUserByEmailAddress(final String userEmailAddress) throws Users.UserEmailAddressNotRegistered {
         return Users.getInstance().getByEmailAddress(userEmailAddress);
     }

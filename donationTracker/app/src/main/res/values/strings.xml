@@ -21,8 +21,12 @@
     <string name="confirm_password">Confirm password</string>
 
     <string name="field_required">This field is required</string>
+
     <string name="email_address_invalid">This email address is invalid</string>
-    <string name="password_invalid">This password is too short</string>
+    <string name="the_password_was_invalid">The password was invalid</string>
+
+    <string name="the_passwords_were_not_matching">The passwords did not match</string>
+
     <string name="email_address_not_registered">This email address is not registered</string>
-    <string name="the_password_incorrect">The password was incorrect</string>
+    <string name="the_password_was_incorrect">The password was incorrect</string>
 </resources>

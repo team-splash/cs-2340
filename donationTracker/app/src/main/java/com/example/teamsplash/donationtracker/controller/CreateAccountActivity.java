@@ -1,32 +1,30 @@
 package com.example.teamsplash.donationtracker.controller;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
-import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.teamsplash.donationtracker.R;
+import com.example.teamsplash.donationtracker.model.Model;
 import com.example.teamsplash.donationtracker.model.User;
-import com.example.teamsplash.donationtracker.model.Users;
 import com.example.teamsplash.donationtracker.model.UserType;
+import com.example.teamsplash.donationtracker.model.Users.UserEmailAddressAlreadyRegistered;
 
 
 public class CreateAccountActivity extends AppCompatActivity {
-
     private EditText firstNameField;
     private EditText lastNameField;
     private Spinner userTypeField;
     private EditText emailAddressField;
     private EditText passwordField;
     private EditText confirmPasswordField;
-    public final int MIN_PASSWORD_LENGTH = 8;
 
-    @Override protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account);
         firstNameField = findViewById(R.id.first_name_field);
@@ -47,7 +45,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         findViewById(R.id.cancel_account_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onCancelPressed();
+                onCancel();
             }
         });
     }
@@ -55,68 +53,86 @@ public class CreateAccountActivity extends AppCompatActivity {
     /**
      * Button handler for cancel
      */
-    public void onCancelPressed() {
+    public void onCancel() {
         startActivity(new Intent(com.example.teamsplash.donationtracker.controller.CreateAccountActivity.this, LoginActivity.class));
         finish();
+    }
+
+    private void clearPasswordFields() {
+        passwordField.getText().clear();
+        confirmPasswordField.getText().clear();
     }
 
     /**
      * Tries to create a new account when the "Create account" button is clicked.
      */
     private void onCreateAccount() {
-        Users users = Users.getInstance();
-        String firstname = firstNameField.getText().toString();
-        String lastname = lastNameField.getText().toString();
-        String email = emailAddressField.getText().toString();;
-        String password = passwordField.getText().toString();
-        String confirmPass = confirmPasswordField.getText().toString();
+        // Reset error messages displayed in the registration fields.
+        firstNameField.setError(null);
+        lastNameField.setError(null);
+        emailAddressField.setError(null);
+        passwordField.setError(null);
+        confirmPasswordField.setError(null);
 
-        // Check if everything during the creation of the account is valid
+        final String firstName = firstNameField.getText().toString();
+        final String lastName = lastNameField.getText().toString();
+        UserType userType = (UserType) userTypeField.getSelectedItem();
+        final String emailAddress = emailAddressField.getText().toString();
+        final String password = passwordField.getText().toString();
+        final String confirmPassword = confirmPasswordField.getText().toString();
 
-        boolean cancel = false;
-        View focusView = null;
+        View firstFieldWithInvalidText = null;
 
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
-            emailAddressField.setError(getString(R.string.field_required));
-            focusView = emailAddressField;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            emailAddressField.setError(getString(R.string.email_address_invalid));
-            focusView = emailAddressField;
-            cancel = true;
-        }
-
-        // Check for a valid password, if the user entered one.
-        if (password.length() < MIN_PASSWORD_LENGTH) {
-            passwordField.setError(getString(R.string.password_invalid));
-            focusView = passwordField;
-            cancel = true;
-        }
-        // TODO fix this password verification??? I don't understand???? -Sara
-        /** else if (!isPasswordValid()) {
-            confirmPasswordField.setError(getString(R.string.error_mismatched_password));
-            focusView = confirmPasswordField;
-            cancel = true;
-        } **/
-
-        if (cancel) {
-            // There was an error; don't attempt to create and focus the first
-            // form field with an error.
-            focusView.requestFocus();
+        if (password.isEmpty()) {
+            clearPasswordFields();
+            passwordField.setError(getText(R.string.field_required));
+            firstFieldWithInvalidText = passwordField;
         } else {
-            UserType usertype = (UserType) userTypeField.getSelectedItem();
-            User newUser = new User(firstname, lastname, email, password, usertype);
-
-            try {
-                users.add(newUser);
-                Intent accountCreated = new Intent(com.example.teamsplash.donationtracker.controller.CreateAccountActivity.this, LoginActivity.class);
-                startActivity(accountCreated);
-            } catch (Users.UserEmailAddressAlreadyRegistered exception) {
-                emailAddressField.setError(getString(R.string.email_address_already_registered));
-                focusView = emailAddressField;
-                focusView.requestFocus();
+            if (!(password.equals(confirmPassword))) {
+                clearPasswordFields();
+                passwordField.setError(getText(R.string.the_passwords_were_not_matching));
+                firstFieldWithInvalidText = passwordField;
+            } else {
+                if (!(Model.validatePassword(password))) {
+                    clearPasswordFields();
+                    passwordField.setError(getText(R.string.the_password_was_invalid));
+                    firstFieldWithInvalidText = passwordField;
+                }
             }
+        }
+
+        if (emailAddress.isEmpty()) {
+            emailAddressField.setError(getText(R.string.field_required));
+            firstFieldWithInvalidText = emailAddressField;
+        } else {
+            if (!(Model.validateEmailAddress(emailAddress))) {
+                emailAddressField.setError(getText(R.string.email_address_invalid));
+                firstFieldWithInvalidText = emailAddressField;
+            }
+        }
+
+        if (lastName.isEmpty()) {
+            lastNameField.setError(getText(R.string.field_required));
+            firstFieldWithInvalidText = lastNameField;
+        }
+
+        if (firstName.isEmpty()) {
+            firstNameField.setError(getText(R.string.field_required));
+            firstFieldWithInvalidText = firstNameField;
+        }
+
+        if (firstFieldWithInvalidText != null) {
+            firstFieldWithInvalidText.requestFocus();
+            return;
+        }
+
+        try {
+            Model.addUser(new User(firstName, lastName, emailAddress, password, userType));
+            startActivity(new Intent(com.example.teamsplash.donationtracker.controller.CreateAccountActivity.this, LoginActivity.class));
+            finish();
+        } catch (UserEmailAddressAlreadyRegistered exception) {
+            emailAddressField.setError(getString(R.string.email_address_already_registered));
+            emailAddressField.requestFocus();
         }
     }
 

@@ -167,6 +167,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         Toast.makeText(com.example.teamsplash.donationtracker.controller.LoginActivity.this, "User cancelled", Toast.LENGTH_SHORT).show();
     }
 
+    private void clearPasswordField() {
+        passwordField.getText().clear();
+    }
+
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -188,11 +192,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         View firstFieldWithInvalidText = null;
 
         if (password.isEmpty()) {
+            clearPasswordField();
             passwordField.setError(getString(R.string.field_required));
             firstFieldWithInvalidText = passwordField;
         } else {
-            if (!Model.validatePassword(password)) {
-                passwordField.setError(getText(R.string.password_invalid));
+            if (!(Model.validatePassword(password))) {
+                clearPasswordField();
+                passwordField.setError(getText(R.string.the_password_was_invalid));
                 firstFieldWithInvalidText = passwordField;
             }
         }
@@ -201,7 +207,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             emailAddressField.setError(getString(R.string.field_required));
             firstFieldWithInvalidText = emailAddressField;
         } else {
-            if (!Model.validateEmailAddress(emailAddress)) {
+            if (!(Model.validateEmailAddress(emailAddress))) {
                 emailAddressField.setError(getText(R.string.email_address_invalid));
                 firstFieldWithInvalidText = emailAddressField;
             }
@@ -366,7 +372,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     emailAddressField.requestFocus();
                     return;
                 case THE_PASSWORD_INCORRECT:
-                    passwordField.setError(getText(R.string.the_password_incorrect));
+                    passwordField.getText().clear();
+                    passwordField.setError(getText(R.string.the_password_was_incorrect));
             }
         }
 
