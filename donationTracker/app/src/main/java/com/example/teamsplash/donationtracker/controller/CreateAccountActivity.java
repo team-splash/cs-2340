@@ -50,14 +50,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Button handler for cancel
-     */
-    public void onCancel() {
-        startActivity(new Intent(com.example.teamsplash.donationtracker.controller.CreateAccountActivity.this, LoginActivity.class));
-        finish();
-    }
-
     private void clearPasswordFields() {
         passwordField.getText().clear();
         confirmPasswordField.getText().clear();
@@ -136,15 +128,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         }
     }
 
-    // Checks for an @ symbol and a period
-    private boolean isEmailValid(String email) {
-        return email.contains("@") && email.contains(".");
+    /**
+     * Button handler for cancel
+     */
+    public void onCancel() {
+        startActivity(new Intent(com.example.teamsplash.donationtracker.controller.CreateAccountActivity.this, LoginActivity.class));
+        finish();
     }
-
-    // Confirms that the entries in "enter password" and "confirm password" are equivalent
-    private boolean isPasswordValid() {
-        return passwordField.getText().equals(confirmPasswordField.getText());
-    }
-
-
 }
