@@ -30,7 +30,6 @@ import android.widget.Toast;
 
 import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Model;
-import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.Users.UserEmailAddressNotRegistered;
 
 import java.util.ArrayList;
@@ -343,8 +342,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
 
             try {
-                final User user = Model.getUserByEmailAddress(emailAddress);
-                if (!(user.getPassword().equals(password)))
+                if (!(Model.checkUserPassword(emailAddress, password)))
                     return AuthenticationResult.THE_PASSWORD_INCORRECT;
 
                 return AuthenticationResult.SUCCESS;
@@ -366,12 +364,14 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                     finish();
                     return;
                 case EMAIL_ADDRESS_NOT_REGISTERED:
+                    clearPasswordField();
                     emailAddressField.setError(getText(R.string.email_address_not_registered));
                     emailAddressField.requestFocus();
                     return;
                 case THE_PASSWORD_INCORRECT:
-                    passwordField.getText().clear();
+                    clearPasswordField();
                     passwordField.setError(getText(R.string.the_password_was_incorrect));
+                    passwordField.requestFocus();
             }
         }
 

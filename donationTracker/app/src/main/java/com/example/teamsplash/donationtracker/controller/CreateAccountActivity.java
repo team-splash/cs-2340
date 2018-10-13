@@ -10,7 +10,6 @@ import android.widget.Spinner;
 
 import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Model;
-import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.UserType;
 import com.example.teamsplash.donationtracker.model.Users.UserEmailAddressAlreadyRegistered;
 
@@ -68,7 +67,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         final String firstName = firstNameField.getText().toString();
         final String lastName = lastNameField.getText().toString();
-        UserType userType = (UserType) userTypeField.getSelectedItem();
+        UserType type = (UserType) userTypeField.getSelectedItem();
         final String emailAddress = emailAddressField.getText().toString();
         final String password = passwordField.getText().toString();
         final String confirmPassword = confirmPasswordField.getText().toString();
@@ -119,7 +118,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         }
 
         try {
-            Model.addUser(new User(firstName, lastName, emailAddress, password, userType));
+            Model.addUser(firstName, lastName, emailAddress, type, password);
             startActivity(new Intent(com.example.teamsplash.donationtracker.controller.CreateAccountActivity.this, LoginActivity.class));
             finish();
         } catch (UserEmailAddressAlreadyRegistered exception) {

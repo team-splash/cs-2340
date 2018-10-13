@@ -24,8 +24,9 @@ public class Users {
     /**
      * Register a user only if the user's email address is not already registered.
      */
-    public void add(final User user) throws UserEmailAddressAlreadyRegistered {
-        final String userEmailAddress = user.getEmail();
+    public void add(final String userFirstName, final String userLastName, final String userEmailAddress, final UserType userType,
+                    final String userPassword) throws UserEmailAddressAlreadyRegistered {
+        final User user = new User(userFirstName, userLastName, userEmailAddress, userPassword, userType);
         final User previousUser = users.put(userEmailAddress, user);
 
         if (previousUser != null) {
@@ -34,12 +35,12 @@ public class Users {
         }
     }
 
-    public User getByEmailAddress(final String userEmailAddress) throws UserEmailAddressNotRegistered {
+    public boolean checkPassword(final String userEmailAddress, final String userPassword) throws UserEmailAddressNotRegistered {
         final User user = users.get(userEmailAddress);
 
         if (user == null)
             throw new UserEmailAddressNotRegistered();
 
-        return user;
+        return user.getPassword().equals(userPassword);
     }
 }

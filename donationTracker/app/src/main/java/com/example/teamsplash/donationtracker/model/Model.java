@@ -9,11 +9,13 @@ public class Model {
         return Login.validatePassword(password);
     }
 
-    public static void addUser(final User user) throws Users.UserEmailAddressAlreadyRegistered {
-        Users.getInstance().add(user);
+    public static void addUser(final String userFirstName, final String userLastName, final String userEmailAddress,
+                               final UserType userType, final String userPassword) throws Users.UserEmailAddressAlreadyRegistered {
+        Users.getInstance().add(userFirstName, userLastName, userEmailAddress, userType, userPassword);
     }
 
-    public static User getUserByEmailAddress(final String userEmailAddress) throws Users.UserEmailAddressNotRegistered {
-        return Users.getInstance().getByEmailAddress(userEmailAddress);
+    public static boolean checkUserPassword(final String userEmailAddress, final String userPassword)
+            throws Users.UserEmailAddressNotRegistered {
+        return Users.getInstance().checkPassword(userEmailAddress, userPassword);
     }
 }
