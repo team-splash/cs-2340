@@ -6,9 +6,6 @@
     <string name="register">Register</string>
     <string name="create_account">Create Account</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="error_mismatched_password">Passwords do not match</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_user_exists">A User with this email already exists</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
