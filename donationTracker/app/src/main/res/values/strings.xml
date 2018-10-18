@@ -24,4 +24,13 @@
     <string name="email_address">Email address</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
+
+    <!--Navigation-->
+    <string name="navigation_title_home">Home</string>
+    <string name="navigation_title_locations">Locations</string>
+    <string name="title_activity_location_details">Location Details</string>
+    <string name="location">LOCATION</string>
+    <string name="phone">PHONE</string>
+    <string name="website">WEBSITE</string>
+    <string name="latLong">LATITUDE/LONGITUDE</string>
 </resources>

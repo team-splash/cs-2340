@@ -28,10 +28,14 @@
             android:label="@string/app_name"
             android:parentActivityName="com.example.teamsplash.donationtracker.controller.LoginActivity" />
         <activity
-            android:name=".controller.NextActivity"
+            android:name=".controller.MainMenu"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize"
             android:parentActivityName="com.example.teamsplash.donationtracker.controller.LoginActivity" />
+        <activity
+            android:name=".controller.locationData"
+            android:label="@string/app_name"
+            android:parentActivityName="com.example.teamsplash.donationtracker.controller.NextActivity" />
     </application>
 
 </manifest>

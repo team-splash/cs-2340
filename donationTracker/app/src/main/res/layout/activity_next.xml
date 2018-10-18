@@ -5,11 +5,23 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/buttonFile"
+        android:layout_width="208dp"
+        android:layout_height="66dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="96dp"
+        android:allowUndo="false"
+        android:text="Load File"
+        android:textAlignment="center" />
+
+    <Button
         android:id="@+id/btn_logout"
         android:layout_width="208dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
+        android:layout_height="66dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
         android:allowUndo="false"
         android:text="Log Off"
         android:textAlignment="center" />
