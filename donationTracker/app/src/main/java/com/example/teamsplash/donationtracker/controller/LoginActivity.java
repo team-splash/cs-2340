@@ -33,15 +33,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.teamsplash.donationtracker.R;
-import com.example.teamsplash.donationtracker.model.User;
-import com.example.teamsplash.donationtracker.model.Users;
-import static com.example.teamsplash.donationtracker.model.Users.UserData;
-import com.example.teamsplash.donationtracker.model.UserType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
+import com.example.teamsplash.donationtracker.model.Users;
 
 /**
  * A login screen that offers login via email/password.
@@ -52,8 +49,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-    // TODO this final variable is in two places bad idea
-    public final int MIN_PASSWORD_LENGTH = 8;
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -194,13 +189,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (password.length() < MIN_PASSWORD_LENGTH) {
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-        if (!isPasswordValid(email, password)) {
-            mPasswordView.setError(getString(R.string.error_incorrect_password));
             focusView = mPasswordView;
             cancel = true;
         }
@@ -230,21 +220,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isEmailValid(String email) {
-        for (User u : UserData.keySet()) {
-            if (u.getEmail().equals(email)) {
-                return true;
-            }
-        }
-        return false;
+        //TODO: Replace this with your own logic
+        return email.equals("user");
     }
 
-    private boolean isPasswordValid(String email, String password) {
-        for (User u : UserData.keySet()) {
-            if (u.getEmail().equals(email)) {
-                return u.getPassword().equals(password);
-            }
-        }
-        return false;
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        return password.equals("password");
     }
 
     /**
@@ -380,10 +362,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                Intent intent = new Intent(com.example.teamsplash.donationtracker.controller.LoginActivity.this, NextActivity.class);
-
-                startActivity(intent);
                 finish();
+                Intent toMainMenu =  new Intent(LoginActivity.this, MainMenu.class);
+                startActivity(toMainMenu);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
