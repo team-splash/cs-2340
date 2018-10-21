@@ -1,17 +1,12 @@
 package com.example.teamsplash.donationtracker.controller;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,14 +15,11 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 import com.example.teamsplash.donationtracker.model.Location;
-import com.example.teamsplash.donationtracker.model.LocationType;
 import com.example.teamsplash.donationtracker.model.Locations;
+import com.example.teamsplash.donationtracker.model.LocationType;
 import com.example.teamsplash.donationtracker.R;
-import com.example.teamsplash.donationtracker.model.User;
-import com.example.teamsplash.donationtracker.model.Users;
 
 public class MainMenu extends AppCompatActivity {
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -48,31 +40,26 @@ public class MainMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_menu);
-
+        setContentView(R.layout.main_menu_activity);
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
         inflateInitialFragment();
-
-
         readLocations();
     }
 
     private void inflateInitialFragment() {
         if(findViewById(R.id.fragment_container) == null)
             return;
-
-        // set initial fragment layout to the home view
+        // Set initial fragment layout to the home view
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragment_container, new Home())
+                .add(R.id.fragment_container, new MainFragment())
                 .commit();
     }
 
     private void switchToHome() {
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.fragment_container, new Home()).commit();
+        manager.beginTransaction().replace(R.id.fragment_container, new MainFragment()).commit();
     }
 
     private void switchToLocations() {
@@ -88,32 +75,26 @@ public class MainMenu extends AppCompatActivity {
                 "30330",
                 "(404) 555 - 3456"
         ));*/
-
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.fragment_container, new locationsFragment()).commit();
+        manager.beginTransaction().replace(R.id.fragment_container, new LocationFragment()).commit();
     }
 
 
-    private void readLocations()
-    {
+    private void readLocations() {
         Locations locations = Locations.getInstance();
         if (locations.get().size() != 0)
             return;
-
         try {
             InputStream stream = getResources().openRawResource(R.raw.locations);
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
-
             //Discard header
             reader.readLine();
-
             locations.readFromCsv(reader);
             reader.close();
         }
 
         catch (IOException exception) {
             Log.e("cs2340.donationTracker", "Error reading `locations.csv`");
-
             //Add default location in case of I/O Error
             locations.add(new Location(
                     "AFD Station 4",
