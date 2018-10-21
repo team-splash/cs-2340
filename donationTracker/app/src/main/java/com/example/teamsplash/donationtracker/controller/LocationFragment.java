@@ -1,13 +1,10 @@
 package com.example.teamsplash.donationtracker.controller;
 
+import java.util.List;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +17,7 @@ import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
 import com.example.teamsplash.donationtracker.R;
 
-import java.util.List;
-
-public class locationsFragment extends Fragment {
+public class LocationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,7 +37,7 @@ public class locationsFragment extends Fragment {
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("LOCATION", itemClicked);
-                Intent listDetails = new Intent(locationsFragment.this.getActivity(), locationData.class);
+                Intent listDetails = new Intent(LocationFragment.this.getActivity(), LocationDetail.class);
                 listDetails.putExtras(bundle);
 
                 startActivity(listDetails);

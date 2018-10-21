@@ -12,17 +12,17 @@ import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.Users;
 import com.example.teamsplash.donationtracker.R;
 
-public class Home extends Fragment {
+public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View fragment = inflater.inflate(R.layout.home_fragment, container, false);
+        View fragment = inflater.inflate(R.layout.main_fragment, container, false);
 
         fragment.findViewById(R.id.logoutButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent logOut = new Intent(getActivity(), LoginActivity.class);
+                Intent logOut = new Intent(getActivity(), HomeScreen.class);
                 startActivity(logOut);
             }
         });
@@ -30,6 +30,9 @@ public class Home extends Fragment {
 
         Users users = Users.getInstance();
         User currentUser = users.getCurrentUser();
+
+        TextView userName = fragment.findViewById(R.id.userName);
+        userName.setText(currentUser.getName());
 
         TextView userEmail = fragment.findViewById(R.id.userEmail);
         userEmail.setText(currentUser.getEmail());

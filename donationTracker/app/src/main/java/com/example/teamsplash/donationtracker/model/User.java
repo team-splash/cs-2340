@@ -8,7 +8,11 @@ public class User {
     private UserType usertype;
 
     public User(String firstname, String lastname, String email, String password, UserType usertype) {
+        String s1 = firstname.substring(0, 1).toUpperCase();
+        firstname = s1 + firstname.substring(1);
         this.firstname = firstname;
+        String s2 = lastname.substring(0, 1).toUpperCase();
+        lastname = s2 + lastname.substring(1);
         this.lastname = lastname;
         this.email = email;
         this.password = password;
@@ -33,11 +37,11 @@ public class User {
     }
 
     // Getter and Setter for first name
-    private String getFirstName() {
+    public String getFirstName() {
         return firstname;
     }
 
-    private void setFirstName(String name) {
+    public void setFirstName(String name) {
         this.firstname = name;
     }
 
@@ -50,11 +54,12 @@ public class User {
         this.lastname = name;
     }
 
+    public String getName() { return firstname + " " + lastname; }
+
     // Getter and Setter for email
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String address) {
         this.email = address;
     }
@@ -63,7 +68,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String updated) {
         this.password = updated;
     }
@@ -72,7 +76,6 @@ public class User {
     public UserType getUserType() {
         return usertype;
     }
-
     public void setUserType(UserType type) {
         usertype = type;
     }
