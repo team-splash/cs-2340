@@ -8,7 +8,7 @@
     <string name="prompt_password">Password</string>
     <string name="prompt_password_confirm">Confirm Password</string>
     <string name="action_sign_in">Sign in</string>
-    <string name="action_register">Don\'t have an account? Register Here</string>
+    <string name="action_register">Don\'t have an account? Register here</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_password_mismatch">Passwords must match</string>
