@@ -17,15 +17,15 @@ public class Items {
     }
 
     public boolean add(Item item) {
-        ItemData.put(item, item.getTimestamp());
+        ItemData.put(item, item.getTime());
         currItem = item;
         return true;
     }
 
-    public Item get(Long ts, Location loc) {
+    public Item get(CharSequence ts, Location loc) {
         String timestamp = ts.toString();
         for (Item i: ItemData.keySet()) {
-            if (i.getTimestamp().equals(timestamp) && i.getLocation().equals(loc)) {
+            if (i.getTime().equals(timestamp) && i.getLocation().equals(loc)) {
                 return i;
             }
         }
@@ -36,7 +36,7 @@ public class Items {
         return ItemData.containsKey(item);
     }
 
-    public boolean contains(Long ts, Location loc) {
+    public boolean contains(CharSequence ts, Location loc) {
         return (get(ts, loc) != null);
     }
 

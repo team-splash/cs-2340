@@ -1,16 +1,15 @@
 package com.example.teamsplash.donationtracker.model;
 
 public class Item {
-    private String timestamp;
+    private String time;
     private Location location;
     private String desc;
     private String longDesc;
     private double value;
     private ItemType itemtype;
 
-    public Item(Location location, String desc, String longDesc, double value, ItemType itemType) {
-        Long tsLong = System.currentTimeMillis()/1000;
-        this.timestamp = tsLong.toString();
+    public Item(CharSequence time, Location location, String desc, String longDesc, double value, ItemType itemType) {
+        this.time = time.toString();
         this.location = location;
         this.desc = desc;
         this.longDesc = longDesc;
@@ -26,7 +25,7 @@ public class Item {
         if (!(o instanceof User)) {
             return false;
         }
-        return (((Item) o).getTimestamp().equals(this.timestamp)
+        return (((Item) o).getTime().equals(this.time)
                 && ((Item) o).getLocation().equals(this.location)
                 && ((Item) o).getDesc().equals(this.desc)
                 && ((Item) o).getLongDesc().equals(this.longDesc)
@@ -36,11 +35,11 @@ public class Item {
     }
 
     // Getter and Setter for time stamp
-    public String getTimestamp() {
-        return timestamp;
+    public String getTime() {
+        return time;
     }
-    private void setTimestamp(Long tsLong) {
-        this.timestamp = tsLong.toString();
+    private void setTime(CharSequence ts) {
+        this.time = ts.toString();
     }
 
     // Getter and setter for location
@@ -85,6 +84,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return null; //(email + ": " + password);
+        return (time + " " + location + " " + desc + " " + longDesc + " " + value + " " + itemtype);
     }
 }

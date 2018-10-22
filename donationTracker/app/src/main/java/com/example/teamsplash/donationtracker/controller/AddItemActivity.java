@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +19,10 @@ import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
 
+import org.w3c.dom.Text;
+
 public class AddItemActivity extends AppCompatActivity {
+    private TextClock clock;
     private TextView currLoc;
     // Location of Item
     private Location currLocation;
@@ -41,6 +45,7 @@ public class AddItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_activity);
 
+        clock = findViewById(R.id.textClock);
 
         Locations locations = Locations.getInstance();
         currLocation = locations.getCurrentLocation();
@@ -51,10 +56,12 @@ public class AddItemActivity extends AppCompatActivity {
         fullDesc = findViewById(R.id.longDescription);
         value = findViewById(R.id.value);
 
+        category = findViewById(R.id.itemType);
         ArrayAdapter<Enum> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ItemType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(adapter);
 
+        addItemBtn = findViewById(R.id.addItemBtn);
         addItemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,11 +72,12 @@ public class AddItemActivity extends AppCompatActivity {
 
     private void submit() {
         Items items = Items.getInstance();
+        CharSequence time = clock.getFormat12Hour();
         String description = desc.getText().toString();
         String longDescription = fullDesc.getText().toString();
         double val = Double.parseDouble(value.getText().toString());
         ItemType itemtype = (ItemType) category.getSelectedItem();
-        Item newItem = new Item(currLocation, description, longDescription, val, itemtype);
+        Item newItem = new Item(time, currLocation, description, longDescription, val, itemtype);
 
         if(items.contains(newItem)) {
             Toast.makeText(this.getBaseContext(), "Item already exists",

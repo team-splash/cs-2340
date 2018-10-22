@@ -24,7 +24,6 @@ public class ItemDetail extends AppCompatActivity {
         setContentView(R.layout.item_detail_activity);
 
         Items items = Items.getInstance();
-        Item currentItem = items.getCurrentItem();
 
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
