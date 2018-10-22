@@ -31,6 +31,17 @@
     <string name="title_register_account_activity">Register</string>
     <string name="preferences_file_key">com.example.teamsplash.donationTracker.preferences</string>
 
+    <!--New Item Form-->
+    <string name="title_add_item_activity">Add New Item</string>
+    <string name="title_item_detail_activity">Details</string>
+    <string name="category">CATEGORY</string>
+    <string name="long_desc">DESCRIPTION</string>
+    <string name="value">PRICE</string>
+
+    <string name="short_description">Short Description</string>
+    <string name="long_description">Long Description</string>
+    <string name="item_value">Value</string>
+
     <!--Navigation Strings-->
     <string name="navigation_title_home">Home</string>
     <string name="navigation_title_locations">Locations</string>

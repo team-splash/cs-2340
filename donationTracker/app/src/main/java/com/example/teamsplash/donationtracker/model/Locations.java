@@ -10,8 +10,7 @@ public class Locations implements Serializable {
     private static final Locations _instance = new Locations();
     public static Locations getInstance() { return _instance; }
     private List<Location> locations;
-
-
+    private Location currLocation;
     private Locations() {
         locations = new ArrayList<>();
     }
@@ -20,11 +19,9 @@ public class Locations implements Serializable {
         locations.add(place);
         return true;
     }
-
     public List<Location> get() {
         return locations;
     }
-
     public boolean contains(String name, String address) {
         for (Location place : locations) {
             if (place.getName().equals(name) && place.getAddress().equals(address))
@@ -32,16 +29,13 @@ public class Locations implements Serializable {
         }
         return false;
     }
-
     public boolean contains(Location location) {
         return locations.contains(location);
     }
-
     public boolean remove(Location location) {
         locations.remove(location);
         return true;
     }
-
     public String toString() {
         String str = "";
         for (Location location : locations) {
@@ -49,7 +43,6 @@ public class Locations implements Serializable {
         }
         return str;
     }
-
 
     private static final int CSV_INDEX_NAME			= 1;
     private static final int CSV_INDEX_LATITUDE		= 2;
@@ -65,23 +58,15 @@ public class Locations implements Serializable {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] tokens = line.split(",");
-
-
             String name = tokens[CSV_INDEX_NAME];
-
             double latitude = Double.parseDouble(tokens[CSV_INDEX_LATITUDE]);
             double longitude = Double.parseDouble(tokens[CSV_INDEX_LONGITUDE]);
-
             String address = tokens[CSV_INDEX_ADDRESS];
             String city = tokens[CSV_INDEX_CITY];
             String state = tokens[CSV_INDEX_STATE];
             String zip = tokens[CSV_INDEX_ZIP];
-
             LocationType type = LocationType.fromString(tokens[CSV_INDEX_TYPE]);
-
             String phone = tokens[CSV_INDEX_PHONE];
-
-
             Location location = new Location(
                     name,
                     type,
@@ -95,5 +80,13 @@ public class Locations implements Serializable {
             );
             this.add(location);
         }
+    }
+
+    // Getter and setter for current location
+    public Location getCurrentLocation() {
+        return currLocation;
+    }
+    public void setCurrentLocation(Location location) {
+        currLocation = location;
     }
 }

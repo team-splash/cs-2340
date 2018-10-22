@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 public class Users {
 
-    // TODO add error messaging letting users know why different things may have failed
-
     private static final Users _instance = new Users();
     public static Users getInstance() {
         return _instance;
@@ -17,7 +15,7 @@ public class Users {
     private Users() {
         UserData = new HashMap<User, String>();
         // Hardcode sample user for test login convenience
-        UserData.put(new User("First", "Last", "user", "password", UserType.USER), "password");
+        UserData.put(new User("First", "Last", "user@gmail.com", "password", UserType.LOCATION_EMPLOYEE), "password");
     }
 
     public boolean add(User user) {
@@ -53,11 +51,9 @@ public class Users {
     }
 
     // Getter and setter for current user
-    // TODO : not sure what the functionality of this is?
     public User getCurrentUser() {
         return currUser;
     }
-
     public void setCurrentUser(User user) {
         currUser = user;
     }
