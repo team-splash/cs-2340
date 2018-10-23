@@ -3,23 +3,29 @@ package com.example.teamsplash.donationtracker.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
-import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.Users;
 
+import java.util.List;
 
-public class LocationDetail extends AppCompatActivity {
+public class LocationInventory extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.location_detail_activity);
+        setContentView(R.layout.location_inventory_activity);
 
         Users users = Users.getInstance();
         User currentUser = users.getCurrentUser();
