@@ -1,9 +1,11 @@
 package com.example.teamsplash.donationtracker.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class Items {
-
+public class Items implements Serializable {
     private static final Items _instance = new Items();
     public static Items getInstance() {
         return _instance;
@@ -32,6 +34,16 @@ public class Items {
         return null;
     }
 
+    public List<Item> getLocItems(Location loc) {
+        List<Item> locItems = new ArrayList<>();
+        for (Item i: ItemData.keySet()) {
+            if (i.getLocation().equals(loc)) {
+                locItems.add(i);
+            }
+        }
+        return locItems;
+    }
+
     public boolean contains(Item item) {
         return ItemData.containsKey(item);
     }
@@ -49,7 +61,6 @@ public class Items {
     public Item getCurrentItem() {
         return currItem;
     }
-
     public void setCurrentItem(Item item) {
         currItem = item;
     }

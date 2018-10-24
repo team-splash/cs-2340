@@ -2,45 +2,46 @@ package com.example.teamsplash.donationtracker.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.teamsplash.donationtracker.model.Location;
-import com.example.teamsplash.donationtracker.model.Locations;
 import com.example.teamsplash.donationtracker.R;
-import com.example.teamsplash.donationtracker.model.User;
-import com.example.teamsplash.donationtracker.model.Users;
-
+import com.example.teamsplash.donationtracker.model.Locations;
 
 public class LocationDetail extends AppCompatActivity {
+    private Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location_detail_activity);
-
-        Users users = Users.getInstance();
-        User currentUser = users.getCurrentUser();
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
-        Location place = (Location) bd.get("LOCATION");
-        String location = place.getName();
-        String type = place.getLocationType();
-        String longitude = Double.toString(place.getLongitude());
-        String latitude = Double.toString(place.getLatitude());
-        String address = place.getAddress();
-        String city = place.getCity();
-        String state = place.getState();
-        String zip = place.getZip();
-        String phone = place.getPhoneNumber();
+        location = (Location) bd.get("LOCATION");
+        toolbar.setTitle(location.getName());
 
-        Locations locations = Locations.getInstance();
-        locations.setCurrentLocation(place);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String wholeAddress = address + "\n" + city + ", " + state + ", " + zip;
+        Locations.getInstance().setCurrentLocation(location);
+
+        final String name = location.getName();
+        final String type = location.getLocationType();
+        final String longitude = Double.toString(location.getLongitude());
+        final String latitude = Double.toString(location.getLatitude());
+        final String address = location.getAddress();
+        final String city = location.getCity();
+        final String state = location.getState();
+        final String zip = location.getZip();
+        final String phone = location.getPhoneNumber();
+
+        final String wholeAddress = address + "\n" + city + ", " + state + ", " + zip;
         TextView loc = findViewById(R.id.location);
         loc.setText(wholeAddress);
 
@@ -51,24 +52,38 @@ public class LocationDetail extends AppCompatActivity {
         String fullCoords = latitude + "/" + longitude;
         coords.setText(fullCoords);
 
-        TextView name = findViewById(R.id.name);
-        name.setText(location);
+        TextView nameView = findViewById(R.id.name);
+        nameView.setText(name);
 
         TextView loctype = findViewById(R.id.type);
         loctype.setText(type);
 
-        Button addNewBtn = findViewById(R.id.addItem);
-        addNewBtn.setVisibility(View.GONE);
-        if (currentUser.getUserType().getRepresentation().equals("Location Employee")) {
-            addNewBtn.setVisibility(View.VISIBLE);
-        }
+        FloatingActionButton donateButton = findViewById(R.id.addButton);
 
-        addNewBtn.setOnClickListener(new View.OnClickListener() {
+        donateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
                 Intent intent = new Intent(LocationDetail.this, AddItemActivity.class);
+                intent.putExtra("LOCATION", location);
                 startActivity(intent);
             }
         });
+
+        inflateInitialFragment();
+    }
+
+    private void inflateInitialFragment() {
+        if(findViewById(R.id.item_fragment_container) == null)
+            return;
+        // set initial fragment layout to the home view
+        ItemFragment fragment = new ItemFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("LOCATION", location);
+        fragment.setArguments(args);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.item_fragment_container, fragment)
+                .commit();
     }
 }

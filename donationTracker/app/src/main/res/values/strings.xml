@@ -50,4 +50,6 @@
     <string name="phone">PHONE</string>
     <string name="website">WEBSITE</string>
     <string name="latLong">LATITUDE/LONGITUDE</string>
+    <string name="addItem">Add New Item</string>
+    <string name="inventory">VIEW INVENTORY</string>
 </resources>

@@ -21,7 +21,7 @@ import com.example.teamsplash.donationtracker.model.Locations;
 
 import org.w3c.dom.Text;
 
-public class AddItemActivity extends AppCompatActivity {
+public class AddItemActivity extends AppCompatActivity implements View.OnClickListener {
     private TextClock clock;
     private TextView currLoc;
     // Location of Item
@@ -39,11 +39,13 @@ public class AddItemActivity extends AppCompatActivity {
     // Picture (optional)
     // private EditText picture;
     private Button addItemBtn;
+    private Location loc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_activity);
+        loc = (Location) getIntent().getSerializableExtra("LOCATION");
 
         clock = findViewById(R.id.textClock);
 
@@ -62,16 +64,12 @@ public class AddItemActivity extends AppCompatActivity {
         category.setAdapter(adapter);
 
         addItemBtn = findViewById(R.id.addItemBtn);
-        addItemBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submit();
-            }
-        });
+        addItemBtn.setOnClickListener(this);
     }
 
-    private void submit() {
+    public void onClick(View v) {
         Items items = Items.getInstance();
+
         CharSequence time = clock.getFormat12Hour();
         String description = desc.getText().toString();
         String longDescription = fullDesc.getText().toString();
@@ -85,8 +83,7 @@ public class AddItemActivity extends AppCompatActivity {
         } else {
             items.add(newItem);
             items.setCurrentItem(newItem);
-            Intent goToItem = new Intent(AddItemActivity.this, ItemDetail.class);
-            startActivity(goToItem);
+            finish();
         }
     }
 }

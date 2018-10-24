@@ -34,12 +34,10 @@ public class LocationFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Location itemClicked = locationList.get(position);
-
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("LOCATION", itemClicked);
                 Intent listDetails = new Intent(LocationFragment.this.getActivity(), LocationDetail.class);
                 listDetails.putExtras(bundle);
-
                 startActivity(listDetails);
             }
         });
@@ -61,7 +59,7 @@ public class LocationFragment extends Fragment {
         @Override
         public View getView(int position, View view, ViewGroup parent) {
             Location location = locations.get(position);
-            View rowView= inflater.inflate(R.layout.item_detail_activity, null, true);
+            View rowView = inflater.inflate(R.layout.location_item_fragment, null, true);
             TextView name = rowView.findViewById(R.id.location_name);
             TextView address = rowView.findViewById(R.id.location_address);
             TextView cityState = rowView.findViewById(R.id.location_city_state);

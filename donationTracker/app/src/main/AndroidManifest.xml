@@ -38,7 +38,8 @@
         <activity
             android:name=".controller.LocationDetail"
             android:label="@string/title_location_details_activity"
-            android:parentActivityName=".controller.MainMenu"></activity>
+            android:parentActivityName=".controller.MainMenu"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".controller.AddItemActivity"
             android:label="@string/title_add_item_activity"
@@ -46,7 +47,8 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".controller.ItemDetail"
-            android:label="@string/title_item_detail_activity"
-            android:parentActivityName=".controller.LocationDetail"></activity>
+            android:label="Inventory"
+            android:parentActivityName=".controller.LocationDetail"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>
