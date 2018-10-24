@@ -1,5 +1,7 @@
 package com.example.teamsplash.donationtracker.controller;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,73 +10,68 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.teamsplash.donationtracker.R;
+import com.example.teamsplash.donationtracker.model.Item;
+import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
-import com.example.teamsplash.donationtracker.model.User;
-import com.example.teamsplash.donationtracker.model.Users;
-
-import java.util.List;
 
 public class LocationInventory extends AppCompatActivity {
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.location_inventory_activity);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View fragment = inflater.inflate(R.layout.location_inventory_fragment, container, false);
 
-        Users users = Users.getInstance();
-        User currentUser = users.getCurrentUser();
+        final List<Item> itemList = Items.getInstance().get();
 
-        Intent intent = getIntent();
-        Bundle bd = intent.getExtras();
-        Location place = (Location) bd.get("LOCATION");
-        String location = place.getName();
-        String type = place.getLocationType();
-        String longitude = Double.toString(place.getLongitude());
-        String latitude = Double.toString(place.getLatitude());
-        String address = place.getAddress();
-        String city = place.getCity();
-        String state = place.getState();
-        String zip = place.getZip();
-        String phone = place.getPhoneNumber();
+        ItemFragment.ItemList listAdapter = new ItemFragment.ItemList(inflater, itemList);
+        final ListView list = fragment.findViewById(R.id.inventory_list);
+        list.setAdapter(listAdapter);
 
-        Locations locations = Locations.getInstance();
-        locations.setCurrentLocation(place);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Item itemClicked = itemList.get(position);
 
-        String wholeAddress = address + "\n" + city + ", " + state + ", " + zip;
-        TextView loc = findViewById(R.id.location);
-        loc.setText(wholeAddress);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("LOCATION", itemClicked);
+                Intent listDetails = new Intent(LocationFragment.this.getActivity(), LocationDetail.class);
+                listDetails.putExtras(bundle);
 
-        TextView phoneNmbr = findViewById(R.id.phone);
-        phoneNmbr.setText(phone);
-
-        TextView coords = findViewById(R.id.coords);
-        String fullCoords = latitude + "/" + longitude;
-        coords.setText(fullCoords);
-
-        TextView name = findViewById(R.id.name);
-        name.setText(location);
-
-        TextView loctype = findViewById(R.id.type);
-        loctype.setText(type);
-
-        Button addNewBtn = findViewById(R.id.addItem);
-        addNewBtn.setVisibility(View.GONE);
-        if (currentUser.getUserType().getRepresentation().equals("Location Employee")) {
-            addNewBtn.setVisibility(View.VISIBLE);
-        }
-
-        addNewBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Code here executes on main thread after user presses button
-                Intent intent = new Intent(LocationDetail.this, AddItemActivity.class);
-                startActivity(intent);
+                startActivity(listDetails);
             }
         });
+
+        return fragment;
+    }
+
+    private class ItemList extends ArrayAdapter<Item> {
+
+        private final LayoutInflater inflater;
+        private final List<Item> items;
+
+        public ItemList(LayoutInflater inflater, List<Item> items) {
+            super(inflater.getContext(), R.layout.location_inventory_fragment, items);
+            this.inflater = inflater;
+            this.items = items;
+        }
+
+        @Override
+        public View getView(int position, View view, ViewGroup parent) {
+            Item item = items.get(position);
+            View rowView= inflater.inflate(R.layout.location_inventory_fragment, null, true);
+            TextView name = rowView.findViewById(R.id.location_name);
+            TextView address = rowView.findViewById(R.id.location_address);
+            TextView cityState = rowView.findViewById(R.id.location_city_state);
+
+            name.setText(location.getName());
+            address.setText(location.getAddress());
+            cityState.setText(location.getCity() + ", " + location.getState());
+            return rowView;
+        }
     }
 }

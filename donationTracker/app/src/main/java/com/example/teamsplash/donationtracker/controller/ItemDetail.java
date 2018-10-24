@@ -3,8 +3,6 @@ package com.example.teamsplash.donationtracker.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.teamsplash.donationtracker.R;
@@ -12,9 +10,6 @@ import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.ItemType;
 import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
-import com.example.teamsplash.donationtracker.model.Locations;
-import com.example.teamsplash.donationtracker.model.User;
-import com.example.teamsplash.donationtracker.model.Users;
 
 public class ItemDetail extends AppCompatActivity {
 

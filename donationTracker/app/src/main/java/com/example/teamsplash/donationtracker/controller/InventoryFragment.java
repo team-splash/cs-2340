@@ -13,31 +13,33 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.teamsplash.donationtracker.model.Item;
+import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
 import com.example.teamsplash.donationtracker.R;
 
-public class LocationFragment extends Fragment {
+public class InventoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View fragment = inflater.inflate(R.layout.location_fragment, container, false);
+        View fragment = inflater.inflate(R.layout.location_inventory_fragment, container, false);
 
-        final List<Location> locationList = Locations.getInstance().get();
+        final List<Item> itemList = Items.getInstance().get();
 
-        LocationList listAdapter = new LocationList(inflater, locationList);
-        final ListView list = fragment.findViewById(R.id.location_list);
+        ItemList listAdapter = new ItemList(inflater, itemList);
+        final ListView list = fragment.findViewById(R.id.inventory_list);
         list.setAdapter(listAdapter);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Location itemClicked = locationList.get(position);
+                Item itemClicked = itemList.get(position);
 
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("LOCATION", itemClicked);
-                Intent listDetails = new Intent(LocationFragment.this.getActivity(), LocationDetail.class);
+                bundle.putSerializable("ITEM", itemClicked);
+                Intent listDetails = new Intent(InventoryFragment.this.getActivity(), ItemDetail.class);
                 listDetails.putExtras(bundle);
 
                 startActivity(listDetails);
@@ -47,21 +49,21 @@ public class LocationFragment extends Fragment {
         return fragment;
     }
 
-    private class LocationList extends ArrayAdapter<Location> {
+    private class ItemList extends ArrayAdapter<Location> {
 
         private final LayoutInflater inflater;
-        private final List<Location> locations;
+        private final List<Item> items;
 
-        public LocationList(LayoutInflater inflater, List<Location> locations) {
-            super(inflater.getContext(), R.layout.location_item_fragment, locations);
+        public ItemList(LayoutInflater inflater, List<Item> items) {
+            super(inflater.getContext(), R.layout.location_item_fragment, items);
             this.inflater = inflater;
-            this.locations = locations;
+            this.items = items;
         }
 
         @Override
         public View getView(int position, View view, ViewGroup parent) {
-            Location location = locations.get(position);
-            View rowView= inflater.inflate(R.layout.item_detail_activity, null, true);
+            Item item = items.get(position);
+            View rowView= inflater.inflate(R.layout.location_item_fragment, null, true);
             TextView name = rowView.findViewById(R.id.location_name);
             TextView address = rowView.findViewById(R.id.location_address);
             TextView cityState = rowView.findViewById(R.id.location_city_state);

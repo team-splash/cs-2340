@@ -9,7 +9,7 @@ public class Items {
         return _instance;
     }
 
-    public static HashMap<Item, String> ItemData;
+    public static HashMap<Item, Location> ItemData;
     private Item currItem;
 
     private Items() {
@@ -17,7 +17,7 @@ public class Items {
     }
 
     public boolean add(Item item) {
-        ItemData.put(item, item.getTime());
+        ItemData.put(item, item.getLocation());
         currItem = item;
         return true;
     }
@@ -62,5 +62,4 @@ public class Items {
         }
         return str;
     }
-
 }
