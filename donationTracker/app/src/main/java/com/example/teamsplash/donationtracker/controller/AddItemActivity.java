@@ -17,6 +17,7 @@ import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.ItemType;
 import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
+import com.example.teamsplash.donationtracker.model.Locations;
 
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener {
     private TextClock clock;
@@ -37,7 +38,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_activity);
-        loc = (Location) getIntent().getSerializableExtra("LOCATION");
+        loc = Locations.getInstance().getCurrentLocation();
         currLoc = findViewById(R.id.location_name);
         currLoc.setText(loc.getName());
 
@@ -60,12 +61,13 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
             value = findViewById(R.id.value);
 
             CharSequence time = clock.getFormat12Hour();
-            String description = desc.getText().toString();
-            String longDescription = fullDesc.getText().toString();
+            String name = desc.getText().toString();
+            String description = fullDesc.getText().toString();
             double val = Double.parseDouble(value.getText().toString());
             ItemType itemtype = (ItemType) category.getSelectedItem();
 
-            Item newItem = new Item(time, loc, description, longDescription, val, itemtype);
+            Location currLocation = Locations.getInstance().getCurrentLocation();
+            Item newItem = new Item(time, currLocation, name, description, val, itemtype);
 
             if(items.contains(newItem)) {
                 Toast.makeText(this.getBaseContext(), "Item already exists",

@@ -11,7 +11,7 @@ public class Items implements Serializable {
     public static Items getInstance() {
         return _instance;
     }
-    public static ArrayList<Item> ItemData;
+    private ArrayList<Item> ItemData;
 
     private Items() {
         ItemData = new ArrayList<>();
@@ -20,16 +20,6 @@ public class Items implements Serializable {
     public boolean add(Item item) {
         ItemData.add(item);
         return true;
-    }
-
-    public Item get(CharSequence ts, Location loc) {
-        String timestamp = ts.toString();
-        for (Item i: ItemData) {
-            if (i.getTime().equals(timestamp) && i.getLocation().equals(loc)) {
-                return i;
-            }
-        }
-        return null;
     }
 
     public List<Item> getLocItems(Location loc) {
@@ -44,17 +34,13 @@ public class Items implements Serializable {
 
     public boolean contains(Item item) {
         for (Item i : ItemData) {
-            if (i.getLocation().equals(item.getLocation())) { //&& i.getDesc().equals(item.getDesc())) {
+            if (i.getLocation().equals(item.getLocation()) && i.getDesc().equals(item.getDesc())) {
                 return true;
             }
         }
         return false;
     }
 
-    public boolean remove(Item item) {
-        ItemData.remove(item);
-        return true;
-    }
 
     @Override
     public String toString() {

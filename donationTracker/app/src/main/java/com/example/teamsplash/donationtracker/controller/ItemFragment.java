@@ -27,12 +27,11 @@ public class ItemFragment extends Fragment {
 
         View fragment = inflater.inflate(R.layout.item_list, container, false);
 
-        Location location = (Location) getArguments().getSerializable("LOCATION");
+        Location location = Locations.getInstance().getCurrentLocation();
+        final List<Item> itemsList = Items.getInstance().getLocItems(location);
 
-        final List<Item> ItemsList = Items.getInstance().getLocItems(location);
-
-        ItemsList listAdapter = new ItemsList(inflater, ItemsList);
-        final ListView list = fragment.findViewById(R.id.item_list);
+        ItemsList listAdapter = new ItemsList(inflater, itemsList);
+        final ListView list = fragment.findViewById(R.id.inventory);
         list.setAdapter(listAdapter);
         setListViewHeightBasedOnItems(list);
 
@@ -40,7 +39,7 @@ public class ItemFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Item itemClicked = ItemsList.get(position);
+                Item itemClicked = itemsList.get(position);
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("ITEM", itemClicked);
@@ -57,10 +56,10 @@ public class ItemFragment extends Fragment {
         private final LayoutInflater inflater;
         private final List<Item> items;
 
-        public ItemsList(LayoutInflater inflater, List<Item> donationItems) {
-            super(inflater.getContext(), R.layout.item_fragment, donationItems);
+        public ItemsList(LayoutInflater inflater, List<Item> items) {
+            super(inflater.getContext(), R.layout.item_fragment, items);
             this.inflater = inflater;
-            this.items = donationItems;
+            this.items =items;
         }
 
         @Override
@@ -79,17 +78,16 @@ public class ItemFragment extends Fragment {
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter != null) {
             int numberOfItems = listAdapter.getCount();
-            // Get total height of all items.
             int totalItemsHeight = 0;
             for (int itemPos = 0; itemPos < numberOfItems; itemPos++) {
                 View item = listAdapter.getView(itemPos, null, listView);
                 item.measure(0, 0);
                 totalItemsHeight += item.getMeasuredHeight();
             }
-            // Get total height of all item dividers.
+
             int totalDividersHeight = listView.getDividerHeight() *
                     (numberOfItems - 1);
-            // Set list height.
+
             ViewGroup.LayoutParams params = listView.getLayoutParams();
             params.height = totalItemsHeight + totalDividersHeight;
             listView.setLayoutParams(params);

@@ -14,7 +14,6 @@ import com.example.teamsplash.donationtracker.model.Locations;
 
 public class LocationDetail extends AppCompatActivity {
     private Location location;
-    TextView inventoryStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +40,6 @@ public class LocationDetail extends AppCompatActivity {
         final String zip = location.getZip();
         final String phone = location.getPhoneNumber();
         final String wholeAddress = address + "\n" + city + ", " + state + ", " + zip;
-
-        inventoryStatus = findViewById(R.id.nullInventory);
 
         TextView loc = findViewById(R.id.location);
         loc.setText(wholeAddress);
@@ -72,7 +69,7 @@ public class LocationDetail extends AppCompatActivity {
     }
 
     private void inflateInitialFragment() {
-        if (findViewById(R.id.item_fragment_container) == null) {
+        if (findViewById(R.id.item_fragment) == null) {
             return;
         }
         ItemFragment fragment = new ItemFragment();
@@ -82,7 +79,7 @@ public class LocationDetail extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.item_fragment_container, fragment)
+                .add(R.id.item_fragment, fragment)
                 .commit();
     }
 }
