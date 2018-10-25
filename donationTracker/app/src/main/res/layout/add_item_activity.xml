@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="@dimen/activity_margin"
     tools:context=".controller.AddItemActivity">
 
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:isScrollContainer="true"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="140dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/addItemBtn"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -97,11 +95,13 @@
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
     </ScrollView>
+
     <Button
         android:id="@+id/addItemBtn"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:onClick="onClick"
         android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent" />
 

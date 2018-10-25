@@ -8,9 +8,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Locations;
+
+import org.w3c.dom.Text;
 
 public class LocationDetail extends AppCompatActivity {
     private Location location;
@@ -28,8 +31,6 @@ public class LocationDetail extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Locations.getInstance().setCurrentLocation(location);
 
         final String type = location.getLocationType();
         final String longitude = Double.toString(location.getLongitude());
@@ -55,7 +56,6 @@ public class LocationDetail extends AppCompatActivity {
         loctype.setText(type);
 
         FloatingActionButton addItemButton = findViewById(R.id.addButton);
-
         addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

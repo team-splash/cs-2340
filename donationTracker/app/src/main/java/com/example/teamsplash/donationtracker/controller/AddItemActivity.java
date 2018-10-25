@@ -38,7 +38,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_activity);
-        loc = Locations.getInstance().getCurrentLocation();
+
+        loc = (Location) getIntent().getSerializableExtra("LOCATION");
         currLoc = findViewById(R.id.location_name);
         currLoc.setText(loc.getName());
 
@@ -53,7 +54,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
 
     public void onClick(View v) {
         if (v.getId() == R.id.addItemBtn) {
-            Items items = Items.getInstance();
 
             clock = findViewById(R.id.textClock);
             desc = findViewById(R.id.shortDescription);
@@ -66,8 +66,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
             double val = Double.parseDouble(value.getText().toString());
             ItemType itemtype = (ItemType) category.getSelectedItem();
 
-            Location currLocation = Locations.getInstance().getCurrentLocation();
-            Item newItem = new Item(time, currLocation, name, description, val, itemtype);
+            Item newItem = new Item(time, loc, name, description, val, itemtype);
+            Items items = Items.getInstance();
 
             if(items.contains(newItem)) {
                 Toast.makeText(this.getBaseContext(), "Item already exists",

@@ -1,5 +1,7 @@
 package com.example.teamsplash.donationtracker.model;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ public class Items implements Serializable {
         return _instance;
     }
     private ArrayList<Item> ItemData;
+    public static int numItems;
 
     private Items() {
         ItemData = new ArrayList<>();
@@ -50,4 +53,6 @@ public class Items implements Serializable {
         }
         return str;
     }
+
+    public int getNumItems() { return numItems; }
 }

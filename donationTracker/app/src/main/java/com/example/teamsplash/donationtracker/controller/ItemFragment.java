@@ -27,7 +27,7 @@ public class ItemFragment extends Fragment {
 
         View fragment = inflater.inflate(R.layout.item_list, container, false);
 
-        Location location = Locations.getInstance().getCurrentLocation();
+        Location location = (Location) getArguments().getSerializable("LOCATION");
         final List<Item> itemsList = Items.getInstance().getLocItems(location);
 
         ItemsList listAdapter = new ItemsList(inflater, itemsList);

@@ -4,36 +4,16 @@ import java.io.Serializable;
 
 public class Location implements Serializable {
 
-    /** Location's name**/
     private String name;
-
-    /** Location's type**/
     private LocationType locationType;
-
-    /** Location's longitude**/
     private double longitude;
-
-    /** Location's latitude**/
     private double latitude;
-
-    /** Location's address**/
     private String address;
-
-    /** Location's city**/
     private String city;
-
-    /** Location's state**/
     private String state;
-
-    /** Location's ZIP**/
     private String zip;
-
-    /** Location's phone number**/
     private String phoneNumber;
 
-    /**
-     * creates a new location
-     */
     public Location(String name, LocationType locationType, double longitude, double latitude,
                     String address, String city, String state, String zip, String phoneNumber) {
         this.name = name;
@@ -55,7 +35,6 @@ public class Location implements Serializable {
         if (!(o instanceof Location)) {
             return false;
         }
-        Location maybeSame = (Location) o;
 
         return (((Location) o).getName().equals(this.name)
                 && ((Location) o).getLocationType().equals(this.locationType)
@@ -67,11 +46,6 @@ public class Location implements Serializable {
                 && ((Location) o).getZip().equals(this.zip)
                 && ((Location) o).getPhoneNumber().equals(this.phoneNumber);
     }
-
-
-    /* *************************************
-     * All property getters and setters
-     */
 
     public String getName() {return name;}
     public void setName(String call) {name = call;}

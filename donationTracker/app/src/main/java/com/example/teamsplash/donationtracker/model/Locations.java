@@ -10,7 +10,6 @@ public class Locations implements Serializable {
     private static final Locations _instance = new Locations();
     public static Locations getInstance() { return _instance; }
     private List<Location> locations;
-    public Location currLocation;
     private Locations() {
         locations = new ArrayList<>();
     }
@@ -77,13 +76,5 @@ public class Locations implements Serializable {
             );
             this.add(location);
         }
-    }
-
-    // Getter and setter for current location
-    public Location getCurrentLocation() {
-        return currLocation;
-    }
-    public void setCurrentLocation(Location location) {
-        currLocation = location;
     }
 }
