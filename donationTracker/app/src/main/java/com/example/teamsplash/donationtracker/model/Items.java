@@ -3,9 +3,7 @@ package com.example.teamsplash.donationtracker.model;
 import android.util.Log;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Items implements Serializable {
@@ -14,7 +12,6 @@ public class Items implements Serializable {
         return _instance;
     }
     private ArrayList<Item> ItemData;
-    public static int numItems;
 
     private Items() {
         ItemData = new ArrayList<>();
@@ -22,14 +19,19 @@ public class Items implements Serializable {
 
     public boolean add(Item item) {
         ItemData.add(item);
+        Log.i("Items Class: ", "Added " + item.toString());
         return true;
     }
 
-    public List<Item> getLocItems(Location loc) {
+    public List<Item> getByLocation(Location loc) {
+
         List<Item> locItems = new ArrayList<>();
-        for (Item i: ItemData) {
-            if (i.getLocation().equals(loc)) {
-                locItems.add(i);
+        for (Item item: ItemData) {
+            Log.i("Items Checked: ", "Location has " + item.toString());
+            if (item.getLocation().equals(loc)) {
+                locItems.add(item);
+            } else {
+                Log.i("Not a ", "match! :(");
             }
         }
         return locItems;
@@ -53,6 +55,4 @@ public class Items implements Serializable {
         }
         return str;
     }
-
-    public int getNumItems() { return numItems; }
 }

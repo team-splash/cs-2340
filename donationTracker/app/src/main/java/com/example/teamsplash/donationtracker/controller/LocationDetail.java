@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.example.teamsplash.donationtracker.model.Locations;
 import org.w3c.dom.Text;
 
 public class LocationDetail extends AppCompatActivity {
+
     private Location location;
 
     @Override
@@ -32,7 +34,8 @@ public class LocationDetail extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final String type = location.getLocationType();
+        final String name = location.getName();
+        final String type = location.getLocationType().toString();
         final String longitude = Double.toString(location.getLongitude());
         final String latitude = Double.toString(location.getLatitude());
         final String address = location.getAddress();
@@ -40,23 +43,23 @@ public class LocationDetail extends AppCompatActivity {
         final String state = location.getState();
         final String zip = location.getZip();
         final String phone = location.getPhoneNumber();
-        final String wholeAddress = address + "\n" + city + ", " + state + ", " + zip;
 
-        TextView loc = findViewById(R.id.location);
+        final String wholeAddress = address + "\n" + city + ", " + state + ", " + zip;
+        TextView loc = (TextView) findViewById(R.id.location);
         loc.setText(wholeAddress);
 
-        TextView phoneNmbr = findViewById(R.id.phone);
+        TextView phoneNmbr = (TextView) findViewById(R.id.phone);
         phoneNmbr.setText(phone);
 
-        TextView coords = findViewById(R.id.coords);
+        TextView coords = (TextView) findViewById(R.id.coords);
         String fullCoords = latitude + "/" + longitude;
         coords.setText(fullCoords);
 
-        TextView loctype = findViewById(R.id.type);
+        TextView loctype = (TextView) findViewById(R.id.type);
         loctype.setText(type);
 
-        FloatingActionButton addItemButton = findViewById(R.id.addButton);
-        addItemButton.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton addBtn = findViewById(R.id.addButton);
+        addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LocationDetail.this, AddItemActivity.class);
@@ -64,14 +67,16 @@ public class LocationDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         inflateInitialFragment();
     }
 
     private void inflateInitialFragment() {
-        if (findViewById(R.id.item_fragment) == null) {
+        if (findViewById(R.id.fragment_container) == null) {
+            Log.i("Fragment container has an item: ", "No");
             return;
-        }
+         }
+
+        Log.i("Fragment container has an item: ", "Finally");
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
         args.putSerializable("LOCATION", location);
@@ -79,7 +84,7 @@ public class LocationDetail extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.item_fragment, fragment)
+                .add(R.id.fragment_container, fragment)
                 .commit();
     }
 }

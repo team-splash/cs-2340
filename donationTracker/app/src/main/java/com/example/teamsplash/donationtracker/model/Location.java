@@ -50,7 +50,7 @@ public class Location implements Serializable {
     public String getName() {return name;}
     public void setName(String call) {name = call;}
 
-    public String getLocationType() {return locationType.toString();}
+    public LocationType getLocationType() {return locationType;}
     public void setLocationType(LocationType type) {locationType = type;}
 
     public double getLongitude() {return longitude;}
@@ -73,8 +73,6 @@ public class Location implements Serializable {
 
     public String getZip() {return zip;}
     public void setZip(String z) {zip = z;}
-
-    /**********************************************/
 
 
     @Override
