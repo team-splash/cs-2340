@@ -16,6 +16,7 @@ import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
+import com.example.teamsplash.donationtracker.model.Locations;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class ItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View fragment = inflater.inflate(R.layout.item_fragment, container, false);
+        View fragment = inflater.inflate(R.layout.item_list, container, false);
 
         Location location = (Location) getArguments().getSerializable("LOCATION");
 
@@ -57,7 +58,7 @@ public class ItemFragment extends Fragment {
         private final List<Item> items;
 
         public ItemsList(LayoutInflater inflater, List<Item> donationItems) {
-            super(inflater.getContext(), R.layout.items_fragment, donationItems);
+            super(inflater.getContext(), R.layout.item_fragment, donationItems);
             this.inflater = inflater;
             this.items = donationItems;
         }
@@ -65,7 +66,7 @@ public class ItemFragment extends Fragment {
         @Override
         public View getView(int position, View view, ViewGroup parent) {
             Item item = items.get(position);
-            View rowView= inflater.inflate(R.layout.items_fragment, null, true);
+            View rowView= inflater.inflate(R.layout.item_fragment, null, true);
             TextView name = rowView.findViewById(R.id.name);
             TextView price = rowView.findViewById(R.id.value);
             name.setText(item.getDesc());

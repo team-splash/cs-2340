@@ -43,12 +43,7 @@
         <activity
             android:name=".controller.AddItemActivity"
             android:label="@string/title_add_item_activity"
-            android:parentActivityName=".controller.LocationDetail"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".controller.ItemDetail"
-            android:label="Inventory"
-            android:parentActivityName=".controller.LocationDetail"
-            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".controller.ItemDetail"></activity>
     </application>
 </manifest>

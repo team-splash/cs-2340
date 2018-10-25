@@ -38,8 +38,8 @@
     <string name="long_desc">DESCRIPTION</string>
     <string name="value">PRICE</string>
 
-    <string name="short_description">Short Description</string>
-    <string name="long_description">Long Description</string>
+    <string name="short_description">Name</string>
+    <string name="long_description">Description</string>
     <string name="item_value">Value</string>
 
     <!--Navigation Strings-->
@@ -51,5 +51,5 @@
     <string name="website">WEBSITE</string>
     <string name="latLong">LATITUDE/LONGITUDE</string>
     <string name="addItem">Add New Item</string>
-    <string name="inventory">VIEW INVENTORY</string>
+    <string name="inventory">INVENTORY</string>
 </resources>

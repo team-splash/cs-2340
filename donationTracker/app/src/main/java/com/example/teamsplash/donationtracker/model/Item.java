@@ -5,16 +5,16 @@ import java.io.Serializable;
 public class Item implements Serializable {
     private String time;
     private Location location;
+    private String name;
     private String desc;
-    private String longDesc;
     private double value;
     private ItemType itemtype;
 
-    public Item(CharSequence time, Location location, String desc, String longDesc, double value, ItemType itemType) {
+    public Item(CharSequence time, Location location, String name, String desc, double value, ItemType itemType) {
         this.time = time.toString();
         this.location = location;
+        this.name = name;
         this.desc = desc;
-        this.longDesc = longDesc;
         this.value = value;
         this.itemtype = itemType;
     }
@@ -29,8 +29,8 @@ public class Item implements Serializable {
         }
         return (((Item) o).getTime().equals(this.time)
                 && ((Item) o).getLocation().equals(this.location)
-                && ((Item) o).getDesc().equals(this.desc)
-                && ((Item) o).getLongDesc().equals(this.longDesc)
+                && ((Item) o).getDesc().equals(this.name)
+                && ((Item) o).getLongDesc().equals(this.desc)
                 && ((Item) o).getValue() == this.value
                 && ((Item) o).getItemType().equals(this.itemtype));
 
@@ -54,18 +54,18 @@ public class Item implements Serializable {
 
     // Getter and Setter for description
     public String getDesc() {
-        return desc;
+        return name;
     }
     public void setDesc(String description) {
-        this.desc = description;
+        this.name = description;
     }
 
     // Getter and Setter for long description
     public String getLongDesc() {
-        return longDesc;
+        return desc;
     }
     public void setLongDesc(String longDescription) {
-        this.longDesc = longDescription;
+        this.desc = longDescription;
     }
 
     // Getter and Setter for value
@@ -86,6 +86,6 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return (time + " " + location + " " + desc + " " + longDesc + " " + value + " " + itemtype);
+        return (time + " " + location + " " + name + " " + desc + " " + value + " " + itemtype);
     }
 }

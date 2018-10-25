@@ -14,6 +14,7 @@ import com.example.teamsplash.donationtracker.model.Locations;
 
 public class LocationDetail extends AppCompatActivity {
     private Location location;
+    TextView inventoryStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,6 @@ public class LocationDetail extends AppCompatActivity {
 
         Locations.getInstance().setCurrentLocation(location);
 
-        final String name = location.getName();
         final String type = location.getLocationType();
         final String longitude = Double.toString(location.getLongitude());
         final String latitude = Double.toString(location.getLatitude());
@@ -40,8 +40,10 @@ public class LocationDetail extends AppCompatActivity {
         final String state = location.getState();
         final String zip = location.getZip();
         final String phone = location.getPhoneNumber();
-
         final String wholeAddress = address + "\n" + city + ", " + state + ", " + zip;
+
+        inventoryStatus = findViewById(R.id.nullInventory);
+
         TextView loc = findViewById(R.id.location);
         loc.setText(wholeAddress);
 
@@ -52,15 +54,12 @@ public class LocationDetail extends AppCompatActivity {
         String fullCoords = latitude + "/" + longitude;
         coords.setText(fullCoords);
 
-        TextView nameView = findViewById(R.id.name);
-        nameView.setText(name);
-
         TextView loctype = findViewById(R.id.type);
         loctype.setText(type);
 
-        FloatingActionButton donateButton = findViewById(R.id.addButton);
+        FloatingActionButton addItemButton = findViewById(R.id.addButton);
 
-        donateButton.setOnClickListener(new View.OnClickListener() {
+        addItemButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LocationDetail.this, AddItemActivity.class);
@@ -73,9 +72,9 @@ public class LocationDetail extends AppCompatActivity {
     }
 
     private void inflateInitialFragment() {
-        if(findViewById(R.id.item_fragment_container) == null)
+        if (findViewById(R.id.item_fragment_container) == null) {
             return;
-        // set initial fragment layout to the home view
+        }
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
         args.putSerializable("LOCATION", location);

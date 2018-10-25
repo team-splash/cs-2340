@@ -17,15 +17,12 @@ import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.ItemType;
 import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
-import com.example.teamsplash.donationtracker.model.Locations;
-
-import org.w3c.dom.Text;
 
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener {
     private TextClock clock;
     private TextView currLoc;
     // Location of Item
-    private Location currLocation;
+    private Location loc;
     // Short Description of Item
     private EditText desc;
     // Full Description of Item
@@ -34,29 +31,15 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     private EditText value;
     // Category (clothing, hat, kitchen, electronics, household, other)
     private Spinner category;
-    // Comments (optional)
-    // private EditText comments;
-    // Picture (optional)
-    // private EditText picture;
     private Button addItemBtn;
-    private Location loc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_activity);
         loc = (Location) getIntent().getSerializableExtra("LOCATION");
-
-        clock = findViewById(R.id.textClock);
-
-        Locations locations = Locations.getInstance();
-        currLocation = locations.getCurrentLocation();
         currLoc = findViewById(R.id.location_name);
-        currLoc.setText(currLocation.getName());
-
-        desc = findViewById(R.id.shortDescription);
-        fullDesc = findViewById(R.id.longDescription);
-        value = findViewById(R.id.value);
+        currLoc.setText(loc.getName());
 
         category = findViewById(R.id.itemType);
         ArrayAdapter<Enum> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ItemType.values());
@@ -68,22 +51,29 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onClick(View v) {
-        Items items = Items.getInstance();
+        if (v.getId() == R.id.addItemBtn) {
+            Items items = Items.getInstance();
 
-        CharSequence time = clock.getFormat12Hour();
-        String description = desc.getText().toString();
-        String longDescription = fullDesc.getText().toString();
-        double val = Double.parseDouble(value.getText().toString());
-        ItemType itemtype = (ItemType) category.getSelectedItem();
-        Item newItem = new Item(time, currLocation, description, longDescription, val, itemtype);
+            clock = findViewById(R.id.textClock);
+            desc = findViewById(R.id.shortDescription);
+            fullDesc = findViewById(R.id.longDescription);
+            value = findViewById(R.id.value);
 
-        if(items.contains(newItem)) {
-            Toast.makeText(this.getBaseContext(), "Item already exists",
-                    Toast.LENGTH_LONG).show();
-        } else {
-            items.add(newItem);
-            items.setCurrentItem(newItem);
-            finish();
+            CharSequence time = clock.getFormat12Hour();
+            String description = desc.getText().toString();
+            String longDescription = fullDesc.getText().toString();
+            double val = Double.parseDouble(value.getText().toString());
+            ItemType itemtype = (ItemType) category.getSelectedItem();
+
+            Item newItem = new Item(time, loc, description, longDescription, val, itemtype);
+
+            if(items.contains(newItem)) {
+                Toast.makeText(this.getBaseContext(), "Item already exists",
+                        Toast.LENGTH_LONG).show();
+            } else {
+                items.add(newItem);
+                finish();
+            }
         }
     }
 }
