@@ -49,12 +49,10 @@ public class ItemFragment extends Fragment {
                 startActivity(listDetails);
             }
         });
-
         return fragment;
     }
 
     private class ItemsList extends ArrayAdapter<Item> {
-
         private final LayoutInflater inflater;
         private final List<Item> items;
 
@@ -69,9 +67,9 @@ public class ItemFragment extends Fragment {
             Item item = items.get(position);
             View rowView= inflater.inflate(R.layout.items_fragment, null, true);
             TextView name = rowView.findViewById(R.id.name);
-            TextView location = rowView.findViewById(R.id.location);
+            TextView price = rowView.findViewById(R.id.value);
             name.setText(item.getDesc());
-            location.setText(item.getLocation().getName());
+            price.setText(Double.toString(item.getValue()));
             return rowView;
         }
     }
@@ -99,6 +97,5 @@ public class ItemFragment extends Fragment {
         } else {
             return false;
         }
-
     }
 }

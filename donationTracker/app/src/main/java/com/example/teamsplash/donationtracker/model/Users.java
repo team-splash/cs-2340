@@ -15,7 +15,7 @@ public class Users {
     private Users() {
         UserData = new HashMap<User, String>();
         // Hardcode sample user for test login convenience
-        UserData.put(new User("First", "Last", "user@gmail.com", "password", UserType.LOCATION_EMPLOYEE), "password");
+        UserData.put(new User("First", "Last", "user@abc.com", "123", UserType.LOCATION_EMPLOYEE), "password");
     }
 
     public boolean add(User user) {
