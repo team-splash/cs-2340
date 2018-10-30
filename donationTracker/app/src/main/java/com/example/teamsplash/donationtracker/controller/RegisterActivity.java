@@ -120,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
             } else {
                 users.add(newUser);
                 users.setCurrentUser(newUser);
-                Intent goToMain = new Intent(RegisterActivity.this, MainMenu.class);
+                Intent goToMain = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(goToMain);
             }
         }
