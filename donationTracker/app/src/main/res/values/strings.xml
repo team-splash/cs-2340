@@ -8,7 +8,7 @@
     <string name="prompt_password">Password</string>
     <string name="prompt_password_confirm">Confirm Password</string>
     <string name="action_sign_in">Sign in</string>
-    <string name="action_register">Don\'t have an account? Register Here</string>
+    <string name="action_register">Don\'t have an account? Register here</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_password_mismatch">Passwords must match</string>
@@ -31,6 +31,17 @@
     <string name="title_register_account_activity">Register</string>
     <string name="preferences_file_key">com.example.teamsplash.donationTracker.preferences</string>
 
+    <!--New Item Form-->
+    <string name="title_add_item_activity">Add New Item</string>
+    <string name="title_item_detail_activity">Details</string>
+    <string name="category">CATEGORY</string>
+    <string name="long_desc">DESCRIPTION</string>
+    <string name="value">PRICE</string>
+
+    <string name="short_description">Name</string>
+    <string name="long_description">Description</string>
+    <string name="item_value">Value</string>
+
     <!--Navigation Strings-->
     <string name="navigation_title_home">Home</string>
     <string name="navigation_title_locations">Locations</string>
@@ -39,4 +50,6 @@
     <string name="phone">PHONE</string>
     <string name="website">WEBSITE</string>
     <string name="latLong">LATITUDE/LONGITUDE</string>
+    <string name="addItem">Add New Item</string>
+    <string name="inventory">INVENTORY</string>
 </resources>

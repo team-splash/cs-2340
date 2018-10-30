@@ -7,7 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <!-- Text properties -->
-    <dimen name="text_list_header">18dp</dimen>
-    <dimen name="text_list_body">14dp</dimen>
+    <dimen name="text_list_header">18sp</dimen>
+    <dimen name="text_list_body">14sp</dimen>
     <dimen name="icon">36dp</dimen>
 </resources>
