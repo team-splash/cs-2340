@@ -95,9 +95,16 @@
         android:id="@+id/addItemBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_margin"
         android:onClick="onClick"
         android:text="@string/submit"
+        app:layout_constraintBottom_toTopOf="@id/cancelItemBtn" />
+    <Button
+        android:id="@+id/cancelItemBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_margin"
+        android:onClick="onClick"
+        android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

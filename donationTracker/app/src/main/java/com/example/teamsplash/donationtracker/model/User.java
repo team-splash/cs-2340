@@ -11,8 +11,10 @@ public class User {
         String s1 = firstname.substring(0, 1).toUpperCase();
         firstname = s1 + firstname.substring(1);
         this.firstname = firstname;
-        String s2 = lastname.substring(0, 1).toUpperCase();
-        lastname = s2 + lastname.substring(1);
+        if (lastname.length() > 0) {
+            String s2 = lastname.substring(0, 1).toUpperCase();
+            lastname = s2 + lastname.substring(1);
+        }
         this.lastname = lastname;
         this.email = email;
         this.password = password;

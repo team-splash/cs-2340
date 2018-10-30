@@ -21,6 +21,7 @@ import com.example.teamsplash.donationtracker.model.UserType;
 import com.example.teamsplash.donationtracker.R;
 
 public class RegisterActivity extends AppCompatActivity {
+    public final int MIN_PASSWORD_LENGTH = 8;
     private EditText firstname;
     private EditText lastname;
     private EditText email;
@@ -62,6 +63,14 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void submit() {
+        boolean cancel = false;
+        View focusView = null;
+
+        firstname.setError(null);
+        email.setError(null);
+        pass.setError(null);
+        confirmPass.setError(null);
+
         Users users = Users.getInstance();
         String userFirstName = firstname.getText().toString();
         String userLastName = lastname.getText().toString();
@@ -69,16 +78,64 @@ public class RegisterActivity extends AppCompatActivity {
         String userPassword = pass.getText().toString();
         String confirmPassword = confirmPass.getText().toString();
         UserType userType = (UserType) accountTypeSpinner.getSelectedItem();
-        User newUser = new User(userFirstName, userLastName, userEmail, userPassword, userType);
-        if(users.contains(newUser)) {
-            Toast.makeText(this.getBaseContext(), "Account already exists",
-                    Toast.LENGTH_LONG).show();
-        } else {
-            users.add(newUser);
-            users.setCurrentUser(newUser);
-            Intent goToMain = new Intent(RegisterActivity.this, MainMenu.class);
-            startActivity(goToMain);
+
+        if (userFirstName == "") {
+            firstname.setError(getString(R.string.error_field_required));
+            focusView = firstname;
+            cancel = true;
+        } else if (userEmail == "") {
+            email.setError(getString(R.string.error_field_required));
+            focusView = email;
+            cancel = true;
+        } else if (userPassword == "") {
+            pass.setError(getString(R.string.error_field_required));
+            focusView = pass;
+            cancel = true;
+        } else if (confirmPassword == "") {
+            confirmPass.setError(getString(R.string.error_field_required));
+            focusView = confirmPass;
+            cancel = true;
+        } else if (userPassword.length() < MIN_PASSWORD_LENGTH) {
+            pass.setError(getString(R.string.error_invalid_password));
+            focusView = pass;
+            cancel = true;
+        } else if (!isEmailValid(userEmail)) {
+            email.setError(getString(R.string.error_invalid_email));
+            focusView = email;
+            cancel = true;
+        } else if (!isPasswordValid(userPassword, confirmPassword)) {
+            confirmPass.setError(getString(R.string.error_password_mismatch));
+            focusView = confirmPass;
+            cancel = true;
         }
 
+        if (cancel) {
+            focusView.requestFocus();
+        } else {
+            User newUser = new User(userFirstName, userLastName, userEmail, userPassword, userType);
+            if(users.contains(newUser)) {
+                email.setError(getString(R.string.error_user_exists));
+                focusView = email;
+                focusView.requestFocus();
+            } else {
+                users.add(newUser);
+                users.setCurrentUser(newUser);
+                Intent goToMain = new Intent(RegisterActivity.this, MainMenu.class);
+                startActivity(goToMain);
+            }
+        }
+
+
+    }
+
+
+
+    // Checks for an @ symbol and a period
+    private boolean isEmailValid(String email) {
+        return email.contains("@") && email.contains(".");
+    }
+
+    private boolean isPasswordValid(String p1, String p2) {
+        return p1.equals(p2);
     }
 }

@@ -18,7 +18,7 @@ public class ItemDetail extends AppCompatActivity {
 
         String name = item.getDesc();
         String description = item.getLongDesc();
-        String value = Double.toString(item.getValue());
+        String value = "$" + String.format( "%.2f", item.getValue());
         Location location = item.getLocation();
 
         TextView title = findViewById(R.id.name);
@@ -29,6 +29,6 @@ public class ItemDetail extends AppCompatActivity {
         title.setText(name);
         desc.setText(description);
         price.setText(value);
-        loc.setText(location.toString());
+        loc.setText(location.getName());
     }
 }
