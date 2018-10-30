@@ -19,7 +19,6 @@ public class Items implements Serializable {
 
     public boolean add(Item item) {
         ItemData.add(item);
-        Log.i("Items Class: ", "Added " + item.toString());
         return true;
     }
 
@@ -27,11 +26,8 @@ public class Items implements Serializable {
 
         List<Item> locItems = new ArrayList<>();
         for (Item item: ItemData) {
-            Log.i("Items Checked: ", "Location has " + item.toString());
             if (item.getLocation().equals(loc)) {
                 locItems.add(item);
-            } else {
-                Log.i("Not a ", "match! :(");
             }
         }
         return locItems;

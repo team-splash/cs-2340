@@ -27,8 +27,6 @@ public class ItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Log.i("ItemFragment: ", "called");
-
         View fragment = inflater.inflate(R.layout.items_fragment, container, false);
 
         Location location = (Location) getArguments().getSerializable("LOCATION");

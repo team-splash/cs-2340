@@ -60,7 +60,6 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                     if (!description.getText().toString().equals("")) {
                         Item item = new Item(loc, title, description.getText().toString(),
                                 Double.parseDouble(value.getText().toString()), itemtype);
-                        Log.i("Item Created: ", item.toString());
                         Items donated = Items.getInstance();
                         donated.add(item);
                         finish();

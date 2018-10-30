@@ -72,11 +72,9 @@ public class LocationDetail extends AppCompatActivity {
 
     private void inflateInitialFragment() {
         if (findViewById(R.id.fragment_container) == null) {
-            Log.i("Fragment container has an item: ", "No");
             return;
          }
 
-        Log.i("Fragment container has an item: ", "Finally");
         ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
         args.putSerializable("LOCATION", location);
