@@ -13,6 +13,8 @@ public class Item implements Serializable {
     public Item(CharSequence time, Location location, String name, String desc, double value, ItemType itemType) {
         this.time = time.toString();
         this.location = location;
+        String s1 = name.substring(0, 1).toUpperCase();
+        name = s1 + name.substring(1);
         this.name = name;
         this.desc = desc;
         this.value = value;
