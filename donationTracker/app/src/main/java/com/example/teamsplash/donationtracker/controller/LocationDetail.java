@@ -5,15 +5,13 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.R;
-import com.example.teamsplash.donationtracker.model.Locations;
+import com.example.teamsplash.donationtracker.model.UserType;
+import com.example.teamsplash.donationtracker.model.Users;
 
 import org.w3c.dom.Text;
 
@@ -46,20 +44,26 @@ public class LocationDetail extends AppCompatActivity {
         final String phone = location.getPhoneNumber();
 
         final String wholeAddress = address + "\n" + city + ", " + state + ", " + zip;
-        TextView loc = (TextView) findViewById(R.id.location);
+        TextView loc = findViewById(R.id.location);
         loc.setText(wholeAddress);
 
-        TextView phoneNmbr = (TextView) findViewById(R.id.phone);
+        TextView phoneNmbr = findViewById(R.id.phone);
         phoneNmbr.setText(phone);
 
-        TextView coords = (TextView) findViewById(R.id.coords);
+        TextView coords = findViewById(R.id.coords);
         String fullCoords = latitude + "/" + longitude;
         coords.setText(fullCoords);
 
-        TextView loctype = (TextView) findViewById(R.id.type);
+        TextView loctype = findViewById(R.id.type);
         loctype.setText(type);
 
         FloatingActionButton addBtn = findViewById(R.id.addButton);
+
+        UserType currUserType = Users.getInstance().getCurrentUser().getUserType();
+        if (currUserType == UserType.USER) {
+            addBtn.setVisibility(View.GONE);
+        }
+
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

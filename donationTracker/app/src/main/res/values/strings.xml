@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Team 8 M7</string>
+    <string name="app_name">Team 8</string>
 
     <!-- Login Form Strings -->
     <string name="prompt_first_name">First Name</string>
@@ -34,7 +34,7 @@
 
     <!--New Item Form-->
     <string name="title_add_item_activity">Add New Item</string>
-    <string name="title_item_detail_activity">Details</string>
+    <string name="title_item_detail_activity">Item Details</string>
     <string name="category">CATEGORY</string>
     <string name="long_desc">DESCRIPTION</string>
     <string name="value">PRICE</string>
@@ -48,6 +48,7 @@
     <string name="navigation_title_home">Home</string>
     <string name="navigation_title_locations">Locations</string>
     <string name="title_location_details_activity">Location Details</string>
+    <string name="back">Go Back</string>
     <string name="location">LOCATION</string>
     <string name="phone">PHONE</string>
     <string name="website">WEBSITE</string>

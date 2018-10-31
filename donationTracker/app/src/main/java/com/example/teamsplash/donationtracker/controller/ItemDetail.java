@@ -1,7 +1,10 @@
 package com.example.teamsplash.donationtracker.controller;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.teamsplash.donationtracker.R;
@@ -30,5 +33,12 @@ public class ItemDetail extends AppCompatActivity {
         desc.setText(description);
         price.setText(value);
         loc.setText(location.getName());
+
+        Button goBackBtn = findViewById(R.id.backBtn);
+        goBackBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 }

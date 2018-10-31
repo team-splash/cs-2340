@@ -45,6 +45,9 @@
             android:name=".controller.AddItemActivity"
             android:label="@string/title_add_item_activity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".controller.ItemDetail"></activity>
+        <activity
+            android:name=".controller.ItemDetail"
+            android:label="@string/title_item_detail_activity"
+            />
     </application>
 </manifest>
