@@ -23,6 +23,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     private EditText description;
     private EditText value;
     private Button submit;
+    private Button cancel;
     private Location loc;
     private Spinner category;
 
@@ -31,8 +32,11 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_activity);
         loc = (Location) getIntent().getSerializableExtra("LOCATION");
-        submit = (Button) findViewById(R.id.addItemBtn);
+        submit = findViewById(R.id.addItemBtn);
         submit.setOnClickListener(this);
+
+        cancel = findViewById(R.id.cancelItemBtn);
+        cancel.setOnClickListener(this);
 
         TextView currLoc = findViewById(R.id.location_name);
         currLoc.setText(loc.getName());
@@ -52,19 +56,19 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 value = findViewById(R.id.value);
 
 
-                //CharSequence time = clock.getFormat12Hour();
+                CharSequence time = clock.getFormat24Hour();
                 String title = name.getText().toString();
                 ItemType itemtype = (ItemType) category.getSelectedItem();
 
                 if (!title.equals("")) {
                     if (!description.getText().toString().equals("")) {
-                        Item item = new Item(loc, title, description.getText().toString(),
+                        Item item = new Item(time, loc, title, description.getText().toString(),
                                 Double.parseDouble(value.getText().toString()), itemtype);
                         Items donated = Items.getInstance();
                         donated.add(item);
                         finish();
                     } else {
-                        Item item = new Item(loc, title, "",
+                        Item item = new Item(time, loc, title, "",
                                 Double.parseDouble(value.getText().toString()), itemtype);
                         Items donated = Items.getInstance();
                         donated.add(item);
@@ -74,6 +78,9 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                     Toast.makeText(getApplicationContext(), "Give the name of your donation item",
                             Toast.LENGTH_LONG).show();
                 }
+                break;
+            case R.id.cancelItemBtn :
+                finish();
                 break;
             default :
                 break;

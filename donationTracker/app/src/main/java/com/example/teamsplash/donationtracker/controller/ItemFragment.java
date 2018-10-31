@@ -75,7 +75,7 @@ public class ItemFragment extends Fragment {
             TextView value = rowView.findViewById(R.id.value);
 
             name.setText(item.getDesc());
-            value.setText(Double.toString(item.getValue()));
+            value.setText("$" + String.format( "%.2f", item.getValue()));
             return rowView;
         }
     }

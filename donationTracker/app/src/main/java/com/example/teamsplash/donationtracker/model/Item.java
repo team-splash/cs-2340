@@ -10,15 +10,6 @@ public class Item implements Serializable {
     private double value;
     private ItemType itemtype;
 
-    public Item(Location location, String name, String desc, double value, ItemType itemType) {
-        this.time = "0:00";
-        this.location = location;
-        this.name = name;
-        this.desc = desc;
-        this.value = value;
-        this.itemtype = itemType;
-    }
-
     public Item(CharSequence time, Location location, String name, String desc, double value, ItemType itemType) {
         this.time = time.toString();
         this.location = location;
