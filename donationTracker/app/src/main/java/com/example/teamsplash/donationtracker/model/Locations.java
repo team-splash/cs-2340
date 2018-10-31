@@ -77,4 +77,6 @@ public class Locations implements Serializable {
             this.add(location);
         }
     }
+
+
 }
