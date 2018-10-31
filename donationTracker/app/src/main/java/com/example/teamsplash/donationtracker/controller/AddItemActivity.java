@@ -1,5 +1,6 @@
 package com.example.teamsplash.donationtracker.controller;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,32 +52,55 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         switch(v.getId()) {
             case R.id.addItemBtn :
                 TextClock clock = findViewById(R.id.textClock);
-                name = (EditText) findViewById(R.id.shortDescription);
-                description = (EditText) findViewById(R.id.longDescription);
+                name = findViewById(R.id.shortDescription);
+                description = findViewById(R.id.longDescription);
                 value = findViewById(R.id.value);
-
 
                 CharSequence time = clock.getFormat24Hour();
                 String title = name.getText().toString();
                 ItemType itemtype = (ItemType) category.getSelectedItem();
 
-                if (!title.equals("")) {
+                name.setError(null);
+                value.setError(null);
+                description.setError(null);
+
+                boolean cancel = false;
+                View focusView;
+                View focusView2;
+
+                if (title.equals("")) {
+                    name.setError(getString(R.string.error_field_required));
+                    focusView = name;
+                    focusView.requestFocus();
+                    cancel = true;
+                }
+                if (value.getText().toString().equals("")) {
+                    value.setError(getString(R.string.error_field_required));
+                    focusView2 = value;
+                    focusView2.requestFocus();
+                    cancel = true;
+                }
+
+                if (!cancel) {
                     if (!description.getText().toString().equals("")) {
                         Item item = new Item(time, loc, title, description.getText().toString(),
                                 Double.parseDouble(value.getText().toString()), itemtype);
                         Items donated = Items.getInstance();
                         donated.add(item);
-                        finish();
+
+                        Intent intent = new Intent(AddItemActivity.this, LocationDetail.class);
+                        intent.putExtra("LOCATION", loc);
+                        startActivity(intent);
                     } else {
                         Item item = new Item(time, loc, title, "",
                                 Double.parseDouble(value.getText().toString()), itemtype);
                         Items donated = Items.getInstance();
                         donated.add(item);
-                        finish();
+
+                        Intent intent = new Intent(AddItemActivity.this, LocationDetail.class);
+                        intent.putExtra("LOCATION", loc);
+                        startActivity(intent);
                     }
-                } else {
-                    Toast.makeText(getApplicationContext(), "Give the name of your donation item",
-                            Toast.LENGTH_LONG).show();
                 }
                 break;
             case R.id.cancelItemBtn :

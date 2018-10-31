@@ -33,6 +33,7 @@
     <string name="preferences_file_key">com.example.teamsplash.donationTracker.preferences</string>
 
     <!--New Item Form-->
+    <string name="error_negative_value">Price cannot be negative</string>
     <string name="title_add_item_activity">Add New Item</string>
     <string name="title_item_detail_activity">Item Details</string>
     <string name="category">CATEGORY</string>

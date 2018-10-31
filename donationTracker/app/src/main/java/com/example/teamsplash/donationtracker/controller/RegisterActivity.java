@@ -64,7 +64,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void submit() {
         boolean cancel = false;
-        View focusView = null;
+        View focusView;
+        View focusView2;
+        View focusView3;
+        View focusView4;
 
         firstname.setError(null);
         email.setError(null);
@@ -79,39 +82,47 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = confirmPass.getText().toString();
         UserType userType = (UserType) accountTypeSpinner.getSelectedItem();
 
-        if (userFirstName == "") {
+        if (userFirstName.equals("")) {
             firstname.setError(getString(R.string.error_field_required));
             focusView = firstname;
+            focusView.requestFocus();
             cancel = true;
-        } else if (userEmail == "") {
+        }
+        if (userEmail.equals("")) {
             email.setError(getString(R.string.error_field_required));
-            focusView = email;
-            cancel = true;
-        } else if (userPassword == "") {
-            pass.setError(getString(R.string.error_field_required));
-            focusView = pass;
-            cancel = true;
-        } else if (confirmPassword == "") {
-            confirmPass.setError(getString(R.string.error_field_required));
-            focusView = confirmPass;
-            cancel = true;
-        } else if (userPassword.length() < MIN_PASSWORD_LENGTH) {
-            pass.setError(getString(R.string.error_invalid_password));
-            focusView = pass;
+            focusView2 = email;
+            focusView2.requestFocus();
             cancel = true;
         } else if (!isEmailValid(userEmail)) {
             email.setError(getString(R.string.error_invalid_email));
-            focusView = email;
+            focusView2 = email;
+            focusView2.requestFocus();
+            cancel = true;
+        }
+        if (userPassword.equals("")) {
+            pass.setError(getString(R.string.error_field_required));
+            focusView3 = pass;
+            focusView3.requestFocus();
+            cancel = true;
+        }
+        if (confirmPassword.equals("")) {
+            confirmPass.setError(getString(R.string.error_field_required));
+            focusView4 = confirmPass;
+            focusView4.requestFocus();
+            cancel = true;
+        } else if (userPassword.length() < MIN_PASSWORD_LENGTH) {
+            pass.setError(getString(R.string.error_invalid_password));
+            focusView3 = pass;
+            focusView3.requestFocus();
             cancel = true;
         } else if (!isPasswordValid(userPassword, confirmPassword)) {
             confirmPass.setError(getString(R.string.error_password_mismatch));
-            focusView = confirmPass;
+            focusView4 = confirmPass;
+            focusView4.requestFocus();
             cancel = true;
         }
 
-        if (cancel) {
-            focusView.requestFocus();
-        } else {
+        if (!cancel) {
             User newUser = new User(userFirstName, userLastName, userEmail, userPassword, userType);
             if(users.contains(newUser)) {
                 email.setError(getString(R.string.error_user_exists));
