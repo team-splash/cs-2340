@@ -64,17 +64,6 @@ public class MainMenu extends AppCompatActivity {
 
     private void switchToLocations() {
         Locations locations = Locations.getInstance();
-        /*locations.add(new Location(
-                "AFD Station 4",
-                LocationType.DR,
-                33.75416,
-                -84.37742,
-                "309 EDGEWOOD AVE SE",
-                "Atlanta",
-                "GA",
-                "30330",
-                "(404) 555 - 3456"
-        ));*/
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.fragment_container, new LocationFragment()).commit();
     }
