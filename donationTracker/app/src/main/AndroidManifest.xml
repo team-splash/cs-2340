@@ -50,5 +50,12 @@
             android:name=".controller.ItemDetail"
             android:label="@string/title_item_detail_activity"
             />
+        <activity android:name=".controller.SearchableActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                        android:resource="@xml/searchable"/>
+        </activity>
     </application>
 </manifest>

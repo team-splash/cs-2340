@@ -56,4 +56,7 @@
     <string name="latLong">LATITUDE/LONGITUDE</string>
     <string name="addItem">Add New Item</string>
     <string name="inventory">INVENTORY</string>
+
+    <!--Search Strings-->
+    <string name="search_hint">Search bar works two ways: search a specific category, or a specific item. We do the rest.</string>
 </resources>

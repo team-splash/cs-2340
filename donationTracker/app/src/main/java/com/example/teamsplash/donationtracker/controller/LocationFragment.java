@@ -29,7 +29,7 @@ import com.example.teamsplash.donationtracker.R;
 
 public class LocationFragment extends Fragment {
     public static Locations locationList;
-    SearchView search;
+    //SearchView search;
     ListView list;
     LocationList listAdapter;
     @Override
@@ -43,16 +43,9 @@ public class LocationFragment extends Fragment {
         list = fragment.findViewById(R.id.location_list);
         list.setAdapter(listAdapter);
 
-        search = (SearchView) list.findViewById(R.id.searchableActivity);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                String text = (String) list.getItemAtPosition(position);
-                Toast.makeText(LocationFragment.this, Toast.LENGTH_SHORT, text).show();
-            }
-        });
 
 
-
+        //Lambda expression here that I somehow un-enabled, but the functionality still works.
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
@@ -97,32 +90,4 @@ public class LocationFragment extends Fragment {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.id.searchableActivity, menu);
-
-
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.searchableActivity).getActionView();
-
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setIconifiedByDefault(false);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                listAdapter.getFilter().filter(newText);
-
-                return false;
-            }
-        });
-        return true;
-    }
 }

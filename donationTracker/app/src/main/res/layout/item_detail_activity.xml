@@ -93,4 +93,23 @@
         android:gravity="center"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/Category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/category"
+        app:layout_constraintTop_toBottomOf="@id/location"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="388dp" />
+
+    <TextView
+        android:id="@+id/category"
+        android:layout_width="261dp"
+        android:layout_height="49dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintTop_toBottomOf="@id/Category"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="419dp" />
 </android.support.constraint.ConstraintLayout>

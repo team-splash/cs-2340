@@ -22,6 +22,13 @@ public class Items implements Serializable {
         return true;
     }
 
+    /*
+        Method designed to return the list contained in the singleton instance. Necessary
+        if I want to step through/check each Item that has been added.
+     */
+    public List<Item> getItemData() {
+        return ItemData;
+    }
     public List<Item> getByLocation(Location loc) {
 
         List<Item> locItems = new ArrayList<>();
