@@ -10,7 +10,7 @@ public class Item implements Serializable {
     private double value;
     private ItemType itemtype;
 
-    public Item(CharSequence time, Location location, String name, String desc, double value, ItemType itemType) {
+    public Item(String time, Location location, String name, String desc, double value, ItemType itemType) {
         this.time = time.toString();
         this.location = location;
         String s1 = name.substring(0, 1).toUpperCase();
@@ -42,7 +42,7 @@ public class Item implements Serializable {
     public String getTime() {
         return time;
     }
-    private void setTime(CharSequence ts) {
+    private void setTime(String ts) {
         this.time = ts.toString();
     }
 

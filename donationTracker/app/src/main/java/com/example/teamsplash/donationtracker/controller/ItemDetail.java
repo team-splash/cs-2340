@@ -23,16 +23,19 @@ public class ItemDetail extends AppCompatActivity {
         String description = item.getLongDesc();
         String value = "$" + String.format( "%.2f", item.getValue());
         Location location = item.getLocation();
+        String time = item.getTime();
 
         TextView title = findViewById(R.id.name);
         TextView desc = findViewById(R.id.description);
         TextView price = findViewById(R.id.value);
         TextView loc = findViewById(R.id.location);
+        TextView timeStamp = findViewById(R.id.time_stamp);
 
         title.setText(name);
         desc.setText(description);
         price.setText(value);
         loc.setText(location.getName());
+        timeStamp.setText(time);
 
         Button goBackBtn = findViewById(R.id.backBtn);
         goBackBtn.setOnClickListener(new View.OnClickListener() {

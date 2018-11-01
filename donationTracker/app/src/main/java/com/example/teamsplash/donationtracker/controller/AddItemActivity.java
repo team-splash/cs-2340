@@ -18,6 +18,10 @@ import com.example.teamsplash.donationtracker.model.ItemType;
 import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
+
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText name;
@@ -27,6 +31,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     private Button cancel;
     private Location loc;
     private Spinner category;
+    private Date date;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,8 +60,10 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 name = findViewById(R.id.shortDescription);
                 description = findViewById(R.id.longDescription);
                 value = findViewById(R.id.value);
+                date = new Timestamp(System.currentTimeMillis());
 
-                CharSequence time = clock.getFormat24Hour();
+                String time = date.toString();
+                //CharSequence time = clock.getFormat24Hour();
                 String title = name.getText().toString();
                 ItemType itemtype = (ItemType) category.getSelectedItem();
 
