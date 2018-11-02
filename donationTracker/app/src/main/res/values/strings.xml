@@ -44,7 +44,7 @@
     <string name="long_description">Description</string>
     <string name="item_value">Price</string>
     <string name="location_name">Location</string>
-    <string name="time_stamp">Time Stamp</string>
+    <string name="time_stamp">Time Added:</string>
 
     <!--Navigation Strings-->
     <string name="navigation_title_home">Home</string>

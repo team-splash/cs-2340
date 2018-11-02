@@ -3,7 +3,8 @@ package com.example.teamsplash.donationtracker.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,12 +71,12 @@ public class ItemFragment extends Fragment {
         @Override
         public View getView(int position, View view, ViewGroup parent) {
             Item item = inventory.get(position);
-            View rowView= inflater.inflate(R.layout.item_fragment, null, true);
+            View rowView = inflater.inflate(R.layout.item_fragment, null, true);
             TextView name = rowView.findViewById(R.id.name);
             TextView value = rowView.findViewById(R.id.value);
 
             name.setText(item.getDesc());
-            value.setText("$" + String.format( "%.2f", item.getValue()));
+            value.setText("$" + String.format("%.2f", item.getValue()));
             return rowView;
         }
     }

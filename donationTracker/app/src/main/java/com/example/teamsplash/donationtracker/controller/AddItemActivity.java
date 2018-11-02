@@ -56,14 +56,12 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.addItemBtn :
-                TextClock clock = findViewById(R.id.textClock);
                 name = findViewById(R.id.shortDescription);
                 description = findViewById(R.id.longDescription);
                 value = findViewById(R.id.value);
                 date = new Timestamp(System.currentTimeMillis());
 
                 String time = date.toString();
-                //CharSequence time = clock.getFormat24Hour();
                 String title = name.getText().toString();
                 ItemType itemtype = (ItemType) category.getSelectedItem();
 
