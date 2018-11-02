@@ -27,6 +27,15 @@ public class MainFragment extends Fragment {
             }
         });
 
+        fragment.findViewById(R.id.inventoryButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toInv = new Intent(getActivity(), InventoryActivity.class);
+                startActivity(toInv);
+            }
+        });
+
+
 
         Users users = Users.getInstance();
         User currentUser = users.getCurrentUser();

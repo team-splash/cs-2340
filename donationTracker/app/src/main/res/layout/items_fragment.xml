@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-        <EditText
-            android:id="@+id/searchBar"
-            android:layout_height="30dp"
-            android:layout_width="match_parent">
-        </EditText>
+    android:layout_height="wrap_content">
         <ListView
         android:id="@+id/inventory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/searchBar"
         android:orientation="vertical">
         </ListView>
 </android.support.constraint.ConstraintLayout>

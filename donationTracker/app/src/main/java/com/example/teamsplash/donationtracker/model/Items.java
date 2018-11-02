@@ -22,6 +22,10 @@ public class Items implements Serializable {
         return true;
     }
 
+    public List<Item> get() {
+        return ItemData;
+    }
+
     public List<Item> getByLocation(Location loc) {
 
         List<Item> locItems = new ArrayList<>();
