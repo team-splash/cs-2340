@@ -2,9 +2,11 @@ package com.example.teamsplash.donationtracker.model;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Locations implements Serializable {
     private static final Locations _instance = new Locations();
@@ -53,7 +55,18 @@ public class Locations implements Serializable {
         return str;
     }
 
-    private static final int CSV_INDEX_NAME			= 1;
+    /**
+     * Save as text method that invokes the Location (singular)
+     * method of saveAsText.
+     * @param writer - printWriter that is our buffer.
+     */
+    public void saveAsText(PrintWriter writer) {
+        for (Location L: locations) {
+            L.saveAsText(writer);
+        }
+        writer.close();
+    }
+    /*private static final int CSV_INDEX_NAME			= 1;
     private static final int CSV_INDEX_LATITUDE		= 2;
     private static final int CSV_INDEX_LONGITUDE	= 3;
     private static final int CSV_INDEX_ADDRESS		= 4;
@@ -61,11 +74,24 @@ public class Locations implements Serializable {
     private static final int CSV_INDEX_STATE		= 6;
     private static final int CSV_INDEX_ZIP			= 7;
     private static final int CSV_INDEX_TYPE			= 8;
-    private static final int CSV_INDEX_PHONE		= 9;
+    private static final int CSV_INDEX_PHONE		= 9;*/
 
-    public void readFromCsv(BufferedReader reader) throws IOException {
-        String line;
-        while ((line = reader.readLine()) != null) {
+    /**
+     * Basically the loadAsText method from User and Item.
+     * But I don't want to mess things up so I'm not changing the name of the method,
+     * and in some ways I'm not really amending its functionality, but I'm making it more in line
+     * with what has been written for persistence in User(s) and soon Item(s).
+     * @param reader - Scanner object that reads our File.
+     * @throws IOException
+     */
+    public void readFromCsv(Scanner reader) throws IOException {
+        //locations.clear(); //potentially don't use this as it may lead to overwriting.
+        while (reader.hasNext()) {
+            String nextLine = reader.nextLine();
+            Location newLoc = Location.parseEntry(nextLine);
+            locations.add(newLoc); // add to ArrayList.
+        }
+        /*while ((line = reader.readLine()) != null) {
             String[] tokens = line.split(",");
             String name = tokens[CSV_INDEX_NAME];
             double latitude = Double.parseDouble(tokens[CSV_INDEX_LATITUDE]);
@@ -88,6 +114,6 @@ public class Locations implements Serializable {
                     phone
             );
             this.add(location);
-        }
+        }*/
     }
 }

@@ -9,10 +9,13 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
@@ -68,19 +71,26 @@ public class MainMenu extends AppCompatActivity {
         manager.beginTransaction().replace(R.id.fragment_container, new LocationFragment()).commit();
     }
 
-
+    /**
+     * This method is very important and accomplishes some major functions.
+     * First, it uses both an initial locations.csv file and a locationsFull file to
+     * get all locations loaded into the ArrayList of Locations.
+     * Then, it also loads all items added as well.
+     */
     private void readLocations() {
         Locations locations = Locations.getInstance();
-        if (locations.get().size() != 0)
+        // initial adding from locations.csv.
+        /*if (locations.get().size() != 0)
             return;
         try {
             InputStream stream = getResources().openRawResource(R.raw.locations);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
+            Scanner reader = new Scanner(new InputStreamReader(stream, StandardCharsets.UTF_8));
             //Discard header
-            reader.readLine();
+            reader.nextLine();
             locations.readFromCsv(reader);
             reader.close();
-        }
+        } // read from original CSV file, locations. But we need to transition away from this file. So we're really reading from one
+        // original file and then using another file... which you'll see past this catch block.
 
         catch (IOException exception) {
             Log.e("cs2340.donationTracker", "Error reading `locations.csv`");
@@ -96,6 +106,17 @@ public class MainMenu extends AppCompatActivity {
                     "30330",
                     "(404) 555 - 3456"
             ));
+        }*/ // commenting this out to see if we can successfully transition away from using the old locations.csv file.
+        try {
+            File locationFile = new File(this.getFilesDir(), "locationsFull"); //actual new locationsFull file.
+            Scanner locationFullScanner = new Scanner(locationFile);
+            locations.readFromCsv(locationFullScanner);
+            locationFullScanner.close();
+            PrintWriter newWriter = new PrintWriter(locationFile);
+            locations.saveAsText(newWriter);
+            newWriter.close(); // we add from a blank file and then write to a blank file, so we keep a copy of all our locations after all.
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
