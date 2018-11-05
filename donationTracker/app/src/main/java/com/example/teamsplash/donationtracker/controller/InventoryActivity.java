@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Item;
+import com.example.teamsplash.donationtracker.model.ItemType;
 import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Locations;
 import com.example.teamsplash.donationtracker.model.UserType;
@@ -39,9 +40,11 @@ public class InventoryActivity extends AppCompatActivity {
         setContentView(R.layout.inventory_activity);
         final ListView list = findViewById(R.id.itemsList);
         Spinner locationSpinner = findViewById(R.id.locationSpinner);
+        final Spinner categorySpinner = findViewById(R.id.categorySpinner);
         EditText searchBar = findViewById(R.id.searchFilter);
 
         final List<Item> itemList = Items.getInstance().get();
+        final List<String> categoryList = new ArrayList<>();
 
         List<String> locationsList = new ArrayList<>();
         locationsList.add("Search by name");
@@ -61,6 +64,30 @@ public class InventoryActivity extends AppCompatActivity {
                 } else {
                     final List<Item> locItemsList = Items.getInstance().getByLocation(Locations.getInstance().getPosition(position - 1));
                     adapter = new ItemListAdapter(InventoryActivity.this, locItemsList);
+                    list.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                adapter = new ItemListAdapter(InventoryActivity.this, itemList);
+                list.setAdapter(adapter);
+            }
+        });
+
+        ArrayAdapter<Enum> spinneradapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ItemType.values());
+        spinneradapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(spinneradapter2);
+        categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (position == 0) {
+                    adapter = new ItemListAdapter(InventoryActivity.this, itemList);
+                    list.setAdapter(adapter);
+                } else {
+                    final Spinner categorySpin = categorySpinner;
+                    final List<Item> catItemsList = Items.getInstance().getByCategory((ItemType) categorySpin.getSelectedItem());
+                    adapter = new ItemListAdapter(InventoryActivity.this, catItemsList);
                     list.setAdapter(adapter);
                 }
             }

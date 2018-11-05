@@ -29,7 +29,6 @@ public class Items implements Serializable {
     }
 
     public List<Item> getByLocation(Location loc) {
-
         List<Item> locItems = new ArrayList<>();
         for (Item item: ItemData) {
             if (item.getLocation().equals(loc)) {
@@ -37,6 +36,16 @@ public class Items implements Serializable {
             }
         }
         return locItems;
+    }
+
+    public List<Item> getByCategory(ItemType it) {
+        List<Item> catItems = new ArrayList<>();
+        for (Item item: ItemData) {
+            if (item.getItemType().equals(it)) {
+                catItems.add(item);
+            }
+        }
+        return catItems;
     }
 
     public boolean contains(Item item) {

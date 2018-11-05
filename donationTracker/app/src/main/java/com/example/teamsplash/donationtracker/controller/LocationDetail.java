@@ -72,7 +72,7 @@ public class LocationDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        inflateInitialFragment();
+        //inflateInitialFragment();
     }
 
     private void inflateInitialFragment() {

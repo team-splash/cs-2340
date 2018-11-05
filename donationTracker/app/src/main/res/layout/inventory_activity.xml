@@ -12,12 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"></Spinner>
 
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/locationSpinner"></Spinner>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/searchFilter"
         android:hint="@string/search"
-        android:layout_below="@+id/locationSpinner"/>
+        android:layout_below="@+id/categorySpinner"/>
 
     <ListView
         android:layout_width="match_parent"
