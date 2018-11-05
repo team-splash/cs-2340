@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,6 +18,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
 import com.example.teamsplash.donationtracker.model.LocationType;
@@ -80,15 +82,23 @@ public class MainMenu extends AppCompatActivity {
     private void readLocations() {
         Locations locations = Locations.getInstance();
         // initial adding from locations.csv.
-        /*if (locations.get().size() != 0)
+        if (locations.get().size() != 0)
             return;
         try {
             InputStream stream = getResources().openRawResource(R.raw.locations);
-            Scanner reader = new Scanner(new InputStreamReader(stream, StandardCharsets.UTF_8));
+            Scanner reader = new Scanner(new InputStreamReader(stream, StandardCharsets.UTF_8)); // read from the initial Locations file.
             //Discard header
             reader.nextLine();
-            locations.readFromCsv(reader);
-            reader.close();
+            locations.readFromCsv(reader); // adding the locations to the Locations ArrayList.
+            reader.close(); // close reader.
+            System.out.println(("----------------------------" + " DIVISION IN LINE 93 - 95, MAIN MENU.JAVA"));
+            System.out.println(("Size of arrayList after initial adds from old loc file: " + locations.get().size() + ", MAIN MENU JAVA")); // test to see if things work.
+            File locationFile = new File(this.getFilesDir(), "locationsFull");
+            PrintWriter newWriter = new PrintWriter(locationFile);
+            locations.saveAsText(newWriter); // we instantiate/reaccess a new file called locationsFull,
+                                                        // which contains all our locations, even past the initial ones found in locations.csv.
+                                                         //We add to this file. This is just a safeguard. check out Locations.saveAsText() for more details.
+            newWriter.close();
         } // read from original CSV file, locations. But we need to transition away from this file. So we're really reading from one
         // original file and then using another file... which you'll see past this catch block.
 
@@ -106,17 +116,31 @@ public class MainMenu extends AppCompatActivity {
                     "30330",
                     "(404) 555 - 3456"
             ));
-        }*/ // commenting this out to see if we can successfully transition away from using the old locations.csv file.
+        } // commenting this out to see if we can successfully transition away from using the old locations.csv file.
+        // I haven't commented out the above, but we probably could. I'd rather not just because I don't want to mess it all up. But
+        // technically, we could comment out the entire above block and the code should work fine, because locationsFull contains all locations!
         try {
             File locationFile = new File(this.getFilesDir(), "locationsFull"); //actual new locationsFull file.
             Scanner locationFullScanner = new Scanner(locationFile);
-            locations.readFromCsv(locationFullScanner);
+            locations.readFromCsv(locationFullScanner); // re-add the locations from this file into our ArrayList of locations.
             locationFullScanner.close();
             PrintWriter newWriter = new PrintWriter(locationFile);
             locations.saveAsText(newWriter);
-            newWriter.close(); // we add from a blank file and then write to a blank file, so we keep a copy of all our locations after all.
+            newWriter.close(); // a cycle of copying and recopying for testing's purposes
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+       // adding/updating items at the beginning before we even really do anything.
+        // this is the most important part. So we instantiate an Items instance.
+        Items instance = Items.getInstance();
+        File itemsFile = new File(this.getFilesDir(), "newItemFile"); // I get/reaccess/access/create a file where all the Item will be stored as strings.
+        try {
+            Scanner itemReader = new Scanner(itemsFile); // I create a scanner to read these Strings inside this file.
+            instance.loadAsText(itemReader); // I turn the strings into Items, and then add them to the ArrayList of Items. check out Items.loadAsText() for more details.
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }

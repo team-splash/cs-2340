@@ -1,5 +1,7 @@
 package com.example.teamsplash.donationtracker.model;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -88,6 +90,7 @@ public class Locations implements Serializable {
         //locations.clear(); //potentially don't use this as it may lead to overwriting.
         while (reader.hasNext()) {
             String nextLine = reader.nextLine();
+            Log.i("THIS IS THE LINE, LINE 91, READ FROM CSV: " + nextLine, "THE MEDIUM IS THE MESSAGE.");
             Location newLoc = Location.parseEntry(nextLine);
             locations.add(newLoc); // add to ArrayList.
         }

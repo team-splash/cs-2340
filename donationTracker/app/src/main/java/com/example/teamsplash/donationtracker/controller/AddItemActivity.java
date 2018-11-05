@@ -18,6 +18,9 @@ import com.example.teamsplash.donationtracker.model.ItemType;
 import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -91,7 +94,16 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                         Item item = new Item(time, loc, title, description.getText().toString(),
                                 Double.parseDouble(value.getText().toString()), itemtype);
                         Items donated = Items.getInstance();
-                        donated.add(item);
+                        donated.add(item); // add an item to the ArrayList of items, found in Items.getInstance().
+
+                        // saving after an add.
+                        File itemFile = new File(this.getFilesDir(), "newItemFile"); // I reaccess this newItemFile which contains all my locations.
+                        try {
+                            PrintWriter newWriter = new PrintWriter(itemFile);
+                            donated.saveAsText(newWriter); // add the one new item we've added to the ArrayList to the text file now. O(n), but it works.
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
 
                         Intent intent = new Intent(AddItemActivity.this, LocationDetail.class);
                         intent.putExtra("LOCATION", loc);
@@ -101,6 +113,15 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                                 Double.parseDouble(value.getText().toString()), itemtype);
                         Items donated = Items.getInstance();
                         donated.add(item);
+
+
+                        File itemFile = new File(this.getFilesDir(), "itemFile"); // the same thing happens here, because you're adding a new item anyways.
+                        try {
+                            PrintWriter newWriter = new PrintWriter(itemFile);
+                            donated.saveAsText(newWriter);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
 
                         Intent intent = new Intent(AddItemActivity.this, LocationDetail.class);
                         intent.putExtra("LOCATION", loc);

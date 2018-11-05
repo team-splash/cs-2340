@@ -86,6 +86,7 @@ public class Location implements Serializable {
 
     public void saveAsText(PrintWriter writer) {
         String fullRep = this.getFullRep();
+        System.out.println("FULL REP EACH TIME: LINE 89, SAVE AS TEXT, LOCATION.JAVA: " + fullRep);
         //Log.d("Full Rep of user to write: " + fullRep, "LINE 98, SAVE AS TEXT: USER.JAVA");
         writer.write(fullRep);
         String newLine = String.format("%n");
@@ -138,7 +139,7 @@ public class Location implements Serializable {
     }
 
     public String getFullRep() {
-        String fullRep =  "x" + name + "," + latitude + "," + longitude + "," + address + "," + city + "," + state + "," + zip + "," + locationType + "," + phoneNumber;
+        String fullRep =  "x" + "," + name + "," + latitude + "," + longitude + "," + address + "," + city + "," + state + "," + zip + "," + locationType + "," + phoneNumber;
         return fullRep; // added the "x" so that all numberings for Location were consistent.
     }
 }

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Item implements Serializable {
     private String time;
@@ -111,7 +112,9 @@ public class Item implements Serializable {
      */
     public static Item parseEntry(String line) {
         assert line != null;
-        String[] tokens = line.split(":");
+        System.out.println("THIS IS THE LINE: " + line);
+        String[] tokens = line.split(",");
+        System.out.println(Arrays.toString(tokens));
         assert tokens.length == 15;
         String actualItemType = tokens[14].substring(0, tokens[14].length() -1); // getting ItemTYPE.
         ItemType itemType = actualItemType.equals("Clothing") ? ItemType.CLO
@@ -138,7 +141,7 @@ public class Item implements Serializable {
      * @return String that is the fullRep string.
      */
     public String getFullRep() {
-        String fullRep = (time + "," + location .getFullRep()+ "," + name + "," + desc + "," + value + "," + itemtype);
+        String fullRep = (time + "," + location.getFullRep()+ "," + name + "," + desc + "," + value + "," + itemtype);
         return fullRep;
     }
 }
