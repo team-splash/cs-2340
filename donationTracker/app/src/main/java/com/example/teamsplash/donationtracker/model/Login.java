@@ -6,7 +6,7 @@ import javax.mail.internet.InternetAddress;
 class Login {
     private static final long MINIMUM_PASSWORD_LENGTH = 8;
 
-    public static boolean validateEmailAddress(final String emailAddressRepresentation) {
+    static boolean validateEmailAddress(final String emailAddressRepresentation) {
         try {
             final InternetAddress emailAddress = new InternetAddress(emailAddressRepresentation, true);
             return true;
@@ -15,7 +15,7 @@ class Login {
         }
     }
 
-    public static boolean validatePassword(final String passwordRepresentation) {
+    static boolean validatePassword(final String passwordRepresentation) {
         return passwordRepresentation.length() >= MINIMUM_PASSWORD_LENGTH;
     }
 }

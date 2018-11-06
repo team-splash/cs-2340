@@ -30,6 +30,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.teamsplash.donationtracker.model.Model;
 import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.Users;
 import com.example.teamsplash.donationtracker.R;
@@ -172,55 +173,36 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-        boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(password) || !isPasswordValid(email, password)) {
-            mPasswordView.setError(getString(R.string.error_incorrect_password));
+        if (password.isEmpty()) {
+            mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
-            cancel = true;
+        } else {
+            if (!(Model.validatePassword(password))) {
+                mPasswordView.setError(getText(R.string.error_invalid_password));
+                focusView = mPasswordView;
+            }
         }
 
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
+        if (email.isEmpty()) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            if (!(Model.validateEmailAddress(email))) {
+                mEmailView.setError(getString(R.string.error_invalid_email));
+                focusView = mEmailView;
+            }
         }
-    }
 
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return (email.contains("@"));
-    }
+        if (focusView != null) {
+            focusView.requestFocus();
+            return;
+        }
 
-    private boolean isPasswordValid(String email, String password) {
-        //TODO: Replace this with your own logic
-        Users accounts = Users.getInstance();
-        return accounts.contains(email, password);
+        showProgress(true);
+        mAuthTask = new UserLoginTask(email, password);
+        mAuthTask.execute((Void) null);
     }
 
     /**
@@ -313,11 +295,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         int IS_PRIMARY = 1;
     }
 
+    private enum AuthenticationResult {
+        ERROR,
+        OK,
+        INCORRECT
+    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    public class UserLoginTask extends AsyncTask<Void, Void, AuthenticationResult> {
 
         private final String mEmail;
         private final String mPassword;
@@ -330,50 +318,44 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         }
 
         @Override
-        protected Boolean doInBackground(Void... params) {
+        protected AuthenticationResult doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-            Users accounts = Users.getInstance();
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
+
+                if (!(Model.checkUserPassword(mEmail, mPassword)))
+                    return AuthenticationResult.INCORRECT;
+
+                return AuthenticationResult.OK;
             } catch (InterruptedException e) {
-                return false;
+                return AuthenticationResult.ERROR;
             }
-
-
-            User newUser = accounts.get(mEmail, mPassword);
-            if (newUser == null) {
-                return false;
-            }
-
-
-            this.user = newUser;
-            return true;
         }
 
         @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
+        protected void onPostExecute(final AuthenticationResult result) {
             showProgress(false);
 
-            if (success) {
-                finish();
-
-                Users users = Users.getInstance();
-                users.setCurrentUser(this.user);
-
-                Intent toMainMenu =  new Intent(LoginActivity.this, MainMenu.class);
-                startActivity(toMainMenu);
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+            switch (result) {
+                case ERROR:
+                    break;
+                case OK:
+                    startActivity(new Intent(LoginActivity.this, MainMenu.class));
+                    finish();
+                    break;
+                case INCORRECT:
+                    mEmailView.setError(getText(R.string.error_incorrect_password));
+                    break;
             }
+
+            mAuthTask = null;
         }
 
         @Override
         protected void onCancelled() {
-            mAuthTask = null;
             showProgress(false);
+            mAuthTask = null;
         }
     }
 }

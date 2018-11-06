@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.teamsplash.donationtracker.model.Model;
 import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.Users;
 import com.example.teamsplash.donationtracker.model.UserType;
@@ -62,22 +63,19 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void submit() {
-        Users users = Users.getInstance();
         String userFirstName = firstname.getText().toString();
         String userLastName = lastname.getText().toString();
         String userEmail = email.getText().toString();
         String userPassword = pass.getText().toString();
         String confirmPassword = confirmPass.getText().toString();
         UserType userType = (UserType) accountTypeSpinner.getSelectedItem();
-        User newUser = new User(userFirstName, userLastName, userEmail, userPassword, userType);
-        if(users.contains(newUser)) {
+
+        try {
+            Model.addUser(userFirstName, userLastName, userEmail, userType, userPassword);
+            finish();
+        } catch (Users.UserEmailAddressAlreadyRegistered e) {
             Toast.makeText(this.getBaseContext(), "Account already exists",
-                    Toast.LENGTH_LONG).show();
-        } else {
-            users.add(newUser);
-            users.setCurrentUser(newUser);
-            Intent goToMain = new Intent(RegisterActivity.this, MainMenu.class);
-            startActivity(goToMain);
+                           Toast.LENGTH_LONG).show();
         }
 
     }

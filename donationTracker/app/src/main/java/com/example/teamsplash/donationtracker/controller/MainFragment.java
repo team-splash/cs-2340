@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.teamsplash.donationtracker.model.Model;
 import com.example.teamsplash.donationtracker.model.User;
-import com.example.teamsplash.donationtracker.model.Users;
 import com.example.teamsplash.donationtracker.R;
 
 public class MainFragment extends Fragment {
@@ -28,17 +28,16 @@ public class MainFragment extends Fragment {
         });
 
 
-        Users users = Users.getInstance();
-        User currentUser = users.getCurrentUser();
+        User currentUser = Model.getUser();
 
         TextView userName = fragment.findViewById(R.id.userName);
-        userName.setText(currentUser.getName());
+        userName.setText(currentUser.getFirstName() + " " + currentUser.getLastName());
 
         TextView userEmail = fragment.findViewById(R.id.userEmail);
-        userEmail.setText(currentUser.getEmail());
+        userEmail.setText(currentUser.getEmailAddress());
 
         TextView userType = fragment.findViewById(R.id.userType);
-        userType.setText(currentUser.getUserType().toString());
+        userType.setText(currentUser.getType().toString());
 
         return fragment;
     }
