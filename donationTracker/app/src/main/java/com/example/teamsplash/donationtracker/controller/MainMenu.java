@@ -2,7 +2,9 @@ package com.example.teamsplash.donationtracker.controller;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,9 @@ import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
 import com.example.teamsplash.donationtracker.model.LocationType;
 import com.example.teamsplash.donationtracker.R;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 
 public class MainMenu extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -32,6 +37,9 @@ public class MainMenu extends AppCompatActivity {
                 case R.id.navigation_locations:
                     switchToLocations();
                     return true;
+                case R.id.navigation_map:
+                    switchToMaps();
+
             }
             return false;
         }
@@ -67,7 +75,11 @@ public class MainMenu extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.fragment_container, new LocationFragment()).commit();
     }
+    private void switchToMaps() {
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.fragment_container, new MapFragment()).commit();
 
+    }
 
     private void readLocations() {
         Locations locations = Locations.getInstance();

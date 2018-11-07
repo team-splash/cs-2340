@@ -59,4 +59,6 @@
 
     <!--Search Strings-->
     <string name="search_hint">Search bar works two ways: search a specific category, or a specific item. We do the rest.</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="navigation_title_map">navigation_title_map</string>
 </resources>

@@ -1,8 +1,8 @@
 package com.example.teamsplash.donationtracker.controller;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,10 +21,8 @@ import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.ItemType;
 import com.example.teamsplash.donationtracker.model.Items;
-import com.example.teamsplash.donationtracker.model.Location;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /*
@@ -41,6 +39,9 @@ public class SearchableActivity extends ListActivity {
     ListView listItems;
     SearchAdapter listAdapter;
     ArrayList<Item> searchList;
+    MenuInflater inflater;
+    LayoutInflater inflatee;
+    ViewGroup container;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,7 @@ public class SearchableActivity extends ListActivity {
             String query = intent.getStringExtra(SearchManager.QUERY);
             searchList = new ArrayList<>();
             searchList = doMySearch(query, searchList);
+            //onCreateView(inflatee, container, savedInstanceState);
         }
     }
 
@@ -163,14 +165,15 @@ public class SearchableActivity extends ListActivity {
     //@Override
     public boolean onCreateOptionsMenu(Menu menu) {
 // Inflate the options menu from XML
-        MenuInflater inflater = getMenuInflater();
+        inflater = getMenuInflater();
         inflater.inflate(R.menu.navigation, menu);
 
 // Get the SearchView and set the searchable configuration
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.searchableActivity).getActionView();
 // Assumes current activity is the searchable activity
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        ComponentName cn = new ComponentName(this, SearchableActivity.class);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(cn));
         searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
 
         return true;
