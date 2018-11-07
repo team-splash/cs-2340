@@ -1,6 +1,10 @@
 package com.example.teamsplash.donationtracker.model;
 
+import android.util.Log;
+
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Item implements Serializable {
     private String time;
@@ -10,7 +14,7 @@ public class Item implements Serializable {
     private double value;
     private ItemType itemtype;
 
-    public Item(CharSequence time, Location location, String name, String desc, double value, ItemType itemType) {
+    public Item(String time, Location location, String name, String desc, double value, ItemType itemType) {
         this.time = time.toString();
         this.location = location;
         String s1 = name.substring(0, 1).toUpperCase();
@@ -42,7 +46,7 @@ public class Item implements Serializable {
     public String getTime() {
         return time;
     }
-    private void setTime(CharSequence ts) {
+    private void setTime(String ts) {
         this.time = ts.toString();
     }
 
@@ -50,6 +54,8 @@ public class Item implements Serializable {
     public Location getLocation() {
         return location;
     }
+
+
     private void setLocation(Location loc) {
         this.location = loc;
     }
@@ -86,9 +92,56 @@ public class Item implements Serializable {
         this.itemtype = type;
     }
 
+    /**
+     * SaveToText file method for items. It's about the same
+     * as the User method, but I wanted to rewrite it by hand just to make sure I was aware of what was going on.
+     * @param writer - a PrintWriter that is actually a buffer for another file.
+     */
+    public void saveAsText(PrintWriter writer) {
+        String fullRep = this.getFullRep();
+        Log.d("Full Rep of item to write: " +  fullRep, "LINE 96, SAVE AS TEXT: ITEM.JAVA");
+        writer.write(fullRep);
+        String newLine = String.format("%n");
+        writer.write(newLine);
+    }
+
+    /**
+     * Getting item data out of a String representation. Used prominently in loadAsText method.
+     * @param line - line that represents an Item that is currently a string.
+     * @return Item that is actually an item.
+     */
+    public static Item parseEntry(String line) {
+        assert line != null;
+        System.out.println("THIS IS THE LINE: " + line);
+        String[] tokens = line.split(",");
+        System.out.println(Arrays.toString(tokens));
+        assert tokens.length == 15;
+        String actualItemType = tokens[14].substring(0, tokens[14].length() -1); // getting ItemTYPE.
+        ItemType itemType = actualItemType.equals("Clothing") ? ItemType.CLO
+                : actualItemType.equals("Hat") ? ItemType.HAT
+                : actualItemType.equals("Kitchen") ? ItemType.KIT
+                : actualItemType.equals("Electronic") ? ItemType.ELE
+                : actualItemType.equals("Household") ? ItemType.HSH
+                : ItemType.OTH;
+        String convertLocation = tokens[1] + "," + tokens[2] + "," + tokens[3] + ","
+                + tokens[4] + "," + tokens[5] + "," + tokens[6] + "," + tokens[7] + "," + tokens[8] + "," + tokens[9] + "," + tokens[10];
+        Location convertedLoc = Location.parseEntry(convertLocation); // getting Location out of convoluted String data.
+        Item item = new Item(tokens[0], convertedLoc, tokens[11], tokens[12], Double.parseDouble(tokens[13]), itemType);
+        return item;
+    }
+
     @Override
     public String toString() {
         return ("Time: " + time + " , Location: " + location + " , Name: " + name +
                 " , Description: " + desc + " , Price: " + value + " , Category: " + itemtype);
+    }
+
+    /**
+     * The fullrep model that allows us to get an Item via a String representation that's easy to read/manipulate.
+     * @return String that is the fullRep string.
+     */
+    public String getFullRep() {
+        String fullRep = (time + "," + location.getFullRep()+ "," + name + "," + desc + "," + value + "," + itemtype);
+        return fullRep;
     }
 }

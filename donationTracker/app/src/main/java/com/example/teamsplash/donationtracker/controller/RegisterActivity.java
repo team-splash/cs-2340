@@ -20,6 +20,14 @@ import com.example.teamsplash.donationtracker.model.Users;
 import com.example.teamsplash.donationtracker.model.UserType;
 import com.example.teamsplash.donationtracker.R;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 public class RegisterActivity extends AppCompatActivity {
     public final int MIN_PASSWORD_LENGTH = 8;
     private EditText firstname;
@@ -122,14 +130,21 @@ public class RegisterActivity extends AppCompatActivity {
             cancel = true;
         }
 
+        //making changes here. First we want to load the file in.
         if (!cancel) {
             User newUser = new User(userFirstName, userLastName, userEmail, userPassword, userType);
-            if(users.contains(newUser)) {
+            if(users.contains(userEmail, userPassword)) {
                 email.setError(getString(R.string.error_user_exists));
                 focusView = email;
                 focusView.requestFocus();
             } else {
-                users.add(newUser);
+                users.add(newUser); // we add to HashMap, and also want to add to the file at the same time.
+                try {
+                    PrintWriter newWriter = new PrintWriter(new File(this.getFilesDir(), "userFile"));
+                    users.saveAsText(newWriter);
+                } catch (FileNotFoundException e) {
+                    System.out.println("Failed to add new name to text file. LINE 158:");
+                }
                 users.setCurrentUser(newUser);
                 Intent goToMain = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(goToMain);

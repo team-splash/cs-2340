@@ -50,5 +50,9 @@
             android:name=".controller.ItemDetail"
             android:label="@string/title_item_detail_activity"
             />
+        <activity android:name=".controller.InventoryActivity"
+            android:label="@string/inventoryL"
+            android:parentActivityName=".controller.MainMenu"
+            />
     </application>
 </manifest>

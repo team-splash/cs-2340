@@ -1,6 +1,7 @@
 package com.example.teamsplash.donationtracker.model;
 
 public enum ItemType {
+    NOT ("Select a category"),
     CLO ("Clothing"),
     HAT ("Hat"),
     KIT ("Kitchen"),

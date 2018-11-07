@@ -2,9 +2,11 @@ package com.example.teamsplash.donationtracker.model;
 
 import android.util.Log;
 
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Items implements Serializable {
     private static final Items _instance = new Items();
@@ -22,8 +24,11 @@ public class Items implements Serializable {
         return true;
     }
 
-    public List<Item> getByLocation(Location loc) {
+    public List<Item> get() {
+        return ItemData;
+    }
 
+    public List<Item> getByLocation(Location loc) {
         List<Item> locItems = new ArrayList<>();
         for (Item item: ItemData) {
             if (item.getLocation().equals(loc)) {
@@ -31,6 +36,16 @@ public class Items implements Serializable {
             }
         }
         return locItems;
+    }
+
+    public List<Item> getByCategory(ItemType it) {
+        List<Item> catItems = new ArrayList<>();
+        for (Item item: ItemData) {
+            if (item.getItemType().equals(it)) {
+                catItems.add(item);
+            }
+        }
+        return catItems;
     }
 
     public boolean contains(Item item) {
@@ -50,5 +65,34 @@ public class Items implements Serializable {
             str += i.toString() + "\n, ";
         }
         return str;
+    }
+
+    /**
+     * saveAsText method for the ArrayList in Locations - we call
+     * the Location (singular) saveAsText method.
+     * @param writer - the printWriter which represents the file we are editing.
+     */
+    public void saveAsText(PrintWriter writer) {
+        for (Item i: ItemData) {
+            i.saveAsText(writer);
+        }
+        writer.close();
+    }
+
+    /**
+     * loadAsText method, which invokes the parseEntry method for Items
+     * and adds Items into the ArrayList.
+     * @param reader - a Scanner reader working on a file of Locations.
+     */
+    public void loadAsText(Scanner reader) {
+        ItemData.clear();
+        while (reader.hasNext()) {
+            String nextLine = reader.nextLine();
+            Item newItem = Item.parseEntry(nextLine);
+            ItemData.add(newItem);
+            String checkSize = String.valueOf(ItemData.size());
+            Log.d("Size after add operation: " + checkSize, "LINE 80: ITEMS.JAVA");
+        }
+        reader.close();
     }
 }

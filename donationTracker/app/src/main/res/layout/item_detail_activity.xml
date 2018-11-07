@@ -70,13 +70,11 @@
     <TextView
         android:id="@+id/locText"
         android:layout_width="261dp"
-        android:layout_height="36dp"
-        android:textSize="24sp"
+        android:layout_height="32dp"
         android:text="@string/location_name"
+        android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintTop_toBottomOf="@id/description" />
 
     <TextView
         android:id="@+id/location"
@@ -93,4 +91,24 @@
         android:gravity="center"
         android:text="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/timeStampTitle"
+        android:layout_width="261dp"
+        android:layout_height="32dp"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/location"
+        android:text="@string/time_stamp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="371dp" />
+
+    <TextView
+        android:id="@+id/time_stamp"
+        android:layout_width="261dp"
+        android:layout_height="49dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="@id/timeStampTitle"
+        app:layout_constraintTop_toBottomOf="@id/timeStampTitle"
+        tools:layout_editor_absoluteY="399dp" />
 </android.support.constraint.ConstraintLayout>
