@@ -99,6 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/category2"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/location"
         android:textSize="24sp"
         tools:layout_editor_absoluteX="0dp"
@@ -109,6 +110,7 @@
         android:layout_width="261dp"
         android:layout_height="49dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Category"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="419dp" />
