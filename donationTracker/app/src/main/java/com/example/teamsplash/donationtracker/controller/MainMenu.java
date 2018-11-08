@@ -37,6 +37,9 @@ public class MainMenu extends AppCompatActivity {
                 case R.id.navigation_locations:
                     switchToLocations();
                     return true;
+                case R.id.navigation_map:
+                    switchToMaps();
+                    return true;
             }
             return false;
         }
@@ -71,6 +74,11 @@ public class MainMenu extends AppCompatActivity {
         Locations locations = Locations.getInstance();
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.fragment_container, new LocationFragment()).commit();
+    }
+    private void switchToMaps() {
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.fragment_container, new MapFragment()).commit();
+
     }
 
     /**
