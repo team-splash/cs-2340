@@ -98,7 +98,7 @@
         android:id="@+id/Category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/category"
+        android:text="@string/category2"
         app:layout_constraintTop_toBottomOf="@id/location"
         android:textSize="24sp"
         tools:layout_editor_absoluteX="0dp"
