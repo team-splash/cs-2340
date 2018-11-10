@@ -52,7 +52,5 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         List<Location> locations;
         Locations location = Locations.getInstance();
 
-
-
     }
 }
