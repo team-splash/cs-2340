@@ -30,7 +30,7 @@ public class Locations implements Serializable {
         return locations.get(position);
     }
 
-    public List<String> getNames() {
+    public Iterable<String> getNames() {
         List<String> tempLoc = new ArrayList<>();
         for (Location l : locations) {
             tempLoc.add(l.getName());

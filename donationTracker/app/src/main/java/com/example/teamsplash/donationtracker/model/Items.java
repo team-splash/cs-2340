@@ -13,7 +13,7 @@ public class Items implements Serializable {
     public static Items getInstance() {
         return _instance;
     }
-    private ArrayList<Item> ItemData;
+    private List<Item> ItemData;
 
     private Items() {
         ItemData = new ArrayList<>();

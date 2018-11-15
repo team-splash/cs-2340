@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ public class LocationFragment extends Fragment {
 
         final List<Location> locationList = Locations.getInstance().get();
 
-        LocationList listAdapter = new LocationList(inflater, locationList);
+        ListAdapter listAdapter = new LocationList(inflater, locationList);
         final ListView list = fragment.findViewById(R.id.location_list);
         list.setAdapter(listAdapter);
 
