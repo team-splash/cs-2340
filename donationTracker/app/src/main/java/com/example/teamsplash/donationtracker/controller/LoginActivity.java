@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -28,14 +29,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.Users;
@@ -47,9 +42,6 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-    /**
-     * Map of current users' e-mails and passwords"
-     */
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -66,7 +58,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private UserLoginTask mAuthTask = null;
+    @Nullable
+    private UserLoginTask mAuthTask;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -90,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                if ((id == EditorInfo.IME_ACTION_DONE) || (id == EditorInfo.IME_NULL)) {
                     Log.i("checking to see if this works", "does this actually work!");
                     attemptLogin();
                     return true;
@@ -157,7 +150,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if ((grantResults.length == 1) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 populateAutoComplete();
             }
         }
@@ -329,7 +322,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
         private final String mPassword;

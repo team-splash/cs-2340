@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,7 @@ import com.example.teamsplash.donationtracker.R;
 
 public class LocationFragment extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View fragment = inflater.inflate(R.layout.location_fragment, container, false);
 
@@ -51,14 +52,15 @@ public class LocationFragment extends Fragment {
         private final LayoutInflater inflater;
         private final List<Location> locations;
 
-        public LocationList(LayoutInflater inflater, List<Location> locations) {
+        LocationList(LayoutInflater inflater, List<Location> locations) {
             super(inflater.getContext(), R.layout.location_item_fragment, locations);
             this.inflater = inflater;
             this.locations = locations;
         }
 
+        @NonNull
         @Override
-        public View getView(int position, View view, ViewGroup parent) {
+        public View getView(int position, View view, @NonNull ViewGroup parent) {
             Location location = locations.get(position);
             View rowView = inflater.inflate(R.layout.location_item_fragment, null, true);
             TextView name = rowView.findViewById(R.id.location_name);

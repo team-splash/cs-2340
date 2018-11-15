@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -61,8 +60,9 @@ public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
     }
 
     private void inflateInitialFragment() {
-        if(findViewById(R.id.fragment_container) == null)
+        if(findViewById(R.id.fragment_container) == null) {
             return;
+        }
         // Set initial fragment layout to the home view
         getSupportFragmentManager()
                 .beginTransaction()
@@ -97,8 +97,9 @@ public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
     private void readLocations() {
         Locations locations = Locations.getInstance();
         // initial adding from locations.csv.
-        if (locations.get().size() != 0)
+        if (!locations.get().isEmpty()) {
             return;
+        }
         try {
             InputStream stream = getResources().openRawResource(R.raw.locations);
             Scanner reader = new Scanner(new InputStreamReader(stream, StandardCharsets.UTF_8)); // read from the initial Locations file.

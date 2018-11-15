@@ -2,7 +2,6 @@ package com.example.teamsplash.donationtracker.model;
 
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -18,9 +17,8 @@ public class Locations implements Serializable {
         locations = new ArrayList<>();
     }
 
-    public boolean add(Location place) {
+    public void add(Location place) {
         locations.add(place);
-        return true;
     }
     public List<Location> get() {
         return locations;
@@ -40,8 +38,9 @@ public class Locations implements Serializable {
 
     public boolean contains(String name, String address) {
         for (Location place : locations) {
-            if (place.getName().equals(name) && place.getAddress().equals(address))
+            if (place.getName().equals(name) && place.getAddress().equals(address)) {
                 return true;
+            }
         }
         return false;
     }
@@ -50,11 +49,11 @@ public class Locations implements Serializable {
     }
 
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (Location location : locations) {
-            str += location + "\n, ";
+            str.append(location).append("\n, ");
         }
-        return str;
+        return str.toString();
     }
 
     /**

@@ -19,9 +19,8 @@ public class Items implements Serializable {
         ItemData = new ArrayList<>();
     }
 
-    public boolean add(Item item) {
+    public void add(Item item) {
         ItemData.add(item);
-        return true;
     }
 
     public List<Item> get() {
@@ -60,11 +59,11 @@ public class Items implements Serializable {
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (Item i : ItemData) {
-            str += i.toString() + "\n, ";
+            str.append(i.toString()).append("\n, ");
         }
-        return str;
+        return str.toString();
     }
 
     /**

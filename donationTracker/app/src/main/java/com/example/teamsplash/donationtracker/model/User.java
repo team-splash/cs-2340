@@ -13,13 +13,11 @@ public class User {
 
     public User(String firstname, String lastname, String email, String password, UserType usertype) {
         String s1 = firstname.substring(0, 1).toUpperCase();
-        firstname = s1 + firstname.substring(1);
-        this.firstname = firstname;
-        if (lastname.length() > 0) {
+        this.firstname = s1 + firstname.substring(1);
+        if (!lastname.isEmpty()) {
             String s2 = lastname.substring(0, 1).toUpperCase();
-            lastname = s2 + lastname.substring(1);
+            this.lastname = s2 + lastname.substring(1);
         }
-        this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.usertype = usertype;
@@ -27,23 +25,12 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof User)) {
-            return false;
-        }
-
-        return (((User) o).getFirstName().equals(this.firstname)
-                && ((User) o).getLastName().equals(this.lastname)
-                && ((User) o).getEmail().equals(this.email)
-                && ((User) o).getPassword().equals(this.password)
-                && ((User) o).getUserType().equals(this.usertype));
+        return o == this || (o instanceof User) && (((User) o).getFirstName().equals(this.firstname) && ((User) o).getLastName().equals(this.lastname) && ((User) o).getEmail().equals(this.email) && ((User) o).getPassword().equals(this.password) && ((User) o).getUserType().equals(this.usertype));
 
     }
 
     // Getter and Setter for first name
-    public String getFirstName() {
+    private String getFirstName() {
         return firstname;
     }
 
@@ -113,12 +100,11 @@ public class User {
         Log.d("We have figured out line isn't null in our parseEntry", "LINE 113: USER.JAVA");
         Log.d("line in file: " + line, "LINE 114, parseEntry: USER.JAVA");
         String[] tokens = line.split(":");
-        assert tokens.length == 5;
         String actualString = tokens[4].substring(0, tokens[4].length() - 1);
-        UserType type = tokens[4].equals("User") ? UserType.USER
-                : tokens[4].equals("Location Employee") ? UserType.LOCATION_EMPLOYEE
-                : tokens[4].equals("Manager") ? UserType.MANAGER
-                : UserType.ADMINISTRATOR;
+        UserType type = "User".equals(tokens[4]) ? UserType.USER
+                : ("Location Employee".equals(tokens[4]) ? UserType.LOCATION_EMPLOYEE
+                : ("Manager".equals(tokens[4]) ? UserType.MANAGER
+                : UserType.ADMINISTRATOR));
         User user = new User(tokens[0], tokens[1], tokens[2], tokens[3], type);
         System.out.println("This works, line 123, parseEntry: USER.JAVA");
         return user;
@@ -134,7 +120,7 @@ public class User {
      * to storing all data.
      * @return a representation of a User that we can save to a text file.
      */
-    public String getFullRep() {
+    private String getFullRep() {
         return (firstname + ":" + lastname + ":" + email + ":" + password + ":" + usertype);
     }
 }

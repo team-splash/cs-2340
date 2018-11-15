@@ -1,43 +1,32 @@
 package com.example.teamsplash.donationtracker.controller;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.Users;
 import com.example.teamsplash.donationtracker.model.UserType;
 import com.example.teamsplash.donationtracker.R;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 
 public class RegisterActivity extends AppCompatActivity {
-    public final int MIN_PASSWORD_LENGTH = 8;
+    private final int MIN_PASSWORD_LENGTH = 8;
     private EditText firstname;
     private EditText lastname;
     private EditText email;
     private EditText pass;
     private EditText confirmPass;
     private Spinner accountTypeSpinner;
-    private Button submitBtn;
-    private TextView goToLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.userEmail);
         pass = findViewById(R.id.userPass);
         confirmPass = findViewById(R.id.userPassConfirm);
-        submitBtn = findViewById(R.id.registerBtn);
-        goToLogin = findViewById(R.id.goToLogin);
+        Button submitBtn = findViewById(R.id.registerBtn);
+        TextView goToLogin = findViewById(R.id.goToLogin);
 
         ArrayAdapter<Enum> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, UserType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -64,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         goToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
@@ -90,13 +80,13 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = confirmPass.getText().toString();
         UserType userType = (UserType) accountTypeSpinner.getSelectedItem();
 
-        if (userFirstName.equals("")) {
+        if ("".equals(userFirstName)) {
             firstname.setError(getString(R.string.error_field_required));
             focusView = firstname;
             focusView.requestFocus();
             cancel = true;
         }
-        if (userEmail.equals("")) {
+        if ("".equals(userEmail)) {
             email.setError(getString(R.string.error_field_required));
             focusView2 = email;
             focusView2.requestFocus();
@@ -107,13 +97,13 @@ public class RegisterActivity extends AppCompatActivity {
             focusView2.requestFocus();
             cancel = true;
         }
-        if (userPassword.equals("")) {
+        if ("".equals(userPassword)) {
             pass.setError(getString(R.string.error_field_required));
             focusView3 = pass;
             focusView3.requestFocus();
             cancel = true;
         }
-        if (confirmPassword.equals("")) {
+        if ("".equals(confirmPassword)) {
             confirmPass.setError(getString(R.string.error_field_required));
             focusView4 = confirmPass;
             focusView4.requestFocus();

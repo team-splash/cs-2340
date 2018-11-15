@@ -1,7 +1,5 @@
 package com.example.teamsplash.donationtracker.model;
 
-import android.util.Log;
-
 import java.io.PrintWriter;
 import java.io.Serializable;
 
@@ -32,22 +30,8 @@ public class Location implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof Location)) {
-            return false;
-        }
+        return o == this || (o instanceof Location) && (((Location) o).getName().equals(this.name) && ((Location) o).getLocationType().equals(this.locationType) && (((Location) o).getLongitude() == this.longitude)) && (((Location) o).getLatitude() == (this.latitude)) && ((Location) o).getAddress().equals(this.address) && ((Location) o).getCity().equals(this.city) && ((Location) o).getState().equals(this.state) && ((Location) o).getZip().equals(this.zip) && ((Location) o).getPhoneNumber().equals(this.phoneNumber);
 
-        return (((Location) o).getName().equals(this.name)
-                && ((Location) o).getLocationType().equals(this.locationType)
-                && (((Location) o).getLongitude() == this.longitude))
-                && ((Location) o).getLatitude() == (this.latitude)
-                && ((Location) o).getAddress().equals(this.address)
-                && ((Location) o).getCity().equals(this.city)
-                && ((Location) o).getState().equals(this.state)
-                && ((Location) o).getZip().equals(this.zip)
-                && ((Location) o).getPhoneNumber().equals(this.phoneNumber);
     }
 
     public String getName() {return name;}
@@ -115,7 +99,6 @@ public class Location implements Serializable {
         //Log.d("We have figured out line isn't null in our parseEntry", "LINE 113: USER.JAVA");
         //Log.d("line in file: " + line, "LINE 114, parseEntry: USER.JAVA");
         String[] tokens = line.split(",");
-        assert tokens.length == 10;
         String name = tokens[CSV_INDEX_NAME]; // 1
         double latitude = Double.parseDouble(tokens[CSV_INDEX_LATITUDE]); // 2
         double longitude = Double.parseDouble(tokens[CSV_INDEX_LONGITUDE]); // 3
@@ -127,10 +110,9 @@ public class Location implements Serializable {
         String phone = tokens[CSV_INDEX_PHONE]; // 9
         //String actualString = tokens[8].substring(0, tokens[8].length() - 1);
         //LocationType actualType = LocationType.fromString(tokens[1]);
-        Location newLoc = new Location(name, type, latitude, longitude,
-        address, city, state, zip, phone);
         //System.out.println("This works, line 123, parseEntry: USER.JAVA");
-        return newLoc;
+        return new Location(name, type, latitude, longitude,
+        address, city, state, zip, phone);
     }
 
     @Override
@@ -139,7 +121,6 @@ public class Location implements Serializable {
     }
 
     public String getFullRep() {
-        String fullRep =  "x" + "," + name + "," + latitude + "," + longitude + "," + address + "," + city + "," + state + "," + zip + "," + locationType + "," + phoneNumber;
-        return fullRep; // added the "x" so that all numberings for Location were consistent.
+        return "x" + "," + name + "," + latitude + "," + longitude + "," + address + "," + city + "," + state + "," + zip + "," + locationType + "," + phoneNumber; // added the "x" so that all numberings for Location were consistent.
     }
 }
