@@ -15,7 +15,7 @@ public class Item implements Serializable {
     private ItemType itemtype;
 
     public Item(String time, Location location, String name, String desc, double value, ItemType itemType) {
-        this.time = time.toString();
+        this.time = time;
         this.location = location;
         String s1 = name.substring(0, 1).toUpperCase();
         name = s1 + name.substring(1);
@@ -27,18 +27,7 @@ public class Item implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof User)) {
-            return false;
-        }
-        return (((Item) o).getTime().equals(this.time)
-                && ((Item) o).getLocation().equals(this.location)
-                && ((Item) o).getDesc().equals(this.name)
-                && ((Item) o).getLongDesc().equals(this.desc)
-                && ((Item) o).getValue() == this.value
-                && ((Item) o).getItemType().equals(this.itemtype));
+        return o == this || o instanceof User && (((Item) o).getTime().equals(this.time) && ((Item) o).getLocation().equals(this.location) && ((Item) o).getDesc().equals(this.name) && ((Item) o).getLongDesc().equals(this.desc) && ((Item) o).getValue() == this.value && ((Item) o).getItemType().equals(this.itemtype));
 
     }
 
@@ -47,7 +36,7 @@ public class Item implements Serializable {
         return time;
     }
     private void setTime(String ts) {
-        this.time = ts.toString();
+        this.time = ts;
     }
 
     // Getter and setter for location
@@ -126,8 +115,7 @@ public class Item implements Serializable {
         String convertLocation = tokens[1] + "," + tokens[2] + "," + tokens[3] + ","
                 + tokens[4] + "," + tokens[5] + "," + tokens[6] + "," + tokens[7] + "," + tokens[8] + "," + tokens[9] + "," + tokens[10];
         Location convertedLoc = Location.parseEntry(convertLocation); // getting Location out of convoluted String data.
-        Item item = new Item(tokens[0], convertedLoc, tokens[11], tokens[12], Double.parseDouble(tokens[13]), itemType);
-        return item;
+        return new Item(tokens[0], convertedLoc, tokens[11], tokens[12], Double.parseDouble(tokens[13]), itemType);
     }
 
     @Override
@@ -140,8 +128,7 @@ public class Item implements Serializable {
      * The fullrep model that allows us to get an Item via a String representation that's easy to read/manipulate.
      * @return String that is the fullRep string.
      */
-    public String getFullRep() {
-        String fullRep = (time + "," + location.getFullRep()+ "," + name + "," + desc + "," + value + "," + itemtype);
-        return fullRep;
+    private String getFullRep() {
+        return (time + "," + location.getFullRep()+ "," + name + "," + desc + "," + value + "," + itemtype);
     }
 }

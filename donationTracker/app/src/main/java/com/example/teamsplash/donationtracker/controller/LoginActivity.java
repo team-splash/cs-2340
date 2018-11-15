@@ -28,14 +28,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.Users;
@@ -47,9 +41,6 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-    /**
-     * Map of current users' e-mails and passwords"
-     */
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -329,7 +320,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
         private final String mPassword;

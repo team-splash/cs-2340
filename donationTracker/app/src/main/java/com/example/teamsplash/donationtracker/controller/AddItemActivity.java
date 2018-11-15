@@ -3,15 +3,13 @@ package com.example.teamsplash.donationtracker.controller;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextClock;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.ItemType;
@@ -27,24 +25,18 @@ import java.util.Date;
 
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText name;
-    private EditText description;
-    private EditText value;
-    private Button submit;
-    private Button cancel;
     private Location loc;
     private Spinner category;
-    private Date date;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_item_activity);
         loc = (Location) getIntent().getSerializableExtra("LOCATION");
-        submit = findViewById(R.id.addItemBtn);
+        Button submit = findViewById(R.id.addItemBtn);
         submit.setOnClickListener(this);
 
-        cancel = findViewById(R.id.cancelItemBtn);
+        Button cancel = findViewById(R.id.cancelItemBtn);
         cancel.setOnClickListener(this);
 
         TextView currLoc = findViewById(R.id.location_name);
@@ -59,10 +51,10 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.addItemBtn :
-                name = findViewById(R.id.shortDescription);
-                description = findViewById(R.id.longDescription);
-                value = findViewById(R.id.value);
-                date = new Timestamp(System.currentTimeMillis());
+                EditText name = findViewById(R.id.shortDescription);
+                EditText description = findViewById(R.id.longDescription);
+                EditText value = findViewById(R.id.value);
+                Date date = new Timestamp(System.currentTimeMillis());
 
                 String time = date.toString();
                 String title = name.getText().toString();

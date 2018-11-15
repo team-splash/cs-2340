@@ -2,7 +2,6 @@ package com.example.teamsplash.donationtracker.model;
 
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -13,14 +12,14 @@ import java.util.Scanner;
 public class Locations implements Serializable {
     private static final Locations _instance = new Locations();
     public static Locations getInstance() { return _instance; }
-    private List<Location> locations;
+    private final List<Location> locations;
     private Locations() {
         locations = new ArrayList<>();
     }
 
-    public boolean add(Location place) {
+    @SuppressWarnings("SameReturnValue")
+    public void add(Location place) {
         locations.add(place);
-        return true;
     }
     public List<Location> get() {
         return locations;
@@ -50,11 +49,11 @@ public class Locations implements Serializable {
     }
 
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (Location location : locations) {
-            str += location + "\n, ";
+            str.append(location).append("\n, ");
         }
-        return str;
+        return str.toString();
     }
 
     /**
@@ -86,7 +85,7 @@ public class Locations implements Serializable {
      * @param reader - Scanner object that reads our File.
      * @throws IOException
      */
-    public void readFromCsv(Scanner reader) throws IOException {
+    public void readFromCsv(Scanner reader) {
         //locations.clear(); //potentially don't use this as it may lead to overwriting.
         while (reader.hasNext()) {
             String nextLine = reader.nextLine();

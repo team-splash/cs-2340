@@ -13,7 +13,7 @@ import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.UserType;
 import com.example.teamsplash.donationtracker.model.Users;
 
-import org.w3c.dom.Text;
+import java.util.Objects;
 
 public class LocationDetail extends AppCompatActivity {
 
@@ -27,11 +27,11 @@ public class LocationDetail extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
-        location = (Location) bd.get("LOCATION");
-        toolbar.setTitle(location.getName());
+        location = (Location) Objects.requireNonNull(bd).get("LOCATION");
+        toolbar.setTitle(Objects.requireNonNull(location).getName());
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         final String name = location.getName();
         final String type = location.getLocationType().toString();

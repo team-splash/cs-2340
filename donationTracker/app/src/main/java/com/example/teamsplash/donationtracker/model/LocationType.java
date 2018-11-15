@@ -1,5 +1,6 @@
 package com.example.teamsplash.donationtracker.model;
 
+@SuppressWarnings("unused")
 public enum LocationType {
     DR ("Drop Off"),
     ST ("Store"),

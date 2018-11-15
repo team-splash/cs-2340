@@ -27,23 +27,12 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof User)) {
-            return false;
-        }
-
-        return (((User) o).getFirstName().equals(this.firstname)
-                && ((User) o).getLastName().equals(this.lastname)
-                && ((User) o).getEmail().equals(this.email)
-                && ((User) o).getPassword().equals(this.password)
-                && ((User) o).getUserType().equals(this.usertype));
+        return o == this || o instanceof User && (((User) o).getFirstName().equals(this.firstname) && ((User) o).getLastName().equals(this.lastname) && ((User) o).getEmail().equals(this.email) && ((User) o).getPassword().equals(this.password) && ((User) o).getUserType().equals(this.usertype));
 
     }
 
     // Getter and Setter for first name
-    public String getFirstName() {
+    private String getFirstName() {
         return firstname;
     }
 
@@ -134,7 +123,7 @@ public class User {
      * to storing all data.
      * @return a representation of a User that we can save to a text file.
      */
-    public String getFullRep() {
+    private String getFullRep() {
         return (firstname + ":" + lastname + ":" + email + ":" + password + ":" + usertype);
     }
 }

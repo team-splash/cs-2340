@@ -2,6 +2,7 @@ package com.example.teamsplash.donationtracker.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import com.example.teamsplash.donationtracker.R;
 
 public class MainFragment extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View fragment = inflater.inflate(R.layout.main_fragment, container, false);

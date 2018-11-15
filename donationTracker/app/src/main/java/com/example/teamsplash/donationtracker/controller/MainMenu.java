@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,7 +29,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
     private SupportMapFragment map;
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override

@@ -1,25 +1,19 @@
 package com.example.teamsplash.donationtracker.controller;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.teamsplash.donationtracker.model.Location;
-import com.example.teamsplash.donationtracker.model.Locations;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.example.teamsplash.donationtracker.R;
 
-import java.util.List;
-
 public class MapFragment extends Fragment implements OnMapReadyCallback {
-
-    private GoogleMap mMap;
 
     public MapFragment() {
         // Required empty public constructor
@@ -27,7 +21,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if(getActivity()!=null) {
@@ -56,7 +50,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
         Log.d("map", "key");
 
 
