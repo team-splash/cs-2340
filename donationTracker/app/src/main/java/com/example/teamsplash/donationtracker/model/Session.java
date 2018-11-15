@@ -1,7 +1,6 @@
 package com.example.teamsplash.donationtracker.model;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 final class Session {
     private static final Session instance = new Session();
