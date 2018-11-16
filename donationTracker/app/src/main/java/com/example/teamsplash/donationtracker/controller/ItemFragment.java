@@ -2,9 +2,8 @@ package com.example.teamsplash.donationtracker.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,21 +19,27 @@ import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
+@SuppressWarnings("unused")
 public class ItemFragment extends Fragment {
-    public static ItemsList listAdapter;
+<<<<<<< HEAD
+=======
+    private static ItemsList listAdapter;
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View fragment = inflater.inflate(R.layout.items_fragment, container, false);
 
-        Location location = (Location) getArguments().getSerializable("LOCATION");
+        Location location = (Location) Objects.requireNonNull(getArguments()).getSerializable("LOCATION");
 
         final List<Item> itemsList = Items.getInstance().getByLocation(location);
 
-        listAdapter = new ItemsList(inflater, itemsList);
+        ItemsList listAdapter = new ItemsList(inflater, itemsList);
         final ListView list = fragment.findViewById(R.id.inventory);
         list.setAdapter(listAdapter);
         setListViewHeightBasedOnItems(list);
@@ -62,26 +67,39 @@ public class ItemFragment extends Fragment {
         private final LayoutInflater inflater;
         private final List<Item> inventory;
 
-        public ItemsList(LayoutInflater inflater, List<Item> inventory) {
+        ItemsList(LayoutInflater inflater, List<Item> inventory) {
             super(inflater.getContext(), R.layout.item_fragment, inventory);
             this.inflater = inflater;
             this.inventory = inventory;
         }
 
+<<<<<<< HEAD
+        @SuppressWarnings("unused")
+=======
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
+        @NonNull
         @Override
-        public View getView(int position, View view, ViewGroup parent) {
+        public View getView(int position, View view, @NonNull ViewGroup parent) {
             Item item = inventory.get(position);
-            View rowView = inflater.inflate(R.layout.item_fragment, null, true);
+            if (view ==null){
+                //noinspection helps with possible cases of null views(was an issue with lint)
+                View rowView = inflater.inflate(R.layout.item_fragment, parent, false);
+            }
+            View rowView = inflater.inflate(R.layout.item_fragment, parent, false);
             TextView name = rowView.findViewById(R.id.name);
             TextView value = rowView.findViewById(R.id.value);
 
             name.setText(item.getDesc());
-            value.setText("$" + String.format("%.2f", item.getValue()));
+<<<<<<< HEAD
+            value.setText(String.format("$%s", String.format(Locale.US, "%.2f", item.getValue())));
+=======
+            value.setText("$" + String.format(Locale.US, "%.2f", item.getValue()));
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
             return rowView;
         }
     }
 
-    public static boolean setListViewHeightBasedOnItems(ListView listView) {
+    private static void setListViewHeightBasedOnItems(ListView listView) {
 
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter != null) {
@@ -101,9 +119,10 @@ public class ItemFragment extends Fragment {
             params.height = totalItemsHeight + totalDividersHeight;
             listView.setLayoutParams(params);
             listView.requestLayout();
-            return true;
+<<<<<<< HEAD
+=======
         } else {
-            return false;
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
         }
 
     }

@@ -1,6 +1,5 @@
 package com.example.teamsplash.donationtracker.controller;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +9,8 @@ import android.widget.TextView;
 import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.Location;
+
+import java.util.Locale;
 
 public class ItemDetail extends AppCompatActivity {
 
@@ -21,7 +22,7 @@ public class ItemDetail extends AppCompatActivity {
 
         String name = item.getDesc();
         String description = item.getLongDesc();
-        String value = "$" + String.format( "%.2f", item.getValue());
+        String value = "$" + String.format(Locale.US, "%.2f", item.getValue());
         Location location = item.getLocation();
         String time = item.getTime();
 
@@ -39,6 +40,7 @@ public class ItemDetail extends AppCompatActivity {
 
         Button goBackBtn = findViewById(R.id.backBtn);
         goBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 finish();
             }

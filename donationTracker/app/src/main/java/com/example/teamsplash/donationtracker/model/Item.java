@@ -7,19 +7,18 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public class Item implements Serializable {
-    private String time;
-    private Location location;
-    private String name;
-    private String desc;
-    private double value;
-    private ItemType itemtype;
+    private final String time;
+    private final Location location;
+    private final String name;
+    private final String desc;
+    private final double value;
+    private final ItemType itemtype;
 
     public Item(String time, Location location, String name, String desc, double value, ItemType itemType) {
-        this.time = time.toString();
+        this.time = time;
         this.location = location;
         String s1 = name.substring(0, 1).toUpperCase();
-        name = s1 + name.substring(1);
-        this.name = name;
+        this.name = s1 + name.substring(1);
         this.desc = desc;
         this.value = value;
         this.itemtype = itemType;
@@ -27,18 +26,18 @@ public class Item implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof User)) {
-            return false;
-        }
-        return (((Item) o).getTime().equals(this.time)
-                && ((Item) o).getLocation().equals(this.location)
-                && ((Item) o).getDesc().equals(this.name)
-                && ((Item) o).getLongDesc().equals(this.desc)
-                && ((Item) o).getValue() == this.value
-                && ((Item) o).getItemType().equals(this.itemtype));
+<<<<<<< HEAD
+        if (o == this) return true;
+        if (o instanceof User) if (((Item) o).getTime().equals(this.time))
+            if (((Item) o).getLocation().equals(this.location))
+                if (((Item) o).getDesc().equals(this.name))
+                    if (((Item) o).getLongDesc().equals(this.desc))
+                        if (((Item) o).getValue() == this.value)
+                            return ((Item) o).getItemType().equals(this.itemtype);
+        return false;
+=======
+        return o == this || (o instanceof User) && (((Item) o).getTime().equals(this.time) && ((Item) o).getLocation().equals(this.location) && ((Item) o).getDesc().equals(this.name) && ((Item) o).getLongDesc().equals(this.desc) && (((Item) o).getValue() == this.value) && ((Item) o).getItemType().equals(this.itemtype));
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 
     }
 
@@ -46,9 +45,17 @@ public class Item implements Serializable {
     public String getTime() {
         return time;
     }
+<<<<<<< HEAD
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    private void setTime(String ts) {
+//        this.time = ts;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
+=======
     private void setTime(String ts) {
-        this.time = ts.toString();
+        this.time = ts;
     }
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 
     // Getter and setter for location
     public Location getLocation() {
@@ -56,41 +63,51 @@ public class Item implements Serializable {
     }
 
 
-    private void setLocation(Location loc) {
-        this.location = loc;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    private void setLocation(Location loc) {
+//        this.location = loc;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
     // Getter and Setter for description
     public String getDesc() {
         return name;
     }
-    public void setDesc(String description) {
-        this.name = description;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    public void setDesc(String description) {
+//        this.name = description;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
     // Getter and Setter for long description
     public String getLongDesc() {
         return desc;
     }
-    public void setLongDesc(String longDescription) {
-        this.desc = longDescription;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    public void setLongDesc(String longDescription) {
+//        this.desc = longDescription;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
     // Getter and Setter for value
     public double getValue() {
         return value;
     }
-    public void setValue(double val) {
-        this.value = val;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    public void setValue(double val) {
+//        this.value = val;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
     // Getter and Setter for item type
     public ItemType getItemType() {
         return itemtype;
     }
-    public void setItemType(ItemType type) {
-        this.itemtype = type;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    public void setItemType(ItemType type) {
+//        this.itemtype = type;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
     /**
      * SaveToText file method for items. It's about the same
@@ -115,19 +132,21 @@ public class Item implements Serializable {
         System.out.println("THIS IS THE LINE: " + line);
         String[] tokens = line.split(",");
         System.out.println(Arrays.toString(tokens));
-        assert tokens.length == 15;
+<<<<<<< HEAD
+        { if( !(tokens.length == 15) ) throw new AssertionError( "Failure message" ); }
+=======
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
         String actualItemType = tokens[14].substring(0, tokens[14].length() -1); // getting ItemTYPE.
-        ItemType itemType = actualItemType.equals("Clothing") ? ItemType.CLO
-                : actualItemType.equals("Hat") ? ItemType.HAT
-                : actualItemType.equals("Kitchen") ? ItemType.KIT
-                : actualItemType.equals("Electronic") ? ItemType.ELE
-                : actualItemType.equals("Household") ? ItemType.HSH
-                : ItemType.OTH;
+        ItemType itemType = "Clothing".equals(actualItemType) ? ItemType.CLO
+                : ("Hat".equals(actualItemType) ? ItemType.HAT
+                : ("Kitchen".equals(actualItemType) ? ItemType.KIT
+                : ("Electronic".equals(actualItemType) ? ItemType.ELE
+                : ("Household".equals(actualItemType) ? ItemType.HSH
+                : ItemType.OTH))));
         String convertLocation = tokens[1] + "," + tokens[2] + "," + tokens[3] + ","
                 + tokens[4] + "," + tokens[5] + "," + tokens[6] + "," + tokens[7] + "," + tokens[8] + "," + tokens[9] + "," + tokens[10];
         Location convertedLoc = Location.parseEntry(convertLocation); // getting Location out of convoluted String data.
-        Item item = new Item(tokens[0], convertedLoc, tokens[11], tokens[12], Double.parseDouble(tokens[13]), itemType);
-        return item;
+        return new Item(tokens[0], convertedLoc, tokens[11], tokens[12], Double.parseDouble(tokens[13]), itemType);
     }
 
     @Override
@@ -140,8 +159,7 @@ public class Item implements Serializable {
      * The fullrep model that allows us to get an Item via a String representation that's easy to read/manipulate.
      * @return String that is the fullRep string.
      */
-    public String getFullRep() {
-        String fullRep = (time + "," + location.getFullRep()+ "," + name + "," + desc + "," + value + "," + itemtype);
-        return fullRep;
+    private String getFullRep() {
+        return (time + "," + location.getFullRep()+ "," + name + "," + desc + "," + value + "," + itemtype);
     }
 }

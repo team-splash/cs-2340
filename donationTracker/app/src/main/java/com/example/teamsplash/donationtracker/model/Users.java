@@ -2,13 +2,11 @@ package com.example.teamsplash.donationtracker.model;
 
 import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
+@SuppressWarnings("SameReturnValue")
 public class Users {
 
     private static final Users _instance = new Users();
@@ -16,7 +14,7 @@ public class Users {
         return _instance;
     }
 
-    public static HashMap<User, String> UserData;
+    private static HashMap<User, String> UserData;
     private User currUser;
 
     private Users() {
@@ -26,14 +24,13 @@ public class Users {
         UserData.put(new User("Chris", "Obando", "chrisjobando@gmail.com", "250797", UserType.ADMINISTRATOR), "250797");
     }
 
-    public boolean add(User user) {
+    public void add(User user) {
         for (User u : UserData.keySet()) {
             if (user.getEmail().equals(u.getEmail())) {
-                return false;
+                return;
             }
         }
         UserData.put(user, user.getPassword());
-        return true;
     }
 
     public User get(String email, String password) {
@@ -49,24 +46,28 @@ public class Users {
         return null;
     }
 
-    public boolean contains(User user) {
-
-        for (User u: UserData.keySet()) {
-            if (user.equals(u)) {
-                return true;
-            }
-        }
-        return false;
-    }
+// --Commented out by Inspection START (11/15/18, 9:10 PM):
+//    public boolean contains(User user) {
+//
+//        for (User u: UserData.keySet()) {
+//            if (user.equals(u)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:10 PM)
 
     public boolean contains(String email, String password) {
         return (get(email, password) != null);
     }
 
-    public boolean remove(User user) {
-        UserData.remove(user);
-        return true;
-    }
+// --Commented out by Inspection START (11/15/18, 9:10 PM):
+//    public boolean remove(User user) {
+//        UserData.remove(user);
+//        return true;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:10 PM)
 
     // Getter and setter for current user
     public User getCurrentUser() {
@@ -78,11 +79,11 @@ public class Users {
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (User u : UserData.keySet()) {
-            str += u + "\n, ";
+            str.append(u).append("\n, ");
         }
-        return str;
+        return str.toString();
     }
 
     /**

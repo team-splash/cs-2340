@@ -13,7 +13,7 @@ import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.UserType;
 import com.example.teamsplash.donationtracker.model.Users;
 
-import org.w3c.dom.Text;
+import java.util.Objects;
 
 public class LocationDetail extends AppCompatActivity {
 
@@ -27,13 +27,13 @@ public class LocationDetail extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bd = intent.getExtras();
-        location = (Location) bd.get("LOCATION");
-        toolbar.setTitle(location.getName());
+        location = (Location) Objects.requireNonNull(bd).get("LOCATION");
+        toolbar.setTitle(Objects.requireNonNull(location).getName());
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        final String name = location.getName();
+       // @SuppressWarnings("locations name") final String name = location.getName();
         final String type = location.getLocationType().toString();
         final String longitude = Double.toString(location.getLongitude());
         final String latitude = Double.toString(location.getLatitude());
@@ -61,7 +61,7 @@ public class LocationDetail extends AppCompatActivity {
 
         UserType currUserType = Users.getInstance().getCurrentUser().getUserType();
         if (currUserType == UserType.USER) {
-            addBtn.setVisibility(View.GONE);
+            findViewById(R.id.addButton).setVisibility(View.GONE);
         }
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -75,19 +75,5 @@ public class LocationDetail extends AppCompatActivity {
         //inflateInitialFragment();
     }
 
-    private void inflateInitialFragment() {
-        if (findViewById(R.id.fragment_container) == null) {
-            return;
-         }
 
-        ItemFragment fragment = new ItemFragment();
-        Bundle args = new Bundle();
-        args.putSerializable("LOCATION", location);
-        fragment.setArguments(args);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.fragment_container, fragment)
-                .commit();
-    }
 }

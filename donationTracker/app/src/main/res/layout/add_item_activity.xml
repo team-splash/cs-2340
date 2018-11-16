@@ -8,7 +8,6 @@
     tools:context=".controller.AddItemActivity">
 
     <ScrollView
-        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -30,8 +29,7 @@
             android:layout_marginHorizontal="4dp" />
 
             <TextClock
-            android:id="@+id/textClock"
-            android:layout_width="fill_parent"
+                android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:textSize="12sp"
