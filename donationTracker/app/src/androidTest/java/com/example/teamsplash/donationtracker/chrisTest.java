@@ -17,7 +17,7 @@ import static org.junit.Assert.assertNotEquals;
 @RunWith(AndroidJUnit4.class)
 public class chrisTest extends TestCase {
     @Test
-    public void userEqualsTest() {
+    public void testUserEquals() {
         final User a = new User("A", "A", "a@example.com", "aaaaaaaa", UserType.USER);
         assertNotEquals(null, a);
         assertNotEquals(new Object(), a);

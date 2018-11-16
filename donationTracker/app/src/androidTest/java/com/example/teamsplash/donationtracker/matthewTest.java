@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class matthewTest extends TestCase {
     @Test
-    public void usersAddCheck() {
+    public void testUsersAdd() {
         User a = new User("A", "A", "a@example.com", "aaaaaaaa", UserType.USER);
         User b = new User("B", "A", "a@example.com", "bbbbbbbb", UserType.USER);
         Users.getInstance().add(a);

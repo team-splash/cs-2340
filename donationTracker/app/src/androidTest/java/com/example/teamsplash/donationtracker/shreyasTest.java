@@ -1,19 +1,18 @@
 package com.example.teamsplash.donationtracker;
+
 import android.support.test.runner.AndroidJUnit4;
+
+import com.example.teamsplash.donationtracker.model.Item;
+import com.example.teamsplash.donationtracker.model.ItemType;
+import com.example.teamsplash.donationtracker.model.Location;
+import com.example.teamsplash.donationtracker.model.LocationType;
+
+import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.example.teamsplash.donationtracker.model.Item;
-
-import com.example.teamsplash.donationtracker.model.Location;
-
 import static org.junit.Assert.assertNotEquals;
-
-import junit.framework.TestCase;
-
-import static com.example.teamsplash.donationtracker.model.ItemType.CLO;
-import static com.example.teamsplash.donationtracker.model.LocationType.DR;
 
 /**
  * test for Shreyas Casturi, checking certain Location methods.
@@ -21,43 +20,19 @@ import static com.example.teamsplash.donationtracker.model.LocationType.DR;
  */
 @RunWith(AndroidJUnit4.class)
 public class shreyasTest extends TestCase {
-    /**
-     * equals method, instantiates two Locations and Items and checks for equality.
-     */
     @Test
-    public void equalsMethod() {
-        Location a = new Location("location", DR, 0.00, 0.00, "0", "0", "0", "00000", "0000000000");
-        Location b = new Location("location", DR, 1.00, 1.00, "1", "1", "1", "10000", "0000000000");
-        Item realItem = new Item("12:00", a, "item", "some item", 0.00, CLO);
-        Item compareItem = new Item("2:00", b, "items", "something", 1.00, CLO);
-        boolean reals = realItem.equals(compareItem);
-        assertNotEquals(reals, false);
+    public void testItemEquals() {
+        Location location = new Location("A", LocationType.DR, 0.0, 0.0, "A", "A", "MA", "01001", "0000000000");
+        Item a = new Item("00:00:00", location, "A", "a", 0.0, ItemType.CLO);
+        assertNotEquals(null, a);
+        assertNotEquals(new Object(), a);
+        assertNotEquals(new Item("00:00:01", location, "A", "a", 0.0, ItemType.CLO), a);
+        assertNotEquals(new Item("00:00:00", null, "A", "a", 0.0, ItemType.CLO), a);
+        assertNotEquals(new Item("00:00:00", location, "B", "a", 0.0, ItemType.CLO), a);
+        assertNotEquals(new Item("00:00:00", location, "A", "b", 0.0, ItemType.CLO), a);
+        assertNotEquals(new Item("00:00:00", location, "A", "a", 1.0, ItemType.CLO), a);
+        assertNotEquals(new Item("00:00:00", location, "A", "a", 0.0, ItemType.ELE), a);
+        assertEquals(new Item("00:00:00", location, "A", "a", 0.0, ItemType.CLO), a);
+        assertEquals(a, a);
     }
-
-    /**
-     * getting Time() tester. Instantiates Location and items, and then tries to compare
-     * time on the items.
-     */
-    @Test
-    public void gettingTime(){
-        Location a = new Location("location", DR, 0.00, 0.00, "0", "0", "0", "00000", "0000000000");
-        Item realItem = new Item("12:00", a, "item", "some item", 0.00, CLO);
-        Item compareItem = new Item("12:00", a, "item", "some item", 0.00, CLO);
-        String realTime = realItem.getTime();
-        String compareTime = compareItem.getTime();
-        assertEquals(realTime,compareTime);
-    }
-
-    /**
-     * The parsing tester. Will instantiate an item and check if there is a toString() invocation
-     * that works.
-     */
-    @Test
-    public void parsing(){
-        Location a = new Location("location", DR, 0.00, 0.00, "0", "0", "0", "00000", "0000000000");
-        Item realItem = new Item("12:00", a, "item", "some item", 0.00, CLO);
-        String myString = realItem.toString();
-        assertNotNull(myString);
-    }
-
 }
