@@ -24,6 +24,10 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class ItemFragment extends Fragment {
+<<<<<<< HEAD
+=======
+    private static ItemsList listAdapter;
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -69,7 +73,10 @@ public class ItemFragment extends Fragment {
             this.inventory = inventory;
         }
 
+<<<<<<< HEAD
         @SuppressWarnings("unused")
+=======
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
         @NonNull
         @Override
         public View getView(int position, View view, @NonNull ViewGroup parent) {
@@ -83,7 +90,11 @@ public class ItemFragment extends Fragment {
             TextView value = rowView.findViewById(R.id.value);
 
             name.setText(item.getDesc());
+<<<<<<< HEAD
             value.setText(String.format("$%s", String.format(Locale.US, "%.2f", item.getValue())));
+=======
+            value.setText("$" + String.format(Locale.US, "%.2f", item.getValue()));
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
             return rowView;
         }
     }
@@ -108,6 +119,10 @@ public class ItemFragment extends Fragment {
             params.height = totalItemsHeight + totalDividersHeight;
             listView.setLayoutParams(params);
             listView.requestLayout();
+<<<<<<< HEAD
+=======
+        } else {
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
         }
 
     }

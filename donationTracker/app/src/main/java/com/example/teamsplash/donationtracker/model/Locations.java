@@ -2,6 +2,10 @@ package com.example.teamsplash.donationtracker.model;
 
 import android.util.Log;
 
+<<<<<<< HEAD
+=======
+import java.io.IOException;
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +20,10 @@ public class Locations implements Serializable {
         locations = new ArrayList<>();
     }
 
+<<<<<<< HEAD
     @SuppressWarnings("SameReturnValue")
+=======
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
     public void add(Location place) {
         locations.add(place);
     }
@@ -28,7 +35,7 @@ public class Locations implements Serializable {
         return locations.get(position);
     }
 
-    public List<String> getNames() {
+    public Iterable<String> getNames() {
         List<String> tempLoc = new ArrayList<>();
         for (Location l : locations) {
             tempLoc.add(l.getName());
@@ -36,6 +43,7 @@ public class Locations implements Serializable {
         return tempLoc;
     }
 
+<<<<<<< HEAD
 //    @SuppressWarnings("contains method check")
 //    public boolean contains(String name, String address) {
 //        for (Location place : locations) {
@@ -48,6 +56,19 @@ public class Locations implements Serializable {
 //    public boolean contains(Location location) {
 //        return locations.contains(location);
 //    }
+=======
+    public boolean contains(String name, String address) {
+        for (Location place : locations) {
+            if (place.getName().equals(name) && place.getAddress().equals(address)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean contains(Location location) {
+        return locations.contains(location);
+    }
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 
     public String toString() {
         StringBuilder str = new StringBuilder();

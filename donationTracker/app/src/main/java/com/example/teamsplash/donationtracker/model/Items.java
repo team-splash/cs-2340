@@ -14,7 +14,11 @@ public class Items implements Serializable {
     public static Items getInstance() {
         return _instance;
     }
+<<<<<<< HEAD
     private final ArrayList<Item> ItemData;
+=======
+    private List<Item> ItemData;
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 
     private Items() {
         ItemData = new ArrayList<>();

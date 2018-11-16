@@ -1,7 +1,10 @@
 package com.example.teamsplash.donationtracker.model;
 
+<<<<<<< HEAD
 import android.annotation.SuppressLint;
 
+=======
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 import java.io.PrintWriter;
 import java.io.Serializable;
 
@@ -33,7 +36,11 @@ public class Location implements Serializable {
 
     @Override
     public boolean equals(Object o) {
+<<<<<<< HEAD
         return o == this || o instanceof Location && (((Location) o).getName().equals(this.name) && ((Location) o).getLocationType().equals(this.locationType) && (((Location) o).getLongitude() == this.longitude)) && ((Location) o).getLatitude() == (this.latitude) && ((Location) o).getAddress().equals(this.address) && ((Location) o).getCity().equals(this.city) && ((Location) o).getState().equals(this.state) && ((Location) o).getZip().equals(this.zip) && ((Location) o).getPhoneNumber().equals(this.phoneNumber);
+=======
+        return o == this || (o instanceof Location) && (((Location) o).getName().equals(this.name) && ((Location) o).getLocationType().equals(this.locationType) && (((Location) o).getLongitude() == this.longitude)) && (((Location) o).getLatitude() == (this.latitude)) && ((Location) o).getAddress().equals(this.address) && ((Location) o).getCity().equals(this.city) && ((Location) o).getState().equals(this.state) && ((Location) o).getZip().equals(this.zip) && ((Location) o).getPhoneNumber().equals(this.phoneNumber);
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 
     }
 
@@ -103,9 +110,12 @@ public class Location implements Serializable {
         //Log.d("We have figured out line isn't null in our parseEntry", "LINE 113: USER.JAVA");
         //Log.d("line in file: " + line, "LINE 114, parseEntry: USER.JAVA");
         String[] tokens = line.split(",");
+<<<<<<< HEAD
         assert !(tokens.length == 10);
 
 
+=======
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
         String name = tokens[CSV_INDEX_NAME]; // 1
         double latitude = Double.parseDouble(tokens[CSV_INDEX_LATITUDE]); // 2
         double longitude = Double.parseDouble(tokens[CSV_INDEX_LONGITUDE]); // 3

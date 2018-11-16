@@ -11,7 +11,10 @@ import com.example.teamsplash.donationtracker.model.Item;
 
 import java.util.List;
 
+<<<<<<< HEAD
 @SuppressWarnings("unused but needed in order to run")
+=======
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 class ItemListAdapter extends BaseAdapter {
 
     private final Context mContext;

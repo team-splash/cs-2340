@@ -20,6 +20,10 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 public class RegisterActivity extends AppCompatActivity {
+<<<<<<< HEAD
+=======
+    private final int MIN_PASSWORD_LENGTH = 8;
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
     private EditText firstname;
     private EditText lastname;
     private EditText email;
@@ -52,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         goToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
@@ -78,13 +83,13 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = confirmPass.getText().toString();
         UserType userType = (UserType) accountTypeSpinner.getSelectedItem();
 
-        if (userFirstName.equals("")) {
+        if ("".equals(userFirstName)) {
             firstname.setError(getString(R.string.error_field_required));
             focusView = firstname;
             focusView.requestFocus();
             cancel = true;
         }
-        if (userEmail.equals("")) {
+        if ("".equals(userEmail)) {
             email.setError(getString(R.string.error_field_required));
             focusView2 = email;
             focusView2.requestFocus();
@@ -95,14 +100,18 @@ public class RegisterActivity extends AppCompatActivity {
             focusView2.requestFocus();
             cancel = true;
         }
-        if (userPassword.equals("")) {
+        if ("".equals(userPassword)) {
             pass.setError(getString(R.string.error_field_required));
             focusView3 = pass;
             focusView3.requestFocus();
             cancel = true;
         }
+<<<<<<< HEAD
         int MIN_PASSWORD_LENGTH = 8;
         if (confirmPassword.equals("")) {
+=======
+        if ("".equals(confirmPassword)) {
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
             confirmPass.setError(getString(R.string.error_field_required));
             focusView4 = confirmPass;
             focusView4.requestFocus();

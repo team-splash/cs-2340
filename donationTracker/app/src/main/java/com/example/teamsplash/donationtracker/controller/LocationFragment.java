@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,7 +27,7 @@ public class LocationFragment extends Fragment {
 
         final List<Location> locationList = Locations.getInstance().get();
 
-        LocationList listAdapter = new LocationList(inflater, locationList);
+        ListAdapter listAdapter = new LocationList(inflater, locationList);
         final ListView list = fragment.findViewById(R.id.location_list);
         list.setAdapter(listAdapter);
 
@@ -58,6 +59,7 @@ public class LocationFragment extends Fragment {
             this.locations = locations;
         }
 
+<<<<<<< HEAD
         @SuppressWarnings("unused")
         @NonNull
         @Override
@@ -66,6 +68,11 @@ public class LocationFragment extends Fragment {
                 //noinspection lint issue if view ever became null,unused
                 @SuppressWarnings("unused") View rowView = inflater.inflate(R.layout.location_item_fragment, parent, false);
             }
+=======
+        @NonNull
+        @Override
+        public View getView(int position, View view, @NonNull ViewGroup parent) {
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
             Location location = locations.get(position);
             View rowView = inflater.inflate(R.layout.location_item_fragment, parent, false);
             TextView name = rowView.findViewById(R.id.location_name);

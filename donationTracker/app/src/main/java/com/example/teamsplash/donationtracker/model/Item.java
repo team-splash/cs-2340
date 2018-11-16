@@ -18,8 +18,7 @@ public class Item implements Serializable {
         this.time = time;
         this.location = location;
         String s1 = name.substring(0, 1).toUpperCase();
-        name = s1 + name.substring(1);
-        this.name = name;
+        this.name = s1 + name.substring(1);
         this.desc = desc;
         this.value = value;
         this.itemtype = itemType;
@@ -27,6 +26,7 @@ public class Item implements Serializable {
 
     @Override
     public boolean equals(Object o) {
+<<<<<<< HEAD
         if (o == this) return true;
         if (o instanceof User) if (((Item) o).getTime().equals(this.time))
             if (((Item) o).getLocation().equals(this.location))
@@ -35,6 +35,9 @@ public class Item implements Serializable {
                         if (((Item) o).getValue() == this.value)
                             return ((Item) o).getItemType().equals(this.itemtype);
         return false;
+=======
+        return o == this || (o instanceof User) && (((Item) o).getTime().equals(this.time) && ((Item) o).getLocation().equals(this.location) && ((Item) o).getDesc().equals(this.name) && ((Item) o).getLongDesc().equals(this.desc) && (((Item) o).getValue() == this.value) && ((Item) o).getItemType().equals(this.itemtype));
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 
     }
 
@@ -42,11 +45,17 @@ public class Item implements Serializable {
     public String getTime() {
         return time;
     }
+<<<<<<< HEAD
 // --Commented out by Inspection START (11/15/18, 9:13 PM):
 //    private void setTime(String ts) {
 //        this.time = ts;
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:13 PM)
+=======
+    private void setTime(String ts) {
+        this.time = ts;
+    }
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 
     // Getter and setter for location
     public Location getLocation() {
@@ -123,14 +132,17 @@ public class Item implements Serializable {
         System.out.println("THIS IS THE LINE: " + line);
         String[] tokens = line.split(",");
         System.out.println(Arrays.toString(tokens));
+<<<<<<< HEAD
         { if( !(tokens.length == 15) ) throw new AssertionError( "Failure message" ); }
+=======
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
         String actualItemType = tokens[14].substring(0, tokens[14].length() -1); // getting ItemTYPE.
-        ItemType itemType = actualItemType.equals("Clothing") ? ItemType.CLO
-                : actualItemType.equals("Hat") ? ItemType.HAT
-                : actualItemType.equals("Kitchen") ? ItemType.KIT
-                : actualItemType.equals("Electronic") ? ItemType.ELE
-                : actualItemType.equals("Household") ? ItemType.HSH
-                : ItemType.OTH;
+        ItemType itemType = "Clothing".equals(actualItemType) ? ItemType.CLO
+                : ("Hat".equals(actualItemType) ? ItemType.HAT
+                : ("Kitchen".equals(actualItemType) ? ItemType.KIT
+                : ("Electronic".equals(actualItemType) ? ItemType.ELE
+                : ("Household".equals(actualItemType) ? ItemType.HSH
+                : ItemType.OTH))));
         String convertLocation = tokens[1] + "," + tokens[2] + "," + tokens[3] + ","
                 + tokens[4] + "," + tokens[5] + "," + tokens[6] + "," + tokens[7] + "," + tokens[8] + "," + tokens[9] + "," + tokens[10];
         Location convertedLoc = Location.parseEntry(convertLocation); // getting Location out of convoluted String data.

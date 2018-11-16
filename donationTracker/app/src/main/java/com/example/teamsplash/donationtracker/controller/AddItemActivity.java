@@ -48,6 +48,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         category.setAdapter(adapter);
     }
 
+    @Override
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.addItemBtn :
@@ -68,13 +69,13 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 View focusView;
                 View focusView2;
 
-                if (title.equals("")) {
+                if ("".equals(title)) {
                     name.setError(getString(R.string.error_field_required));
                     focusView = name;
                     focusView.requestFocus();
                     cancel = true;
                 }
-                if (value.getText().toString().equals("")) {
+                if ("".equals(value.getText().toString())) {
                     value.setError(getString(R.string.error_field_required));
                     focusView2 = value;
                     focusView2.requestFocus();
@@ -82,7 +83,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
                 if (!cancel) {
-                    if (!description.getText().toString().equals("")) {
+                    if (!"".equals(description.getText().toString())) {
                         Item item = new Item(time, loc, title, description.getText().toString(),
                                 Double.parseDouble(value.getText().toString()), itemtype);
                         Items donated = Items.getInstance();

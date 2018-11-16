@@ -40,6 +40,7 @@ public class ItemDetail extends AppCompatActivity {
 
         Button goBackBtn = findViewById(R.id.backBtn);
         goBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 finish();
             }

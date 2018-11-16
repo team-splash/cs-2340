@@ -109,7 +109,7 @@ public class InventoryActivity extends AppCompatActivity {
                         }
                     }
                 }
-                if (tempArrayList.size() == 0) {
+                if (tempArrayList.isEmpty()) {
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "No items match your search",
                             Toast.LENGTH_SHORT);
