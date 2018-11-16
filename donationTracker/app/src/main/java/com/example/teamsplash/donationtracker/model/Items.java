@@ -69,7 +69,8 @@ public class Items implements Serializable {
 // --Commented out by Inspection START (11/15/18, 9:13 PM):
 //    public boolean contains(Item item) {
 //        for (Item i : ItemData) {
-//            if (i.getLocation().equals(item.getLocation()) && i.getDesc().equals(item.getDesc())) {
+//            if (i.getLocation().equals(item.getLocation()) && i.getDesc().equals(item.getDesc()))
+// {
 //                return true;
 //            }
 //        }

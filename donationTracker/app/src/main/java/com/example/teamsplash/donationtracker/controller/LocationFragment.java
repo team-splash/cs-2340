@@ -49,7 +49,8 @@ public class LocationFragment extends Fragment {
                 Location itemClicked = locationList.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("LOCATION", itemClicked);
-                Intent listDetails = new Intent(LocationFragment.this.getActivity(), LocationDetail.class);
+                Intent listDetails = new Intent(LocationFragment.this.getActivity(),
+                        LocationDetail.class);
                 listDetails.putExtras(bundle);
                 startActivity(listDetails);
             }
@@ -82,10 +83,13 @@ public class LocationFragment extends Fragment {
         public View getView(int position, View view, @NonNull ViewGroup parent) {
             if(view == null){
                 //noinspection lint issue if view ever became null,unused
-                @SuppressWarnings("unused") View rowView = inflater.inflate(R.layout.location_item_fragment, parent, false);
+                @SuppressWarnings("unused")
+                View rowView = inflater.inflate(R.layout.location_item_fragment,
+                        parent, false);
             }
             Location location = locations.get(position);
-            View rowView = inflater.inflate(R.layout.location_item_fragment, parent, false);
+            View rowView = inflater.inflate(R.layout.location_item_fragment,
+                    parent, false);
             TextView name = rowView.findViewById(R.id.location_name);
             TextView address = rowView.findViewById(R.id.location_address);
             TextView cityState = rowView.findViewById(R.id.location_city_state);

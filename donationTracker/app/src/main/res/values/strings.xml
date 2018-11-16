@@ -30,10 +30,12 @@
     <string name="title_main_menu_activity">Donation Tracker App</string>
     <string name="title_activity_temp" tools:keep="@string/title_activity_temp">Sign in</string>
     <string name="title_register_account_activity">Register</string>
-    <string name="preferences_file_key" tools:keep="@string/preferences_file_key">com.example.teamsplash.donationTracker.preferences</string>
+    <string name="preferences_file_key" tools:keep="@string/preferences_file_key">
+        com.example.teamsplash.donationTracker.preferences</string>
 
     <!--New Item Form-->
-    <string name="error_negative_value" tools:keep="@string/error_negative_value">Price cannot be negative</string>
+    <string name="error_negative_value" tools:keep="@string/error_negative_value">
+        Price cannot be negative</string>
     <string name="title_add_item_activity">Add New Item</string>
     <string name="title_item_detail_activity">Item Details</string>
     <string name="category" tools:keep="@string/category">CATEGORY</string>

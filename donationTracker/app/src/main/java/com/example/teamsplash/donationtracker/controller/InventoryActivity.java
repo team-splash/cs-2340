@@ -42,7 +42,8 @@ public class InventoryActivity extends AppCompatActivity {
         locationsList.add("Search by name");
         locationsList.addAll(Locations.getInstance().getNames());
 
-        ArrayAdapter<? extends String> spinneradapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationsList);
+        ArrayAdapter<? extends String> spinneradapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, locationsList);
         spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpinner.setAdapter(spinneradapter);
         locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -53,12 +54,14 @@ public class InventoryActivity extends AppCompatActivity {
              * @param id the id of the inventory item
              */
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
+                                       int position, long id) {
                 if (position == 0) {
                     adapter = new ItemListAdapter(InventoryActivity.this, itemList);
                     list.setAdapter(adapter);
                 } else {
-                    final List<Item> locItemsList = Items.getInstance().getByLocation(Locations.getInstance().getPosition(position - 1));
+                    final List<Item> locItemsList = Items.getInstance().getByLocation(
+                            Locations.getInstance().getPosition(position - 1));
                     adapter = new ItemListAdapter(InventoryActivity.this, locItemsList);
                     list.setAdapter(adapter);
                 }
@@ -74,7 +77,8 @@ public class InventoryActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<Enum<ItemType>> spinneradapter2 = new ArrayAdapter<Enum<ItemType>>(this, android.R.layout.simple_spinner_item, ItemType.values());
+        ArrayAdapter<Enum<ItemType>> spinneradapter2 = new ArrayAdapter<Enum<ItemType>>(this,
+                android.R.layout.simple_spinner_item, ItemType.values());
         spinneradapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(spinneradapter2);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -85,12 +89,14 @@ public class InventoryActivity extends AppCompatActivity {
              * @param position where it's locted
              * @param id the id of the inventory item
              */
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
+                                       int position, long id) {
                 if (position == 0) {
                     adapter = new ItemListAdapter(InventoryActivity.this, itemList);
                     list.setAdapter(adapter);
                 } else {
-                    final List<Item> catItemsList = Items.getInstance().getByCategory((ItemType) categorySpinner.getSelectedItem());
+                    final List<Item> catItemsList = Items.getInstance().getByCategory(
+                            (ItemType) categorySpinner.getSelectedItem());
                     adapter = new ItemListAdapter(InventoryActivity.this, catItemsList);
                     list.setAdapter(adapter);
                 }
@@ -135,7 +141,8 @@ public class InventoryActivity extends AppCompatActivity {
                         }
                     }
                     if (textlength <= c.getLocation().toString().length()) {
-                        if (c.getLocation().toString().toLowerCase().contains(cs.toString().toLowerCase())) {
+                        String csToLowerCase = cs.toString().toLowerCase();
+                        if (c.getLocation().toString().toLowerCase().contains(csToLowerCase)) {
                             tempArrayList.add(c);
                         }
                     }
@@ -168,7 +175,8 @@ public class InventoryActivity extends AppCompatActivity {
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("ITEM", itemClicked);
-                Intent listDetails = new Intent(InventoryActivity.this, ItemDetail.class);
+                Intent listDetails = new Intent(InventoryActivity.this,
+                        ItemDetail.class);
                 listDetails.putExtras(bundle);
                 startActivity(listDetails);
             }

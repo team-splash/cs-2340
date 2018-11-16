@@ -42,7 +42,8 @@ import static android.Manifest.permission.READ_CONTACTS;
  * A login screen that offers login via email/password.
  */
 @SuppressWarnings("unused")
-public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<Cursor> {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -51,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
     /**
      * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
+     *
      */
     @SuppressWarnings("dummy credentials")
     private static final String[] DUMMY_CREDENTIALS = new String[]{
@@ -106,7 +107,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
              */
             @Override
             public void onClick(View v) {
-                Intent toRegister = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent toRegister = new Intent(LoginActivity.this,
+                        RegisterActivity.class);
                 startActivity(toRegister);
             }
         });
@@ -231,12 +233,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return (email.contains("@"));
     }
 
     private boolean isPasswordValid(String email, String password) {
-        //TODO: Replace this with your own logic
         Users accounts = Users.getInstance();
         return accounts.contains(email, password);
     }
@@ -355,7 +355,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
             Users accounts = Users.getInstance();
             try {
                 // Simulate network access.

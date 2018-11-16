@@ -112,7 +112,8 @@ public class Locations implements Serializable {
         //locations.clear(); //potentially don't use this as it may lead to overwriting.
         while (reader.hasNext()) {
             String nextLine = reader.nextLine();
-            Log.i("THIS IS THE LINE, LINE 91, READ FROM CSV: " + nextLine, "THE MEDIUM IS THE MESSAGE.");
+            Log.i("THIS IS THE LINE, LINE 91, READ FROM CSV: " + nextLine,
+                    "THE MEDIUM IS THE MESSAGE.");
             Location newLoc = Location.parseEntry(nextLine);
             locations.add(newLoc); // add to ArrayList.
         }

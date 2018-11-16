@@ -37,7 +37,8 @@ public class ItemFragment extends Fragment {
 
         View fragment = inflater.inflate(R.layout.items_fragment, container, false);
 
-        Location location = (Location) Objects.requireNonNull(getArguments()).getSerializable("LOCATION");
+        Location location = (Location) Objects.requireNonNull(
+                getArguments()).getSerializable("LOCATION");
 
         final List<Item> itemsList = Items.getInstance().getByLocation(location);
 
@@ -101,7 +102,8 @@ public class ItemFragment extends Fragment {
             TextView value = rowView.findViewById(R.id.value);
 
             name.setText(item.getDesc());
-            value.setText(String.format("$%s", String.format(Locale.US, "%.2f", item.getValue())));
+            value.setText(String.format("$%s", String.format(Locale.US, "%.2f",
+                    item.getValue())));
             return rowView;
         }
     }

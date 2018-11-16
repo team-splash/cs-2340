@@ -28,18 +28,24 @@ import static com.example.teamsplash.donationtracker.model.UserType.USER;
 public class matthewTest extends TestCase{
     @Test
     public void userTypeCheck() {
-        User matthew = new User("Matthew", "Marting", "mmarting1@outlook.com", "password123!", USER);
+        User matthew = new User("Matthew", "Marting",
+                "mmarting1@outlook.com", "password123!", USER);
         assertEquals(matthew.getUserType().toString(), USER.toString());
     }
     @Test
     public void locationTypeCheck() {
-        Location warehouse = new Location("warehouse", WA, -10.00, 100.00, "Address", "city", "state", "100000", "1234567890");
+        Location warehouse = new Location("warehouse", WA, -10.00,
+                100.00, "Address", "city", "state",
+                "100000", "1234567890");
         assertEquals(warehouse.getLocationType().toString(), WA.toString());
     }
     @Test
     public void itemTypeCheck() {
-        Location warehouse = new Location("warehouse", WA, -10.00, 100.00, "Address", "city", "state", "100000", "1234567890");
-        Item sweater = new Item("15:30", warehouse, "sweater", "knitted", 30.00, CLO);
+        Location warehouse = new Location("warehouse", WA, -10.00, 100.00,
+                "Address", "city", "state",
+                "100000", "1234567890");
+        Item sweater = new Item("15:30", warehouse, "sweater",
+                "knitted", 30.00, CLO);
         assertEquals(sweater.getItemType().toString(), CLO.toString());
     }
 }

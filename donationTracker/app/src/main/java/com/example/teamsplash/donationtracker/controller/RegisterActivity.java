@@ -42,7 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
         Button submitBtn = findViewById(R.id.registerBtn);
         TextView goToLogin = findViewById(R.id.goToLogin);
 
-        ArrayAdapter<Enum> adapter = new ArrayAdapter<Enum>(this,android.R.layout.simple_spinner_item, UserType.values());
+        ArrayAdapter<Enum> adapter = new ArrayAdapter<Enum>(
+                this,android.R.layout.simple_spinner_item, UserType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         accountTypeSpinner.setAdapter(adapter);
 
@@ -128,15 +129,18 @@ public class RegisterActivity extends AppCompatActivity {
                 focusView = email;
                 focusView.requestFocus();
             } else {
-                users.add(newUser); // we add to HashMap, and also want to add to the file at the same time.
+                users.add(newUser); // we add to HashMap, and also want to add to the file
+                // at the same time.
                 try {
-                    PrintWriter newWriter = new PrintWriter(new File(this.getFilesDir(), "userFile"));
+                    PrintWriter newWriter = new PrintWriter(new File(this.getFilesDir(),
+                            "userFile"));
                     users.saveAsText(newWriter);
                 } catch (FileNotFoundException e) {
                     System.out.println("Failed to add new name to text file. LINE 158:");
                 }
                 users.setCurrentUser(newUser);
-                Intent goToMain = new Intent(RegisterActivity.this, LoginActivity.class);
+                Intent goToMain = new Intent(RegisterActivity.this,
+                        LoginActivity.class);
                 startActivity(goToMain);
             }
         }

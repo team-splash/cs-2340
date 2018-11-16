@@ -34,7 +34,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if(getActivity()!=null) {
-            SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager()
+            SupportMapFragment mapFragment =
+                    (SupportMapFragment) getActivity().getSupportFragmentManager()
                     .findFragmentById(R.id.map);
             if (mapFragment != null) {
                 mapFragment.getMapAsync(this);
@@ -49,7 +50,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //
 //        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 //        if(getActivity()!=null) {
-//            SupportMapFragment mapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager()
+//            SupportMapFragment mapFragment =
+// (SupportMapFragment) getActivity().getSupportFragmentManager()
 //                    .findFragmentById(R.id.map);
 //            if (mapFragment != null) {
 //                mapFragment.getMapAsync(this);
