@@ -3,6 +3,7 @@ package com.example.teamsplash.donationtracker.controller;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -80,11 +81,16 @@ public class RegisterActivity extends AppCompatActivity {
         confirmPass.setError(null);
 
         Users users = Users.getInstance();
-        String userFirstName = firstname.getText().toString();
-        String userLastName = lastname.getText().toString();
-        String userEmail = email.getText().toString();
-        String userPassword = pass.getText().toString();
-        String confirmPassword = confirmPass.getText().toString();
+        Editable a = firstname.getText();
+        String userFirstName = a.toString();
+        Editable b = lastname.getText();
+        String userLastName = b.toString();
+        Editable c = email.getText();
+        String userEmail = c.toString();
+        Editable d = pass.getText();
+        String userPassword = d.toString();
+        Editable f = confirmPass.getText();
+        String confirmPassword = f.toString();
         UserType userType = (UserType) accountTypeSpinner.getSelectedItem();
 
         if ("".equals(userFirstName)) {

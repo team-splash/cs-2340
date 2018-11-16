@@ -18,6 +18,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -188,8 +189,10 @@ public class LoginActivity extends AppCompatActivity implements
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        Editable x = mEmailView.getText();
+        String email = x.toString();
+        Editable y = mPasswordView.getText();
+        String password = y.toString();
 
         boolean cancel = false;
         View focusView = null;
