@@ -21,11 +21,11 @@ public class matthewTest extends TestCase {
         User b = new User("B", "A", "a@example.com", "bbbbbbbb", UserType.USER);
         Users.getInstance().add(a);
         assertTrue(Users.getInstance().contains("a@example.com", "aaaaaaaa"));
-        assertTrue(Users.getInstance().get("a@example.com", "aaaaaaaa").equals(a));
+        assertEquals(a, Users.getInstance().get("a@example.com", "aaaaaaaa"));
         assertFalse(Users.getInstance().contains("a@xample.com", "bbbbbbbb"));
         Users.getInstance().add(b);
         assertTrue(Users.getInstance().contains("a@example.com", "aaaaaaaa"));
-        assertTrue(Users.getInstance().get("a@example.com", "aaaaaaaa").equals(a));
+        assertEquals(a, Users.getInstance().get("a@example.com", "aaaaaaaa"));
         assertFalse(Users.getInstance().contains("a@xample.com", "bbbbbbbb"));
     }
 }
