@@ -2,30 +2,22 @@ package com.example.teamsplash.donationtracker.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ArrayAdapter;
 
 import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.ItemType;
 import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Locations;
-import com.example.teamsplash.donationtracker.model.UserType;
-import com.example.teamsplash.donationtracker.model.Users;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,15 +36,12 @@ public class InventoryActivity extends AppCompatActivity {
         EditText searchBar = findViewById(R.id.searchFilter);
 
         final List<Item> itemList = Items.getInstance().get();
-        final List<String> categoryList = new ArrayList<>();
 
         List<String> locationsList = new ArrayList<>();
         locationsList.add("Search by name");
-        for (String s : Locations.getInstance().getNames()) {
-            locationsList.add(s);
-        }
+        locationsList.addAll(Locations.getInstance().getNames());
 
-        ArrayAdapter<Enum> spinneradapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, locationsList);
+        ArrayAdapter<? extends String> spinneradapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationsList);
         spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpinner.setAdapter(spinneradapter);
         locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -75,7 +64,7 @@ public class InventoryActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<Enum> spinneradapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ItemType.values());
+        ArrayAdapter<Enum<ItemType>> spinneradapter2 = new ArrayAdapter<Enum<ItemType>>(this, android.R.layout.simple_spinner_item, ItemType.values());
         spinneradapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(spinneradapter2);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -85,8 +74,7 @@ public class InventoryActivity extends AppCompatActivity {
                     adapter = new ItemListAdapter(InventoryActivity.this, itemList);
                     list.setAdapter(adapter);
                 } else {
-                    final Spinner categorySpin = categorySpinner;
-                    final List<Item> catItemsList = Items.getInstance().getByCategory((ItemType) categorySpin.getSelectedItem());
+                    final List<Item> catItemsList = Items.getInstance().getByCategory((ItemType) categorySpinner.getSelectedItem());
                     adapter = new ItemListAdapter(InventoryActivity.this, catItemsList);
                     list.setAdapter(adapter);
                 }
@@ -121,7 +109,7 @@ public class InventoryActivity extends AppCompatActivity {
                         }
                     }
                 }
-                if (tempArrayList.size() == 0) {
+                if (tempArrayList.isEmpty()) {
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "No items match your search",
                             Toast.LENGTH_SHORT);

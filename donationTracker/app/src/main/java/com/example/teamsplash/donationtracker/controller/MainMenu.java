@@ -1,5 +1,6 @@
 package com.example.teamsplash.donationtracker.controller;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,9 +23,11 @@ import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
 import com.example.teamsplash.donationtracker.model.LocationType;
 import com.example.teamsplash.donationtracker.R;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
-public class MainMenu extends AppCompatActivity {
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -36,6 +38,9 @@ public class MainMenu extends AppCompatActivity {
                     return true;
                 case R.id.navigation_locations:
                     switchToLocations();
+                    return true;
+                case R.id.navigation_map:
+                    switchToMaps();
                     return true;
             }
             return false;
@@ -53,8 +58,9 @@ public class MainMenu extends AppCompatActivity {
     }
 
     private void inflateInitialFragment() {
-        if(findViewById(R.id.fragment_container) == null)
+        if(findViewById(R.id.fragment_container) == null) {
             return;
+        }
         // Set initial fragment layout to the home view
         getSupportFragmentManager()
                 .beginTransaction()
@@ -68,9 +74,16 @@ public class MainMenu extends AppCompatActivity {
     }
 
     private void switchToLocations() {
-        Locations locations = Locations.getInstance();
+
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.fragment_container, new LocationFragment()).commit();
+    }
+    private void switchToMaps() {
+//        FragmentManager manager = getSupportFragmentManager();
+//
+//        manager.beginTransaction().replace(R.id.fragment_container, new MapFragment()).commit();
+        Intent toRegister = new Intent(MainMenu.this, MapsActivity.class);
+        startActivity(toRegister);
     }
 
     /**
@@ -82,8 +95,9 @@ public class MainMenu extends AppCompatActivity {
     private void readLocations() {
         Locations locations = Locations.getInstance();
         // initial adding from locations.csv.
-        if (locations.get().size() != 0)
+        if (!locations.get().isEmpty()) {
             return;
+        }
         try {
             InputStream stream = getResources().openRawResource(R.raw.locations);
             Scanner reader = new Scanner(new InputStreamReader(stream, StandardCharsets.UTF_8)); // read from the initial Locations file.
@@ -141,6 +155,11 @@ public class MainMenu extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
 
     }
 }

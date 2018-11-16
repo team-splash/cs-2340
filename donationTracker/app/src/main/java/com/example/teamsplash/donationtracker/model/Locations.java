@@ -2,8 +2,10 @@ package com.example.teamsplash.donationtracker.model;
 
 import android.util.Log;
 
-import java.io.BufferedReader;
+<<<<<<< HEAD
+=======
 import java.io.IOException;
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,14 +15,17 @@ import java.util.Scanner;
 public class Locations implements Serializable {
     private static final Locations _instance = new Locations();
     public static Locations getInstance() { return _instance; }
-    private List<Location> locations;
+    private final List<Location> locations;
     private Locations() {
         locations = new ArrayList<>();
     }
 
-    public boolean add(Location place) {
+<<<<<<< HEAD
+    @SuppressWarnings("SameReturnValue")
+=======
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
+    public void add(Location place) {
         locations.add(place);
-        return true;
     }
     public List<Location> get() {
         return locations;
@@ -30,7 +35,7 @@ public class Locations implements Serializable {
         return locations.get(position);
     }
 
-    public List<String> getNames() {
+    public Iterable<String> getNames() {
         List<String> tempLoc = new ArrayList<>();
         for (Location l : locations) {
             tempLoc.add(l.getName());
@@ -38,23 +43,39 @@ public class Locations implements Serializable {
         return tempLoc;
     }
 
+<<<<<<< HEAD
+//    @SuppressWarnings("contains method check")
+//    public boolean contains(String name, String address) {
+//        for (Location place : locations) {
+//            if (place.getName().equals(name) && place.getAddress().equals(address))
+//                return true;
+//        }
+//        return false;
+//    }
+//    @SuppressWarnings("contains method check")
+//    public boolean contains(Location location) {
+//        return locations.contains(location);
+//    }
+=======
     public boolean contains(String name, String address) {
         for (Location place : locations) {
-            if (place.getName().equals(name) && place.getAddress().equals(address))
+            if (place.getName().equals(name) && place.getAddress().equals(address)) {
                 return true;
+            }
         }
         return false;
     }
     public boolean contains(Location location) {
         return locations.contains(location);
     }
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (Location location : locations) {
-            str += location + "\n, ";
+            str.append(location).append("\n, ");
         }
-        return str;
+        return str.toString();
     }
 
     /**
@@ -83,10 +104,10 @@ public class Locations implements Serializable {
      * But I don't want to mess things up so I'm not changing the name of the method,
      * and in some ways I'm not really amending its functionality, but I'm making it more in line
      * with what has been written for persistence in User(s) and soon Item(s).
-     * @param reader - Scanner object that reads our File.
-     * @throws IOException
+
+     //* @throws IOException -if it doesn't exist
      */
-    public void readFromCsv(Scanner reader) throws IOException {
+    public void readFromCsv(Scanner reader){
         //locations.clear(); //potentially don't use this as it may lead to overwriting.
         while (reader.hasNext()) {
             String nextLine = reader.nextLine();
