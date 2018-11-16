@@ -24,6 +24,9 @@ public class Users {
         UserData.put(new User("Chris", "Obando", "chrisjobando@gmail.com", "250797", UserType.ADMINISTRATOR), "250797");
     }
 
+    /**
+     * @param user the user we want to add to our keyset for login
+     */
     public void add(User user) {
         for (User u : UserData.keySet()) {
             if (user.getEmail().equals(u.getEmail())) {
@@ -33,6 +36,11 @@ public class Users {
         UserData.put(user, user.getPassword());
     }
 
+    /**
+     * @param email the email of the user we are retrieving
+     * @param password the password of the user we are retrieving
+     * @return the user that we are looking for
+     */
     public User get(String email, String password) {
         for (User u : UserData.keySet()) {
             Log.i(u.getEmail() + ":" + u.getPassword(), "EACH TIME: LINE 41, USERS.JAVA");
@@ -58,6 +66,11 @@ public class Users {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:10 PM)
 
+    /**
+     * @param email the email we are searching for
+     * @param password the password we are serching for
+     * @return true or false if the email password combo matches
+     */
     public boolean contains(String email, String password) {
         return (get(email, password) != null);
     }
@@ -69,6 +82,9 @@ public class Users {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:10 PM)
 
+    /**
+     * @return the user that is loging in
+     */
     // Getter and setter for current user
     public User getCurrentUser() {
         return currUser;
@@ -77,6 +93,9 @@ public class Users {
         currUser = user;
     }
 
+    /**
+     * @return string of the information of the user
+     */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

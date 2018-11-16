@@ -20,6 +20,9 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.home_screen_activity);
     }
 
+    /**
+     * @param v the view item
+     */
     public void onClick(View v) {
         if(v.getId() == R.id.loginBtn){
             Users users = Users.getInstance();

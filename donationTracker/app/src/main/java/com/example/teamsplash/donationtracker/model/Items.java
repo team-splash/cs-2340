@@ -11,6 +11,10 @@ import java.util.Scanner;
 @SuppressWarnings("SameReturnValue")
 public class Items implements Serializable {
     private static final Items _instance = new Items();
+
+    /**
+     * @return instance of that item
+     */
     public static Items getInstance() {
         return _instance;
     }
@@ -20,14 +24,24 @@ public class Items implements Serializable {
         ItemData = new ArrayList<>();
     }
 
+    /**
+     * @param item what we want to add to items from list
+     */
     public void add(Item item) {
         ItemData.add(item);
     }
 
+    /**
+     * @return the item from the list of items that we want to grab
+     */
     public List<Item> get() {
         return ItemData;
     }
 
+    /**
+     * @param loc location of the item in the list
+     * @return a list of items by location
+     */
     public List<Item> getByLocation(Location loc) {
         List<Item> locItems = new ArrayList<>();
         for (Item item: ItemData) {
@@ -38,6 +52,10 @@ public class Items implements Serializable {
         return locItems;
     }
 
+    /**
+     * @param it item type of each item in list
+     * @return list by category
+     */
     public List<Item> getByCategory(ItemType it) {
         List<Item> catItems = new ArrayList<>();
         for (Item item: ItemData) {
@@ -60,6 +78,9 @@ public class Items implements Serializable {
 // --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
 
+    /**
+     * @return string of each item in the lsit
+     */
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

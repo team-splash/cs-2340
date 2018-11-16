@@ -65,6 +65,9 @@ public class LocationDetail extends AppCompatActivity {
         }
 
         addBtn.setOnClickListener(new View.OnClickListener() {
+            /**
+             * @param v view object
+             */
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LocationDetail.this, AddItemActivity.class);

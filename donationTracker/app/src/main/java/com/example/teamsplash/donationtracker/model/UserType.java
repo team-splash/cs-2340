@@ -18,6 +18,9 @@ public enum UserType {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:10 PM)
 
+    /**
+     * @return string version of the usertypes to be displayed, enums
+     */
     @Override
     public String toString() {
         return representation;

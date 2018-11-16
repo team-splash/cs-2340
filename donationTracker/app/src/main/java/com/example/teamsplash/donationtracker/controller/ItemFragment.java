@@ -25,6 +25,12 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public class ItemFragment extends Fragment {
 
+    /**
+     * @param inflater the laout inflated
+     * @param container where the fragment is contained
+     * @param savedInstanceState  what is used for the button
+     * @return View this is the view we get after
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,6 +47,12 @@ public class ItemFragment extends Fragment {
         setListViewHeightBasedOnItems(list);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * @param parent the parent adapterview
+             * @param view the view we have
+             * @param position where it's located
+             * @param id the id of the item
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -69,6 +81,12 @@ public class ItemFragment extends Fragment {
             this.inventory = inventory;
         }
 
+        /**
+         * @param position where the location is plaed
+         * @param view the view frame that shows it all
+         * @param parent the view group before
+         * @return View the view we want
+         */
         @SuppressWarnings("unused")
         @NonNull
         @Override

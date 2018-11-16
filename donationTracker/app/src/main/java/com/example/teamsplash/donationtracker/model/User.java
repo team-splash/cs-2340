@@ -11,6 +11,13 @@ public class User {
     private final String password;
     private final UserType usertype;
 
+    /**
+     * @param firstname name of the user
+     * @param lastname last name of the user
+     * @param email email of the user
+     * @param password password of the user
+     * @param usertype type of user that the user is
+     */
     public User(String firstname, String lastname, String email, String password, UserType usertype) {
         String s1 = firstname.substring(0, 1).toUpperCase();
         firstname = s1 + firstname.substring(1);
@@ -25,6 +32,10 @@ public class User {
         this.usertype = usertype;
     }
 
+    /**
+     * @param o an object that is being compared
+     * @return boolean that gives true if items compared are equal
+     */
     @Override
     public boolean equals(Object o) {
         return o == this || o instanceof User && (((User) o).getFirstName().equals(this.firstname) && ((User) o).getLastName().equals(this.lastname) && ((User) o).getEmail().equals(this.email) && ((User) o).getPassword().equals(this.password) && ((User) o).getUserType().equals(this.usertype));
@@ -53,8 +64,14 @@ public class User {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
+    /**
+     * @return string of the name put together in first and last
+     */
     public String getName() { return firstname + " " + lastname; }
 
+    /**
+     * @return the email in string form
+     */
     // Getter and Setter for email
     public String getEmail() {
         return email;
@@ -65,6 +82,9 @@ public class User {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
+    /**
+     * @return the password in string form
+     */
     // Getter and Setter for password
     public String getPassword() {
         return password;
@@ -75,6 +95,9 @@ public class User {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
+    /**
+     * @return usertype, so what type of user of the user we are seeking
+     */
     // Getter and Setter for User Type
     public UserType getUserType() {
         return usertype;
@@ -122,6 +145,10 @@ public class User {
         System.out.println("This works, line 123, parseEntry: USER.JAVA");
         return user;
     }
+
+    /**
+     * @return string version of the email and password together
+     */
     @Override
     public String toString() {
         return (email + ": " + password);

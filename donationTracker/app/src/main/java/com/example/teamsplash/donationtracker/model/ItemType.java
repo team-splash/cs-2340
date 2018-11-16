@@ -21,6 +21,9 @@ public enum ItemType {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:14 PM)
 
+    /**
+     * @return string of each type into string form
+     */
     public String toString() {
         return type;
     }

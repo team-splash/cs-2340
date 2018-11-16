@@ -19,6 +19,12 @@ import com.example.teamsplash.donationtracker.model.Locations;
 import com.example.teamsplash.donationtracker.R;
 
 public class LocationFragment extends Fragment {
+    /**
+     * @param inflater inflates makes layout come to life
+     * @param container holsd  fragments
+     * @param savedInstanceState used for buttons, holds the state
+     * @return view which is the view of our after our button push
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,6 +37,12 @@ public class LocationFragment extends Fragment {
         list.setAdapter(listAdapter);
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            /**
+             * @param parent adapterview object before click
+             * @param view the view we have
+             * @param position where on the lsit
+             * @param id id of the item
+             */
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -58,6 +70,12 @@ public class LocationFragment extends Fragment {
             this.locations = locations;
         }
 
+        /**
+         * @param position where on the list
+         * @param view view object, view of that page
+         * @param parent a viewgroup object
+         * @return view after button
+         */
         @SuppressWarnings("unused")
         @NonNull
         @Override

@@ -18,6 +18,17 @@ public class Location implements Serializable {
     private final String zip;
     private final String phoneNumber;
 
+    /**
+     * @param name name of the location of donation center
+     * @param locationType type of donation center
+     * @param longitude longitude of donation center
+     * @param latitude latitude of donation center
+     * @param address address of donation center
+     * @param city city donation center is located in
+     * @param state state donation location is in
+     * @param zip zip code of donation center
+     * @param phoneNumber phone number of donation center
+     */
     public Location(String name, LocationType locationType, double longitude, double latitude,
                     String address, String city, String state, String zip, String phoneNumber) {
         this.name = name;
@@ -31,36 +42,67 @@ public class Location implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * @param o the object we want to make comparisons on
+     * @return if they are equal, true if they are, false if not
+     */
     @Override
     public boolean equals(Object o) {
         return o == this || o instanceof Location && (((Location) o).getName().equals(this.name) && ((Location) o).getLocationType().equals(this.locationType) && (((Location) o).getLongitude() == this.longitude)) && ((Location) o).getLatitude() == (this.latitude) && ((Location) o).getAddress().equals(this.address) && ((Location) o).getCity().equals(this.city) && ((Location) o).getState().equals(this.state) && ((Location) o).getZip().equals(this.zip) && ((Location) o).getPhoneNumber().equals(this.phoneNumber);
 
     }
 
+    /**
+     * @return name of location we are getting
+     */
     public String getName() {return name;}
     // --Commented out by Inspection (11/15/18, 9:00 PM):public void setName(String call) {name = call;}
 
+    /**
+     * @return location type of location we are getting
+     */
     public LocationType getLocationType() {return locationType;}
     // --Commented out by Inspection (11/15/18, 9:00 PM):public void setLocationType(LocationType type) {locationType = type;}
 
+    /**
+     * @return longitude of of location we are getting
+     */
     public double getLongitude() {return longitude;}
     // --Commented out by Inspection (11/15/18, 9:00 PM):public void setLongitude(double longy) {longitude = longy;}
 
+    /**
+     * @return latitude of of location we are getting
+     */
     public double getLatitude() {return latitude;}
     // --Commented out by Inspection (11/15/18, 9:00 PM):public void setLatitude(double laty) {latitude = laty;}
 
+    /**
+     * @return address of of location we are getting
+     */
     public String getAddress() {return address;}
     // --Commented out by Inspection (11/15/18, 9:00 PM):public void setAddress(String place) {address = place;}
 
+    /**
+     * @return phone number of location we are getting
+     */
     public String getPhoneNumber() {return phoneNumber;}
     // --Commented out by Inspection (11/15/18, 9:00 PM):public void setPhoneNumber(String num) {phoneNumber = num;}
 
+    /**
+     * @return city of location we are getting
+     */
     public String getCity() {return city;}
     // --Commented out by Inspection (11/15/18, 9:00 PM):public void setCity(String c) {city = c;}
 
+    /**
+     * @return state of location we are getting
+     */
     public String getState() {return state;}
     // --Commented out by Inspection (11/15/18, 9:00 PM):public void setState(String s) {state = s;}
 
+    /**
+     * @return zip of location we are getting
+     */
     public String getZip() {return zip;}
     // --Commented out by Inspection (11/15/18, 9:00 PM):public void setZip(String z) {zip = z;}
 
@@ -122,11 +164,17 @@ public class Location implements Serializable {
         address, city, state, zip, phone);
     }
 
+    /**
+     * @return string of name, address, long, lat, and phone number attributes of location
+     */
     @Override
     public String toString() {
         return (name + ", " + address + " : " + longitude + "," + latitude + " : " + phoneNumber);
     }
 
+    /**
+     * @return all of the attributes of the location into one string
+     */
     public String getFullRep() {
         return "x" + "," + name + "," + latitude + "," + longitude + "," + address + "," + city + "," + state + "," + zip + "," + locationType + "," + phoneNumber; // added the "x" so that all numberings for Location were consistent.
     }

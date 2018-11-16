@@ -156,6 +156,9 @@ public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
 
     }
 
+    /**
+     * @param googleMap a google map that will be displayed after this call
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
 

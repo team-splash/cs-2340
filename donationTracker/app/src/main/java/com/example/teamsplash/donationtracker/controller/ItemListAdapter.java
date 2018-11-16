@@ -17,28 +17,49 @@ class ItemListAdapter extends BaseAdapter {
     private final Context mContext;
     private final List<Item> mItemList;
 
+    /**
+     * @param mContext a context item
+     * @param mItemList list of items
+     */
     public ItemListAdapter(Context mContext, List<Item> mItemList) {
         this.mContext = mContext;
         this.mItemList = mItemList;
     }
 
 
+    /**
+     * @return the count of items in list
+     */
     @Override
     public int getCount() {
         return mItemList.size();
     }
 
+    /**
+     * @param position the area where it's at
+     * @return object whatever poisition of the item
+     */
     @Override
     public Object getItem(int position) {
         return mItemList.get(position);
     }
 
+    /**
+     * @param position location in list
+     * @return long number of return
+     */
     @Override
     public long getItemId(int position) {
         return position;
     }
 
 
+    /**
+     * @param position where in list
+     * @param convertView view item of item
+     * @param parent a viewgroup item
+     * @return view the view we want
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null){

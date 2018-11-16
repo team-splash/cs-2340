@@ -14,6 +14,12 @@ import com.example.teamsplash.donationtracker.model.Users;
 import com.example.teamsplash.donationtracker.R;
 
 public class MainFragment extends Fragment {
+    /**
+     * @param inflater converts xml into view objects
+     * @param container holds the fragments
+     * @param savedInstanceState used in clicks of buttons
+     * @return view, the view after the xml file change to view after button click
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -14,6 +14,14 @@ public class Item implements Serializable {
     private final double value;
     private final ItemType itemtype;
 
+    /**
+     * @param time time item was added
+     * @param location location of where the item is from
+     * @param name name of the item
+     * @param desc description of the item
+     * @param value how much item is worth
+     * @param itemType type of item like clothing, furniture, etc...
+     */
     public Item(String time, Location location, String name, String desc, double value, ItemType itemType) {
         this.time = time;
         this.location = location;
@@ -25,19 +33,34 @@ public class Item implements Serializable {
         this.itemtype = itemType;
     }
 
+
+    /**
+     * @param o object to be compared
+     * @return boolean of true or false if the items are alike
+     */
     @Override
     public boolean equals(Object o) {
+        if (getClass() != o.getClass())
+            return false;
+        o = new Item(time, location, name, desc, value, itemtype);
         if (o == this) return true;
-        if (o instanceof User) if (((Item) o).getTime().equals(this.time))
-            if (((Item) o).getLocation().equals(this.location))
-                if (((Item) o).getDesc().equals(this.name))
-                    if (((Item) o).getLongDesc().equals(this.desc))
-                        if (((Item) o).getValue() == this.value)
+        if (((Item) o).getTime().equals(this.time))
+            if (((Item) o).getLocation().equals(this.location)) {
+                if (((Item) o).getDesc().equals(this.name)) {
+                    if (((Item) o).getLongDesc().equals(this.desc)) {
+                        if (((Item) o).getValue() == this.value) {
                             return ((Item) o).getItemType().equals(this.itemtype);
+                        }
+                    }
+                }
+            }
         return false;
 
     }
 
+    /**
+     * @return string of what the time of item was requested
+     */
     // Getter and Setter for time stamp
     public String getTime() {
         return time;
@@ -48,6 +71,9 @@ public class Item implements Serializable {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
+    /**
+     * @return Location of where item is from when people ask
+     */
     // Getter and setter for location
     public Location getLocation() {
         return location;
@@ -60,6 +86,9 @@ public class Item implements Serializable {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
+    /**
+     * @return description of item being requested for
+     */
     // Getter and Setter for description
     public String getDesc() {
         return name;
@@ -70,6 +99,9 @@ public class Item implements Serializable {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
+    /**
+     * @return long description of item description be requested
+     */
     // Getter and Setter for long description
     public String getLongDesc() {
         return desc;
@@ -80,6 +112,9 @@ public class Item implements Serializable {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
+    /**
+     * @return gets value/cost of item
+     */
     // Getter and Setter for value
     public double getValue() {
         return value;
@@ -90,6 +125,9 @@ public class Item implements Serializable {
 //    }
 // --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
+    /**
+     * @return gets the item's type
+     */
     // Getter and Setter for item type
     public ItemType getItemType() {
         return itemtype;
@@ -137,6 +175,9 @@ public class Item implements Serializable {
         return new Item(tokens[0], convertedLoc, tokens[11], tokens[12], Double.parseDouble(tokens[13]), itemType);
     }
 
+    /**
+     * @return string form of each attribute of item
+     */
     @Override
     public String toString() {
         return ("Time: " + time + " , Location: " + location + " , Name: " + name +

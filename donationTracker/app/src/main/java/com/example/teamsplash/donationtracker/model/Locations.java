@@ -10,24 +10,43 @@ import java.util.Scanner;
 
 public class Locations implements Serializable {
     private static final Locations _instance = new Locations();
+
+    /**
+     * @return locations returns all the different locations when we ask for
+     * the instances of them
+     */
     public static Locations getInstance() { return _instance; }
     private final List<Location> locations;
     private Locations() {
         locations = new ArrayList<>();
     }
 
+    /**
+     * @param place adds the place we want to the location
+     */
     @SuppressWarnings("SameReturnValue")
     public void add(Location place) {
         locations.add(place);
     }
+
+    /**
+     * @return list of locations that we want
+     */
     public List<Location> get() {
         return locations;
     }
 
+    /**
+     * @param position of item in list of location we want
+     * @return the location that's in that place of the list
+     */
     public Location getPosition(int position) {
         return locations.get(position);
     }
 
+    /**
+     * @return list of the names of all of the lcoations we are getting
+     */
     public List<String> getNames() {
         List<String> tempLoc = new ArrayList<>();
         for (Location l : locations) {
@@ -49,6 +68,9 @@ public class Locations implements Serializable {
 //        return locations.contains(location);
 //    }
 
+    /**
+     * @return string form of the location we want
+     */
     public String toString() {
         StringBuilder str = new StringBuilder();
         for (Location location : locations) {

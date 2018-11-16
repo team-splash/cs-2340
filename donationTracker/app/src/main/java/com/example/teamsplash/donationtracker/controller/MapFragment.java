@@ -15,11 +15,20 @@ import com.example.teamsplash.donationtracker.R;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
+    /**
+     * basically map fragment so it can work along the fragments on the bottom of the screen
+     */
     public MapFragment() {
         // Required empty public constructor
     }
 
 
+    /**
+     * @param inflater converts xml to view
+     * @param container holds the fragmenet
+     * @param savedInstanceState used for button clicks to hold it together
+     * @return view that will be displayed after button click for the view comes up
+     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,6 +57,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 //        }
 //    }
 
+    /**
+     * @param googleMap google map that will come up after this action is called
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Log.d("map", "key");

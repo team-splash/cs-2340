@@ -23,11 +23,18 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 
+/**
+ *
+ */
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Location loc;
     private Spinner category;
 
+    /**
+     * adds an item when you press the button
+     * @param savedInstanceState collection of key value pairs
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +55,10 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         category.setAdapter(adapter);
     }
 
+    /**
+     * on click action
+     * @param v a view
+     */
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.addItemBtn :
