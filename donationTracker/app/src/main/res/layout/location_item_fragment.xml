@@ -2,8 +2,10 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:stretchColumns="*">
     <TableRow
+        tools:ignore="UselessParent"
         android:layout_margin="@dimen/text_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,8 +16,13 @@
             <ImageView
                 android:layout_width="@dimen/icon"
                 android:layout_height="@dimen/icon"
-                android:layout_marginRight="@dimen/text_margin"
-                android:src="@drawable/ic_location_on_gray_36dp"/>
+                android:layout_marginEnd="@dimen/text_margin"
+                android:src="@drawable/ic_location_on_gray_36dp"
+<<<<<<< HEAD
+                android:contentDescription="@string/locations" />
+=======
+                android:contentDescription="Item information" />
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,7 +43,7 @@
                 <TextView
                     android:id="@+id/location_city_state"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/text_list_body"/>
             </LinearLayout>

@@ -12,9 +12,11 @@ public enum UserType {
         this.representation = representation;
     }
 
-    public String getRepresentation() {
-        return representation;
-    }
+// --Commented out by Inspection START (11/15/18, 9:10 PM):
+//    public String getRepresentation() {
+//        return representation;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:10 PM)
 
     @Override
     public String toString() {

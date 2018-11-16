@@ -2,7 +2,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controller.InventoryActivity">
@@ -10,20 +9,21 @@
     <Spinner
         android:id="@+id/locationSpinner"
         android:layout_width="match_parent"
-        android:layout_height="40dp"></Spinner>
+        android:layout_height="40dp" />
 
     <Spinner
         android:id="@+id/categorySpinner"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/locationSpinner"></Spinner>
+        android:layout_below="@+id/locationSpinner" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/searchFilter"
         android:hint="@string/search"
-        android:layout_below="@+id/categorySpinner"/>
+        android:layout_below="@+id/categorySpinner"
+        android:inputType="" />
 
     <ListView
         android:layout_width="match_parent"

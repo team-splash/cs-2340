@@ -8,20 +8,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+@SuppressWarnings("SameReturnValue")
 public class Items implements Serializable {
     private static final Items _instance = new Items();
     public static Items getInstance() {
         return _instance;
     }
-    private ArrayList<Item> ItemData;
+<<<<<<< HEAD
+    private final ArrayList<Item> ItemData;
+=======
+    private List<Item> ItemData;
+>>>>>>> 9917c0a0e2d67b75b2a5c29e7d21950a7063086b
 
     private Items() {
         ItemData = new ArrayList<>();
     }
 
-    public boolean add(Item item) {
+    public void add(Item item) {
         ItemData.add(item);
-        return true;
     }
 
     public List<Item> get() {
@@ -48,23 +52,25 @@ public class Items implements Serializable {
         return catItems;
     }
 
-    public boolean contains(Item item) {
-        for (Item i : ItemData) {
-            if (i.getLocation().equals(item.getLocation()) && i.getDesc().equals(item.getDesc())) {
-                return true;
-            }
-        }
-        return false;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    public boolean contains(Item item) {
+//        for (Item i : ItemData) {
+//            if (i.getLocation().equals(item.getLocation()) && i.getDesc().equals(item.getDesc())) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (Item i : ItemData) {
-            str += i.toString() + "\n, ";
+            str.append(i.toString()).append("\n, ");
         }
-        return str;
+        return str.toString();
     }
 
     /**
