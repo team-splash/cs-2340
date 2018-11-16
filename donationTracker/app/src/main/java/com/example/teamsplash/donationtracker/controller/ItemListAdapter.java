@@ -21,6 +21,7 @@ class ItemListAdapter extends BaseAdapter {
      * @param mContext a context item
      * @param mItemList list of items
      */
+    @SuppressWarnings("AssignmentOrReturnOfFieldWithMutableType")
     public ItemListAdapter(Context mContext, List<Item> mItemList) {
         this.mContext = mContext;
         this.mItemList = mItemList;

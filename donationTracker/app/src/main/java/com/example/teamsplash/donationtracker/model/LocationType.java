@@ -1,5 +1,8 @@
 package com.example.teamsplash.donationtracker.model;
 
+/**
+ * enums for locations types. There are specific types, so we make enums
+ */
 @SuppressWarnings("unused")
 public enum LocationType {
     DR ("Drop Off"),

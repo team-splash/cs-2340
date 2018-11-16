@@ -5,11 +5,15 @@ import android.util.Log;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * item object, items has all attributes of item
+ */
 @SuppressWarnings("SameReturnValue")
-public class Items implements Serializable {
+public final class Items implements Serializable {
     private static final Items _instance = new Items();
 
     /**
@@ -18,7 +22,7 @@ public class Items implements Serializable {
     public static Items getInstance() {
         return _instance;
     }
-    private final ArrayList<Item> ItemData;
+    private final List<Item> ItemData;
 
     private Items() {
         ItemData = new ArrayList<>();
@@ -35,7 +39,7 @@ public class Items implements Serializable {
      * @return the item from the list of items that we want to grab
      */
     public List<Item> get() {
-        return ItemData;
+        return Collections.unmodifiableList(ItemData);
     }
 
     /**
@@ -45,7 +49,8 @@ public class Items implements Serializable {
     public List<Item> getByLocation(Location loc) {
         List<Item> locItems = new ArrayList<>();
         for (Item item: ItemData) {
-            if (item.getLocation().equals(loc)) {
+            Location ofItem = item.getLocation();
+            if (ofItem.equals(loc)) {
                 locItems.add(item);
             }
         }

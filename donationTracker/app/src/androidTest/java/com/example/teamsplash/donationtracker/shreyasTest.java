@@ -15,8 +15,15 @@ import junit.framework.TestCase;
 import static com.example.teamsplash.donationtracker.model.ItemType.CLO;
 import static com.example.teamsplash.donationtracker.model.LocationType.DR;
 
+/**
+ * test for Shreyas Casturi, checking certain Location methods.
+ *
+ */
 @RunWith(AndroidJUnit4.class)
 public class shreyasTest extends TestCase {
+    /**
+     * equals method, instantiates two Locations and Items and checks for equality.
+     */
     @Test
     public void equalsMethod() {
         Location a = new Location("location", DR, 0.00, 0.00, "0", "0", "0", "00000", "0000000000");
@@ -26,6 +33,11 @@ public class shreyasTest extends TestCase {
         boolean reals = realItem.equals(compareItem);
         assertNotEquals(reals, false);
     }
+
+    /**
+     * getting Time() tester. Instantiates Location and items, and then tries to compare
+     * time on the items.
+     */
     @Test
     public void gettingTime(){
         Location a = new Location("location", DR, 0.00, 0.00, "0", "0", "0", "00000", "0000000000");
@@ -35,6 +47,11 @@ public class shreyasTest extends TestCase {
         String compareTime = compareItem.getTime();
         assertEquals(realTime,compareTime);
     }
+
+    /**
+     * The parsing tester. Will instantiate an item and check if there is a toString() invocation
+     * that works.
+     */
     @Test
     public void parsing(){
         Location a = new Location("location", DR, 0.00, 0.00, "0", "0", "0", "00000", "0000000000");

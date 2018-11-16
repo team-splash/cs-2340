@@ -18,6 +18,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 
 
+@SuppressWarnings("ALL")
 @RunWith(AndroidJUnit4.class)
 public class chrisTest extends TestCase {
     @Test

@@ -1,5 +1,8 @@
 package com.example.teamsplash.donationtracker.model;
 
+/**
+ * the enum for the usesr type. Several chosen types for user
+ */
 public enum UserType {
     USER("User"),
     LOCATION_EMPLOYEE("Location Employee"),

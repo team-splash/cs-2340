@@ -22,7 +22,10 @@ import com.example.teamsplash.donationtracker.model.Locations;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("SpellCheckingInspection")
+/**
+ * this is the way to add items into inventory
+ */
+@SuppressWarnings("ALL")
 public class InventoryActivity extends AppCompatActivity {
 
     private ItemListAdapter adapter;
@@ -147,7 +150,7 @@ public class InventoryActivity extends AppCompatActivity {
                         }
                     }
                 }
-                if (tempArrayList.size() == 0) {
+                if (tempArrayList.isEmpty()) {
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "No items match your search",
                             Toast.LENGTH_SHORT);

@@ -60,7 +60,8 @@
             android:layout_height="match_parent"
             android:hint="@string/short_description"
             android:inputType="textShortMessage"
-            android:maxLines="2" />
+            android:maxLines="2"
+                android:importantForAutofill="no" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -74,7 +75,8 @@
             android:hint="@string/item_value"
             android:inputType="numberDecimal"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+                android:importantForAutofill="no" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -87,7 +89,8 @@
             android:layout_height="80sp"
             android:hint="@string/long_description"
             android:inputType="textMultiLine"
-            android:maxLines="4" />
+            android:maxLines="4"
+                android:importantForAutofill="no" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
     </ScrollView>

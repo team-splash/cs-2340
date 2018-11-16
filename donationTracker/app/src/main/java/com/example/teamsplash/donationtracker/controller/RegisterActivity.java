@@ -19,7 +19,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+/**
+ * this allows for the submitting of info for registration
+ */
 @SuppressWarnings("SpellCheckingInspection")
+
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText firstname;
     private EditText lastname;
@@ -54,12 +59,14 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
         goToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
         });
     }
 
+    @SuppressWarnings({"FeatureEnvy", "OverlyComplexMethod", "OverlyLongMethod"})
     private void submit() {
         boolean cancel = false;
         View focusView;
@@ -80,13 +87,13 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = confirmPass.getText().toString();
         UserType userType = (UserType) accountTypeSpinner.getSelectedItem();
 
-        if (userFirstName.equals("")) {
+        if ("".equals(userFirstName)) {
             firstname.setError(getString(R.string.error_field_required));
             focusView = firstname;
             focusView.requestFocus();
             cancel = true;
         }
-        if (userEmail.equals("")) {
+        if ("".equals(userEmail)) {
             email.setError(getString(R.string.error_field_required));
             focusView2 = email;
             focusView2.requestFocus();
@@ -97,14 +104,14 @@ public class RegisterActivity extends AppCompatActivity {
             focusView2.requestFocus();
             cancel = true;
         }
-        if (userPassword.equals("")) {
+        if ("".equals(userPassword)) {
             pass.setError(getString(R.string.error_field_required));
             focusView3 = pass;
             focusView3.requestFocus();
             cancel = true;
         }
         int MIN_PASSWORD_LENGTH = 8;
-        if (confirmPassword.equals("")) {
+        if ("".equals(confirmPassword)) {
             confirmPass.setError(getString(R.string.error_field_required));
             focusView4 = confirmPass;
             focusView4.requestFocus();

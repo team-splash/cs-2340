@@ -24,7 +24,8 @@
         android:id="@+id/searchFilter"
         android:hint="@string/search"
         android:layout_below="@+id/categorySpinner"
-        android:inputType="" />
+        android:inputType=""
+        android:importantForAutofill="no" />
 
     <ListView
         android:layout_width="match_parent"

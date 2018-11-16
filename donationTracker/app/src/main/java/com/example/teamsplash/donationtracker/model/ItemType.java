@@ -1,5 +1,8 @@
 package com.example.teamsplash.donationtracker.model;
 
+/**
+ * enum for item types. Tell what category the item is
+ */
 public enum ItemType {
     NOT ("Select a category"),
     CLO ("Clothing"),

@@ -12,6 +12,10 @@ import com.example.teamsplash.donationtracker.model.Location;
 
 import java.util.Locale;
 
+/**
+ * descriptions and attributes about item objects
+ */
+@SuppressWarnings("ALL")
 public class ItemDetail extends AppCompatActivity {
 
     @Override
@@ -40,6 +44,7 @@ public class ItemDetail extends AppCompatActivity {
 
         Button goBackBtn = findViewById(R.id.backBtn);
         goBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 finish();
             }

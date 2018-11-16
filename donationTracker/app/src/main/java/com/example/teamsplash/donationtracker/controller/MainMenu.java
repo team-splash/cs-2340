@@ -26,7 +26,11 @@ import com.example.teamsplash.donationtracker.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
-@SuppressWarnings("SpellCheckingInspection")
+/**
+ * This is the mainmenu object that does the activities
+ * needed for the main menu
+ */
+@SuppressWarnings({"SpellCheckingInspection", "MagicNumber", "FeatureEnvy"})
 public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
     private final
     BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -60,8 +64,9 @@ public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
     }
 
     private void inflateInitialFragment() {
-        if(findViewById(R.id.fragment_container) == null)
+        if(findViewById(R.id.fragment_container) == null) {
             return;
+        }
         // Set initial fragment layout to the home view
         getSupportFragmentManager()
                 .beginTransaction()
@@ -97,8 +102,9 @@ public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
     private void readLocations() {
         Locations locations = Locations.getInstance();
         // initial adding from locations.csv.
-        if (locations.get().size() != 0)
+        if (!locations.get().isEmpty()) {
             return;
+        }
         try {
             InputStream stream = getResources().openRawResource(R.raw.locations);
             Scanner reader = new Scanner(new InputStreamReader(stream, StandardCharsets.UTF_8));
@@ -107,10 +113,11 @@ public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
             reader.nextLine();
             locations.readFromCsv(reader); // adding the locations to the Locations ArrayList.
             reader.close(); // close reader.
-            System.out.println(("----------------------------" +
-                    " DIVISION IN LINE 93 - 95, MAIN MENU.JAVA"));
-            System.out.println(("Size of arrayList after initial adds from old loc file: "
-                    + locations.get().size() + ", MAIN MENU JAVA")); // test to see if things work.
+            //System.out.println(("----------------------------" +
+            //        " DIVISION IN LINE 93 - 95, MAIN MENU.JAVA"));
+            //System.out.println(("Size of arrayList after initial adds from old loc file: "
+             //       + locations.get().size() + ", MAIN MENU JAVA"));
+            // test to see if things work.
             File locationFile = new File(this.getFilesDir(), "locationsFull");
             PrintWriter newWriter = new PrintWriter(locationFile);
             locations.saveAsText(newWriter); // we instantiate/reaccess a new file called

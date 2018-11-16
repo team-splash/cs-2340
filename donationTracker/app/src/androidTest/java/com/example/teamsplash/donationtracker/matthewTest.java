@@ -24,6 +24,7 @@ import static com.example.teamsplash.donationtracker.model.LocationType.WA;
 import static com.example.teamsplash.donationtracker.model.UserType.USER;
 
 
+@SuppressWarnings("ALL")
 @RunWith(AndroidJUnit4.class)
 public class matthewTest extends TestCase{
     @Test

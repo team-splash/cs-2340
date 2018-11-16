@@ -15,7 +15,10 @@ import com.example.teamsplash.donationtracker.model.Users;
 
 import java.util.Objects;
 
-@SuppressWarnings("SpellCheckingInspection")
+/**
+ * Location detail keeps track of the locations in a listAdapter.
+ */
+@SuppressWarnings("ALL")
 public class LocationDetail extends AppCompatActivity {
 
     private Location location;

@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * item made into a fragment so that the bottom part of the app can be accessed
+ */
 @SuppressWarnings("unused")
 public class ItemFragment extends Fragment {
 
@@ -42,7 +45,7 @@ public class ItemFragment extends Fragment {
 
         final List<Item> itemsList = Items.getInstance().getByLocation(location);
 
-        ItemsList listAdapter = new ItemsList(inflater, itemsList);
+        ListAdapter listAdapter = new ItemsList(inflater, itemsList);
         final ListView list = fragment.findViewById(R.id.inventory);
         list.setAdapter(listAdapter);
         setListViewHeightBasedOnItems(list);

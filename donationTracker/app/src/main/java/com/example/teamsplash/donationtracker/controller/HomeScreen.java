@@ -12,6 +12,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * Home screen holds all the stuff to access different parts of the app
+ */
+@SuppressWarnings("ALL")
 public class HomeScreen extends AppCompatActivity implements View.OnClickListener {
 
     @Override
@@ -23,6 +27,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
     /**
      * @param v the view item
      */
+    @Override
     public void onClick(View v) {
         if(v.getId() == R.id.loginBtn){
             Users users = Users.getInstance();
@@ -38,8 +43,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 //readFile.close(); // closes buffers.
                 br.close(); // closes buffers.
             } catch (FileNotFoundException e){
-                System.out.println("Failed to add users to HashMap from text."
-                        + "LINE 136: RegisterActivity.");
+                //System.out.println("Failed to add users to HashMap from text."
+                        //+ "LINE 136: RegisterActivity.");
             } // exception handling but this shouldn't happen.
             Intent intent = new Intent(HomeScreen.this, LoginActivity.class);
             startActivity(intent);
@@ -47,7 +52,7 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         }else if(v.getId() == R.id.registerBtn){
 
             Users users = Users.getInstance();
-            System.out.println(this.getFilesDir());
+            //System.out.println(this.getFilesDir());
             File userFile = new File(this.getFilesDir(), "userFile"); // either it exists,
             // or it doesn't. Either way it is created/a buffer on the file is created.
             try {
@@ -58,8 +63,8 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
                 //readFile.close(); // closes buffers.
                 br.close(); // closes buffers.
             } catch (FileNotFoundException e){
-                System.out.println("Failed to add users to HashMap from text. "
-                        + "LINE 136: RegisterActivity.");
+                //System.out.println("Failed to add users to HashMap from text. "
+                 //       + "LINE 136: RegisterActivity.");
             } // exception handling but this shouldn't happen.
             Intent intent = new Intent(HomeScreen.this, RegisterActivity.class);
             startActivity(intent);

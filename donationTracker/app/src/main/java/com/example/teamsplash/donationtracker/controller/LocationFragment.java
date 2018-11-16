@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +19,9 @@ import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
 import com.example.teamsplash.donationtracker.R;
 
+/**
+ * makes a fragment type for locations. So it can display correctly in the way the app is formated
+ */
 public class LocationFragment extends Fragment {
     /**
      * @param inflater inflates makes layout come to life
@@ -32,7 +36,7 @@ public class LocationFragment extends Fragment {
 
         final List<Location> locationList = Locations.getInstance().get();
 
-        LocationList listAdapter = new LocationList(inflater, locationList);
+        ListAdapter listAdapter = new LocationList(inflater, locationList);
         final ListView list = fragment.findViewById(R.id.location_list);
         list.setAdapter(listAdapter);
 
@@ -59,7 +63,7 @@ public class LocationFragment extends Fragment {
         return fragment;
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "FeatureEnvy"})
     private class LocationList extends ArrayAdapter<Location> {
 
         private final LayoutInflater inflater;

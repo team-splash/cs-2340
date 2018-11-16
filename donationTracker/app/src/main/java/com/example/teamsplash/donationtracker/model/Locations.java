@@ -5,10 +5,14 @@ import android.util.Log;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class Locations implements Serializable {
+/**
+ * takes care of location objects in a list
+ */
+public final class Locations implements Serializable {
     private static final Locations _instance = new Locations();
 
     /**
@@ -33,7 +37,7 @@ public class Locations implements Serializable {
      * @return list of locations that we want
      */
     public List<Location> get() {
-        return locations;
+        return Collections.unmodifiableList(locations);
     }
 
     /**
@@ -105,6 +109,7 @@ public class Locations implements Serializable {
      * But I don't want to mess things up so I'm not changing the name of the method,
      * and in some ways I'm not really amending its functionality, but I'm making it more in line
      * with what has been written for persistence in User(s) and soon Item(s).
+     * @param reader a readline reader
 
      //* @throws IOException -if it doesn't exist
      */

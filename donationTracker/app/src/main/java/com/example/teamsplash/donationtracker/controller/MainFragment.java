@@ -13,6 +13,10 @@ import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.Users;
 import com.example.teamsplash.donationtracker.R;
 
+/**
+ * makes the main menu into a fragment object for formatting
+ */
+@SuppressWarnings("FeatureEnvy")
 public class MainFragment extends Fragment {
     /**
      * @param inflater converts xml into view objects

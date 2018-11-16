@@ -15,6 +15,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * mapsactivity are all the activities needed to pull up the maps
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
@@ -38,6 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * installed Google Play services and returned to the app.
      * @param googleMap the google map we want to display after we call the cation
      */
+    @SuppressWarnings("FeatureEnvy")
     @Override
     public void onMapReady(GoogleMap googleMap) {
         final List<Location> locationList = Locations.getInstance().get();
