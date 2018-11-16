@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class RegisterActivity extends AppCompatActivity {
     private EditText firstname;
     private EditText lastname;

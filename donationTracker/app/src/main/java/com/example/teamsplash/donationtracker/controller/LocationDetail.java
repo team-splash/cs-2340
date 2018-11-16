@@ -15,6 +15,7 @@ import com.example.teamsplash.donationtracker.model.Users;
 
 import java.util.Objects;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class LocationDetail extends AppCompatActivity {
 
     private Location location;

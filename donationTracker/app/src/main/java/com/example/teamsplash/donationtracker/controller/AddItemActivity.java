@@ -26,6 +26,7 @@ import java.util.Date;
 /**
  *
  */
+@SuppressWarnings("SpellCheckingInspection")
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Location loc;
@@ -50,7 +51,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         currLoc.setText(loc.getName());
 
         category = findViewById(R.id.itemType);
-        ArrayAdapter<Enum> adapter = new ArrayAdapter<Enum>(this,android.R.layout.simple_spinner_item, ItemType.values());
+        ArrayAdapter<Enum> adapter = new ArrayAdapter<Enum>(this,
+                android.R.layout.simple_spinner_item, ItemType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(adapter);
     }
@@ -97,18 +99,25 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                         Item item = new Item(time, loc, title, description.getText().toString(),
                                 Double.parseDouble(value.getText().toString()), itemtype);
                         Items donated = Items.getInstance();
-                        donated.add(item); // add an item to the ArrayList of items, found in Items.getInstance().
+                        donated.add(item);
+                        // add an item to the ArrayList of items, found in Items.getInstance().
 
                         // saving after an add.
-                        File itemFile = new File(this.getFilesDir(), "newItemFile"); // I reaccess this newItemFile which contains all my locations.
+                        //noinspection SpellCheckingInspection
+                        File itemFile = new File(this.getFilesDir(), "newItemFile");
+                        // I reaccess this newItemFile which contains all my locations.
                         try {
                             PrintWriter newWriter = new PrintWriter(itemFile);
-                            donated.saveAsText(newWriter); // add the one new item we've added to the ArrayList to the text file now. O(n), but it works.
+                            donated.saveAsText(newWriter);
+                            // add the one new item we've added to the ArrayList to the
+                            // text file now.
+                            // O(n), but it works.
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }
 
-                        Intent intent = new Intent(AddItemActivity.this, LocationDetail.class);
+                        Intent intent = new Intent(AddItemActivity.this,
+                                LocationDetail.class);
                         intent.putExtra("LOCATION", loc);
                         startActivity(intent);
                     } else {
@@ -118,7 +127,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                         donated.add(item);
 
 
-                        File itemFile = new File(this.getFilesDir(), "itemFile"); // the same thing happens here, because you're adding a new item anyways.
+                        File itemFile = new File(this.getFilesDir(), "itemFile");
+                        // the same thing happens here, because you're adding a new item anyways.
                         try {
                             PrintWriter newWriter = new PrintWriter(itemFile);
                             donated.saveAsText(newWriter);
@@ -126,7 +136,8 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
                             e.printStackTrace();
                         }
 
-                        Intent intent = new Intent(AddItemActivity.this, LocationDetail.class);
+                        Intent intent = new Intent(AddItemActivity.this,
+                                LocationDetail.class);
                         intent.putExtra("LOCATION", loc);
                         startActivity(intent);
                     }

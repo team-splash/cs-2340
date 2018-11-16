@@ -22,6 +22,7 @@ import com.example.teamsplash.donationtracker.model.Locations;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class InventoryActivity extends AppCompatActivity {
 
     private ItemListAdapter adapter;

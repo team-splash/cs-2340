@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
-@SuppressWarnings("SameReturnValue")
+@SuppressWarnings("ALL")
 public class Users {
 
     private static final Users _instance = new Users();
@@ -107,8 +107,10 @@ public class Users {
 
     /**
      * How we write all the users to a text file, if i'm not mistaken.
-     * Read through the HashMap and add accordingly,
+     * Read through the User HashMap and add accordingly,
      * using the saveAsText command we defined in the USER class.
+     * The PrintWriter will write the contents of a User (a string) to the actual file.
+     * We save the data!
      * @param writer - A PrintWriter which is a buffer for an actual file.
      */
     public void saveAsText(PrintWriter writer) {
@@ -122,9 +124,9 @@ public class Users {
 
 
     /**
-     * How do we READ FROM A file? We have a BufferedReader
-     * and we clear out our HashMap. Then, we add back in again.
-     * @param reader - A bufferedReader on our file.
+     * How do we READ FROM A file? We have a Scanner that reads from the file.
+     * and we clear out our HashMap. Then, we add back in again. It's inefficient, but it works.
+     * @param reader - A Scanner on our file.
      */
     public void loadAsText(Scanner reader) {
         UserData.clear();

@@ -22,21 +22,24 @@ import static org.junit.Assert.assertThat;
 public class chrisTest extends TestCase {
     @Test
     public void LocationsTypeFromString(){
-        Location newLoc = new Location("loc", DR, 1.23, 1.23, "123", "123", "123", "12345", "1234567890");
+        Location newLoc = new Location("loc", DR, 1.23, 1.23,
+                "123", "123", "123", "12345", "1234567890");
         LocationType type = newLoc.getLocationType();
         LocationType x = LocationType.fromString(type.toString());
         assertNotNull(x);
     }
     @Test
     public void getTypeMethod() {
-        Location newLoc = new Location("loc", DR, 1.23, 1.23, "123", "123", "123", "12345", "1234567890");
+        Location newLoc = new Location("loc", DR, 1.23, 1.23,
+                "123", "123", "123", "12345", "1234567890");
         LocationType type = newLoc.getLocationType();
         String theType = type.getType();
         assertThat(theType, containsString("Drop Off"));
     }
     @Test
     public void getTypeToString() {
-        Location newLoc = new Location("loc", DR, 1.23, 1.23, "123", "123", "123", "12345", "1234567890");
+        Location newLoc = new Location("loc", DR, 1.23, 1.23,
+                "123", "123", "123", "12345", "1234567890");
         LocationType type = newLoc.getLocationType();
         String theType = type.toString();
         assertNotNull(theType);

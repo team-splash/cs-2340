@@ -17,6 +17,7 @@ import static com.example.teamsplash.donationtracker.model.UserType.USER;
 import static org.junit.Assert.assertNotEquals;
 
 
+@SuppressWarnings("ALL")
 @RunWith(AndroidJUnit4.class)
 public class sarahTest extends TestCase {
     @Test

@@ -27,15 +27,19 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
         if(v.getId() == R.id.loginBtn){
             Users users = Users.getInstance();
 
-            File userFile = new File(this.getFilesDir(), "userFile"); // either it exists, or it doesn't. Either way it is created/a buffer on the file is created.
+            File userFile = new File(this.getFilesDir(), "userFile");
+            // either it exists, or it doesn't. Either way it is created/a buffer
+            // on the file is created.
             try {
                 //FileReader readFile = new FileReader(userFile);
                 Scanner br = new Scanner(userFile);
-                users.loadAsText(br); // actually reads everything in the file into our userData HashMap.
+                users.loadAsText(br); // actually reads everything in the file into
+                // our userData HashMap.
                 //readFile.close(); // closes buffers.
                 br.close(); // closes buffers.
             } catch (FileNotFoundException e){
-                System.out.println("Failed to add users to HashMap from text. LINE 136: RegisterActivity.");
+                System.out.println("Failed to add users to HashMap from text."
+                        + "LINE 136: RegisterActivity.");
             } // exception handling but this shouldn't happen.
             Intent intent = new Intent(HomeScreen.this, LoginActivity.class);
             startActivity(intent);
@@ -44,15 +48,18 @@ public class HomeScreen extends AppCompatActivity implements View.OnClickListene
 
             Users users = Users.getInstance();
             System.out.println(this.getFilesDir());
-            File userFile = new File(this.getFilesDir(), "userFile"); // either it exists, or it doesn't. Either way it is created/a buffer on the file is created.
+            File userFile = new File(this.getFilesDir(), "userFile"); // either it exists,
+            // or it doesn't. Either way it is created/a buffer on the file is created.
             try {
                 //FileReader readFile = new FileReader(userFile);
                 Scanner br = new Scanner(userFile);
-                users.loadAsText(br); // actually reads everything in the file into our userData HashMap.
+                users.loadAsText(br); // actually reads everything in the file into our
+                // userData HashMap.
                 //readFile.close(); // closes buffers.
                 br.close(); // closes buffers.
             } catch (FileNotFoundException e){
-                System.out.println("Failed to add users to HashMap from text. LINE 136: RegisterActivity.");
+                System.out.println("Failed to add users to HashMap from text. "
+                        + "LINE 136: RegisterActivity.");
             } // exception handling but this shouldn't happen.
             Intent intent = new Intent(HomeScreen.this, RegisterActivity.class);
             startActivity(intent);

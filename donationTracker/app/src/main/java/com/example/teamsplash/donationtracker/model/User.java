@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.io.PrintWriter;
 
+@SuppressWarnings("ALL")
 public class User {
     private final String firstname;
     private final String lastname;

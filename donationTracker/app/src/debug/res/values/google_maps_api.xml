@@ -4,7 +4,9 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=58:63:F8:58:0D:ED:97:38:67:5D:13:6A:01:18:2D:96:37:6A:29:55%3Bcom.example.teamsplash.donationtracker.controller
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=
+    CLIENT_SIDE_ANDROID&r=58:63:F8:58:0D:ED:97:38:67:5D:13:6A:01:18:2D:96:37:6A:29:55%3
+    Bcom.example.teamsplash.donationtracker.controller
 
     You can also add your credentials to an existing key, using these values:
 
@@ -20,5 +22,6 @@
     Once you have your key (it starts with "AIza"), replace the "google_maps_key"
     string in this file.
     -->
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCeYMFaRf4b_ddrOgVTKc-sLyeCY1hnFq0</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyCeYMFaRf4b_ddrOgVTKc-sLyeCY1hnFq0</string>
 </resources>

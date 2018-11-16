@@ -17,7 +17,7 @@ public class kacitest extends TestCase{
         Location w = new Location("kaci", DR, 0.00, 0.00, " 47 17th", "atlanta", "Georgia", "30363", "6780000000");
         Location x = new Location("kaci", DR, 0.00, 0.00, " 47 17th", "atlanta", "Georgia", "30363", "6780000000");
         boolean y = x.equals(w);
-        assertEquals(y, true);
+        assertTrue(y);
     }
     @Test
     public void getNames(){

@@ -26,6 +26,7 @@ import com.example.teamsplash.donationtracker.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
