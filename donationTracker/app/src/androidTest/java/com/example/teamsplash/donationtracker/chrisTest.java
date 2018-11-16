@@ -2,8 +2,6 @@ package com.example.teamsplash.donationtracker;
 
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.teamsplash.donationtracker.model.Location;
-import com.example.teamsplash.donationtracker.model.LocationType;
 import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.UserType;
 
@@ -11,10 +9,6 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static com.example.teamsplash.donationtracker.model.LocationType.DR;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
 
 
 @SuppressWarnings("ALL")
