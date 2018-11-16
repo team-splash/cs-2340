@@ -46,6 +46,7 @@ public class LocationFragment extends Fragment {
         return fragment;
     }
 
+    @SuppressWarnings("unused")
     private class LocationList extends ArrayAdapter<Location> {
 
         private final LayoutInflater inflater;
@@ -57,18 +58,23 @@ public class LocationFragment extends Fragment {
             this.locations = locations;
         }
 
+        @SuppressWarnings("unused")
         @NonNull
         @Override
         public View getView(int position, View view, @NonNull ViewGroup parent) {
+            if(view == null){
+                //noinspection lint issue if view ever became null,unused
+                @SuppressWarnings("unused") View rowView = inflater.inflate(R.layout.location_item_fragment, parent, false);
+            }
             Location location = locations.get(position);
-            View rowView = inflater.inflate(R.layout.location_item_fragment, null, true);
+            View rowView = inflater.inflate(R.layout.location_item_fragment, parent, false);
             TextView name = rowView.findViewById(R.id.location_name);
             TextView address = rowView.findViewById(R.id.location_address);
             TextView cityState = rowView.findViewById(R.id.location_city_state);
 
             name.setText(location.getName());
             address.setText(location.getAddress());
-            cityState.setText(location.getCity() + ", " + location.getState());
+            cityState.setText(String.format("%s, %s", location.getCity(), location.getState()));
             return rowView;
         }
     }

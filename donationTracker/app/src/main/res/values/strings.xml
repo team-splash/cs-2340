@@ -61,4 +61,6 @@
     <string name="view_inventory">View Inventory</string>
     <string name="search">Search</string>
     <string name="title_activity_maps">Map</string>
+    <string name="locations">location description</string>
+    <string name="logostuff">logo description</string>
 </resources>

@@ -25,10 +25,8 @@ import com.example.teamsplash.donationtracker.model.LocationType;
 import com.example.teamsplash.donationtracker.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 
 public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
-    private SupportMapFragment map;
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -75,7 +73,7 @@ public class MainMenu extends AppCompatActivity implements OnMapReadyCallback{
     }
 
     private void switchToLocations() {
-        Locations locations = Locations.getInstance();
+
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.fragment_container, new LocationFragment()).commit();
     }

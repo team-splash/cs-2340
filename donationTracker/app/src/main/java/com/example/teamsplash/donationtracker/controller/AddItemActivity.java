@@ -43,7 +43,7 @@ public class AddItemActivity extends AppCompatActivity implements View.OnClickLi
         currLoc.setText(loc.getName());
 
         category = findViewById(R.id.itemType);
-        ArrayAdapter<Enum> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ItemType.values());
+        ArrayAdapter<Enum> adapter = new ArrayAdapter<Enum>(this,android.R.layout.simple_spinner_item, ItemType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(adapter);
     }

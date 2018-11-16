@@ -41,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
         Button submitBtn = findViewById(R.id.registerBtn);
         TextView goToLogin = findViewById(R.id.goToLogin);
 
-        ArrayAdapter<Enum> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, UserType.values());
+        ArrayAdapter<Enum> adapter = new ArrayAdapter<Enum>(this,android.R.layout.simple_spinner_item, UserType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         accountTypeSpinner.setAdapter(adapter);
 

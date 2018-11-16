@@ -15,22 +15,26 @@ public enum ItemType {
         this.type = type;
     }
 
-    public String getType() {
-        return type;
-    }
+// --Commented out by Inspection START (11/15/18, 9:14 PM):
+//    public String getType() {
+//        return type;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:14 PM)
 
     public String toString() {
         return type;
     }
 
 
-    public static ItemType fromString(String text) {
-        for (ItemType itemType : ItemType.values()) {
-            if (itemType.type.equalsIgnoreCase(text)) {
-                return itemType;
-            }
-        }
-        return null;
-    }
+// --Commented out by Inspection START (11/15/18, 9:14 PM):
+//    public static ItemType fromString(String text) {
+//        for (ItemType itemType : ItemType.values()) {
+//            if (itemType.type.equalsIgnoreCase(text)) {
+//                return itemType;
+//            }
+//        }
+//        return null;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:14 PM)
 
 }

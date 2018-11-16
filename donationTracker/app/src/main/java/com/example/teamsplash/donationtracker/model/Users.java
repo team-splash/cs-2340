@@ -46,24 +46,28 @@ public class Users {
         return null;
     }
 
-    public boolean contains(User user) {
-
-        for (User u: UserData.keySet()) {
-            if (user.equals(u)) {
-                return true;
-            }
-        }
-        return false;
-    }
+// --Commented out by Inspection START (11/15/18, 9:10 PM):
+//    public boolean contains(User user) {
+//
+//        for (User u: UserData.keySet()) {
+//            if (user.equals(u)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:10 PM)
 
     public boolean contains(String email, String password) {
         return (get(email, password) != null);
     }
 
-    public boolean remove(User user) {
-        UserData.remove(user);
-        return true;
-    }
+// --Commented out by Inspection START (11/15/18, 9:10 PM):
+//    public boolean remove(User user) {
+//        UserData.remove(user);
+//        return true;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:10 PM)
 
     // Getter and setter for current user
     public User getCurrentUser() {

@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        app:srcCompat="@drawable/teamlogo"
+        app:srcCompat="@mipmap/teamlogo"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:layout_marginEnd="96dp"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/logostuff" />
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="250dp"

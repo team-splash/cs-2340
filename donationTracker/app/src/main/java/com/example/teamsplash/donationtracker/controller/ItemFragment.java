@@ -19,8 +19,10 @@ import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Location;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public class ItemFragment extends Fragment {
 
     @Override
@@ -67,16 +69,21 @@ public class ItemFragment extends Fragment {
             this.inventory = inventory;
         }
 
+        @SuppressWarnings("unused")
         @NonNull
         @Override
         public View getView(int position, View view, @NonNull ViewGroup parent) {
             Item item = inventory.get(position);
-            View rowView = inflater.inflate(R.layout.item_fragment, null, true);
+            if (view ==null){
+                //noinspection helps with possible cases of null views(was an issue with lint)
+                View rowView = inflater.inflate(R.layout.item_fragment, parent, false);
+            }
+            View rowView = inflater.inflate(R.layout.item_fragment, parent, false);
             TextView name = rowView.findViewById(R.id.name);
             TextView value = rowView.findViewById(R.id.value);
 
             name.setText(item.getDesc());
-            value.setText("$" + String.format("%.2f", item.getValue()));
+            value.setText(String.format("$%s", String.format(Locale.US, "%.2f", item.getValue())));
             return rowView;
         }
     }

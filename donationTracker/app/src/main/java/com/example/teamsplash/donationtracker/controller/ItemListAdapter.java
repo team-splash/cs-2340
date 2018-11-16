@@ -11,6 +11,7 @@ import com.example.teamsplash.donationtracker.model.Item;
 
 import java.util.List;
 
+@SuppressWarnings("unused but needed in order to run")
 class ItemListAdapter extends BaseAdapter {
 
     private final Context mContext;
@@ -20,6 +21,7 @@ class ItemListAdapter extends BaseAdapter {
         this.mContext = mContext;
         this.mItemList = mItemList;
     }
+
 
     @Override
     public int getCount() {
@@ -36,15 +38,20 @@ class ItemListAdapter extends BaseAdapter {
         return position;
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null){
+            //noinspection this helps with null cases of convert view
+            View v = View.inflate(mContext, R.layout.item_fragment, null);
+        }
         View v = View.inflate(mContext, R.layout.item_fragment, null);
         TextView name = v.findViewById(R.id.name);
         TextView price = v.findViewById(R.id.value);
 
         //Set text for TextView
         name.setText(mItemList.get(position).getDesc());
-        price.setText("$" + String.valueOf(mItemList.get(position).getValue()));
+        price.setText(String.format("$%s", String.valueOf(mItemList.get(position).getValue())));
 
         return v;
     }

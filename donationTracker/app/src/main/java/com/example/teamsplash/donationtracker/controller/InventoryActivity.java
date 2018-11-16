@@ -7,11 +7,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ArrayAdapter;
 
 import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Item;
@@ -36,13 +36,12 @@ public class InventoryActivity extends AppCompatActivity {
         EditText searchBar = findViewById(R.id.searchFilter);
 
         final List<Item> itemList = Items.getInstance().get();
-        final List<String> categoryList = new ArrayList<>();
 
         List<String> locationsList = new ArrayList<>();
         locationsList.add("Search by name");
         locationsList.addAll(Locations.getInstance().getNames());
 
-        ArrayAdapter<Enum> spinneradapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, locationsList);
+        ArrayAdapter<? extends String> spinneradapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locationsList);
         spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpinner.setAdapter(spinneradapter);
         locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -65,7 +64,7 @@ public class InventoryActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<Enum> spinneradapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ItemType.values());
+        ArrayAdapter<Enum<ItemType>> spinneradapter2 = new ArrayAdapter<Enum<ItemType>>(this, android.R.layout.simple_spinner_item, ItemType.values());
         spinneradapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(spinneradapter2);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

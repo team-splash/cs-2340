@@ -10,6 +10,8 @@ import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.Location;
 
+import java.util.Locale;
+
 public class ItemDetail extends AppCompatActivity {
 
     @Override
@@ -20,7 +22,7 @@ public class ItemDetail extends AppCompatActivity {
 
         String name = item.getDesc();
         String description = item.getLongDesc();
-        String value = "$" + String.format( "%.2f", item.getValue());
+        String value = "$" + String.format(Locale.US, "%.2f", item.getValue());
         Location location = item.getLocation();
         String time = item.getTime();
 

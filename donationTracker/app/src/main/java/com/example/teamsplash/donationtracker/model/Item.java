@@ -7,12 +7,12 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 public class Item implements Serializable {
-    private String time;
-    private Location location;
-    private String name;
-    private String desc;
-    private double value;
-    private ItemType itemtype;
+    private final String time;
+    private final Location location;
+    private final String name;
+    private final String desc;
+    private final double value;
+    private final ItemType itemtype;
 
     public Item(String time, Location location, String name, String desc, double value, ItemType itemType) {
         this.time = time;
@@ -27,7 +27,14 @@ public class Item implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        return o == this || o instanceof User && (((Item) o).getTime().equals(this.time) && ((Item) o).getLocation().equals(this.location) && ((Item) o).getDesc().equals(this.name) && ((Item) o).getLongDesc().equals(this.desc) && ((Item) o).getValue() == this.value && ((Item) o).getItemType().equals(this.itemtype));
+        if (o == this) return true;
+        if (o instanceof User) if (((Item) o).getTime().equals(this.time))
+            if (((Item) o).getLocation().equals(this.location))
+                if (((Item) o).getDesc().equals(this.name))
+                    if (((Item) o).getLongDesc().equals(this.desc))
+                        if (((Item) o).getValue() == this.value)
+                            return ((Item) o).getItemType().equals(this.itemtype);
+        return false;
 
     }
 
@@ -35,9 +42,11 @@ public class Item implements Serializable {
     public String getTime() {
         return time;
     }
-    private void setTime(String ts) {
-        this.time = ts;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    private void setTime(String ts) {
+//        this.time = ts;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
     // Getter and setter for location
     public Location getLocation() {
@@ -45,41 +54,51 @@ public class Item implements Serializable {
     }
 
 
-    private void setLocation(Location loc) {
-        this.location = loc;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    private void setLocation(Location loc) {
+//        this.location = loc;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
     // Getter and Setter for description
     public String getDesc() {
         return name;
     }
-    public void setDesc(String description) {
-        this.name = description;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    public void setDesc(String description) {
+//        this.name = description;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
     // Getter and Setter for long description
     public String getLongDesc() {
         return desc;
     }
-    public void setLongDesc(String longDescription) {
-        this.desc = longDescription;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    public void setLongDesc(String longDescription) {
+//        this.desc = longDescription;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
     // Getter and Setter for value
     public double getValue() {
         return value;
     }
-    public void setValue(double val) {
-        this.value = val;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    public void setValue(double val) {
+//        this.value = val;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
     // Getter and Setter for item type
     public ItemType getItemType() {
         return itemtype;
     }
-    public void setItemType(ItemType type) {
-        this.itemtype = type;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    public void setItemType(ItemType type) {
+//        this.itemtype = type;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
     /**
      * SaveToText file method for items. It's about the same
@@ -104,7 +123,7 @@ public class Item implements Serializable {
         System.out.println("THIS IS THE LINE: " + line);
         String[] tokens = line.split(",");
         System.out.println(Arrays.toString(tokens));
-        assert tokens.length == 15;
+        { if( !(tokens.length == 15) ) throw new AssertionError( "Failure message" ); }
         String actualItemType = tokens[14].substring(0, tokens[14].length() -1); // getting ItemTYPE.
         ItemType itemType = actualItemType.equals("Clothing") ? ItemType.CLO
                 : actualItemType.equals("Hat") ? ItemType.HAT

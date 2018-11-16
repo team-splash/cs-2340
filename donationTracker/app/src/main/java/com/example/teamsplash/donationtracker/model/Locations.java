@@ -2,7 +2,6 @@ package com.example.teamsplash.donationtracker.model;
 
 import android.util.Log;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -37,16 +36,18 @@ public class Locations implements Serializable {
         return tempLoc;
     }
 
-    public boolean contains(String name, String address) {
-        for (Location place : locations) {
-            if (place.getName().equals(name) && place.getAddress().equals(address))
-                return true;
-        }
-        return false;
-    }
-    public boolean contains(Location location) {
-        return locations.contains(location);
-    }
+//    @SuppressWarnings("contains method check")
+//    public boolean contains(String name, String address) {
+//        for (Location place : locations) {
+//            if (place.getName().equals(name) && place.getAddress().equals(address))
+//                return true;
+//        }
+//        return false;
+//    }
+//    @SuppressWarnings("contains method check")
+//    public boolean contains(Location location) {
+//        return locations.contains(location);
+//    }
 
     public String toString() {
         StringBuilder str = new StringBuilder();
@@ -82,10 +83,10 @@ public class Locations implements Serializable {
      * But I don't want to mess things up so I'm not changing the name of the method,
      * and in some ways I'm not really amending its functionality, but I'm making it more in line
      * with what has been written for persistence in User(s) and soon Item(s).
-     * @param reader - Scanner object that reads our File.
-     * @throws IOException
+
+     //* @throws IOException -if it doesn't exist
      */
-    public void readFromCsv(Scanner reader) {
+    public void readFromCsv(Scanner reader){
         //locations.clear(); //potentially don't use this as it may lead to overwriting.
         while (reader.hasNext()) {
             String nextLine = reader.nextLine();

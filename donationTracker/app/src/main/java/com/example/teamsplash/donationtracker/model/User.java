@@ -5,11 +5,11 @@ import android.util.Log;
 import java.io.PrintWriter;
 
 public class User {
-    private String firstname;
-    private String lastname;
-    private String email;
-    private String password;
-    private UserType usertype;
+    private final String firstname;
+    private final String lastname;
+    private final String email;
+    private final String password;
+    private final UserType usertype;
 
     public User(String firstname, String lastname, String email, String password, UserType usertype) {
         String s1 = firstname.substring(0, 1).toUpperCase();
@@ -36,18 +36,22 @@ public class User {
         return firstname;
     }
 
-    public void setFirstName(String name) {
-        this.firstname = name;
-    }
+// --Commented out by Inspection START (11/15/18, 9:08 PM):
+//    public void setFirstName(String name) {
+//        this.firstname = name;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
     // Getter and setter for last name
     private String getLastName() {
         return lastname;
     }
 
-    private void setLastName(String name) {
-        this.lastname = name;
-    }
+// --Commented out by Inspection START (11/15/18, 9:08 PM):
+//    private void setLastName(String name) {
+//        this.lastname = name;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
     public String getName() { return firstname + " " + lastname; }
 
@@ -55,25 +59,31 @@ public class User {
     public String getEmail() {
         return email;
     }
-    public void setEmail(String address) {
-        this.email = address;
-    }
+// --Commented out by Inspection START (11/15/18, 9:08 PM):
+//    public void setEmail(String address) {
+//        this.email = address;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
     // Getter and Setter for password
     public String getPassword() {
         return password;
     }
-    public void setPassword(String updated) {
-        this.password = updated;
-    }
+// --Commented out by Inspection START (11/15/18, 9:08 PM):
+//    public void setPassword(String updated) {
+//        this.password = updated;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
     // Getter and Setter for User Type
     public UserType getUserType() {
         return usertype;
     }
-    public void setUserType(UserType type) {
-        usertype = type;
-    }
+// --Commented out by Inspection START (11/15/18, 9:08 PM):
+//    public void setUserType(UserType type) {
+//        usertype = type;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
     /**
      * Using water's code here. Essentially, I want to
@@ -102,8 +112,8 @@ public class User {
         Log.d("We have figured out line isn't null in our parseEntry", "LINE 113: USER.JAVA");
         Log.d("line in file: " + line, "LINE 114, parseEntry: USER.JAVA");
         String[] tokens = line.split(":");
-        assert tokens.length == 5;
-        String actualString = tokens[4].substring(0, tokens[4].length() - 1);
+        { if( !(tokens.length == 5) ) throw new AssertionError( "Failure message" ); }
+        //String actualString = tokens[4].substring(0, tokens[4].length() - 1);
         UserType type = tokens[4].equals("User") ? UserType.USER
                 : tokens[4].equals("Location Employee") ? UserType.LOCATION_EMPLOYEE
                 : tokens[4].equals("Manager") ? UserType.MANAGER
