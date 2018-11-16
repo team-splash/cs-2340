@@ -136,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity {
                             "userFile"));
                     users.saveAsText(newWriter);
                 } catch (FileNotFoundException e) {
-                    System.out.println("Failed to add new name to text file. LINE 158:");
+                    //System.out.println("Failed to add new name to text file. LINE 158:");
                 }
                 users.setCurrentUser(newUser);
                 Intent goToMain = new Intent(RegisterActivity.this,

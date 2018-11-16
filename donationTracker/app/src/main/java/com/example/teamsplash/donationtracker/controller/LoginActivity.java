@@ -376,7 +376,6 @@ public class LoginActivity extends AppCompatActivity implements
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
             showProgress(false);
 
             if (success) {
@@ -395,7 +394,6 @@ public class LoginActivity extends AppCompatActivity implements
 
         @Override
         protected void onCancelled() {
-            mAuthTask = null;
             showProgress(false);
         }
     }
