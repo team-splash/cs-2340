@@ -1,19 +1,15 @@
 package com.example.teamsplash.donationtracker;
+
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.teamsplash.donationtracker.model.User;
+import com.example.teamsplash.donationtracker.model.Location;
+import com.example.teamsplash.donationtracker.model.LocationType;
 
+import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-
-
-import junit.framework.TestCase;
-
-
-import static com.example.teamsplash.donationtracker.model.UserType.MANAGER;
-import static com.example.teamsplash.donationtracker.model.UserType.USER;
 import static org.junit.Assert.assertNotEquals;
 
 
@@ -21,24 +17,20 @@ import static org.junit.Assert.assertNotEquals;
 @RunWith(AndroidJUnit4.class)
 public class sarahTest extends TestCase {
     @Test
-    public void equals() {
-        User one = new User("sarah", "branham", "sarah@gmail.com", "password", MANAGER);
-        User two = new User("chris", "obando", "chris@yahoo.com", "password", MANAGER);
-        boolean nos = one.equals(two);
-
-        assertNotEquals(nos, true);
+    public void testLocationEquals() {
+        Location a = new Location("A", LocationType.DR, 0.0, 0.0, "A", "A", "MA", "01001", "0000000000");
+        assertNotEquals(null, a);
+        assertNotEquals(new Object(), a);
+        assertNotEquals(new Location("B", LocationType.DR, 0.0, 0.0, "A", "A", "MA", "01001", "0000000000"), a);
+        assertNotEquals(new Location("A", LocationType.ST, 0.0, 0.0, "A", "A", "MA", "01001", "0000000000"), a);
+        assertNotEquals(new Location("A", LocationType.DR, 1.0, 0.0, "A", "A", "MA", "01001", "0000000000"), a);
+        assertNotEquals(new Location("A", LocationType.DR, 0.0, 1.0, "A", "A", "MA", "01001", "0000000000"), a);
+        assertNotEquals(new Location("A", LocationType.DR, 0.0, 0.0, "B", "A", "MA", "01001", "0000000000"), a);
+        assertNotEquals(new Location("A", LocationType.DR, 0.0, 0.0, "A", "B", "MA", "01001", "0000000000"), a);
+        assertNotEquals(new Location("A", LocationType.DR, 0.0, 0.0, "A", "A", "RI", "01001", "0000000000"), a);
+        assertNotEquals(new Location("A", LocationType.DR, 0.0, 0.0, "A", "A", "MA", "02804", "0000000000"), a);
+        assertNotEquals(new Location("A", LocationType.DR, 0.0, 0.0, "A", "A", "MA", "01001", "0000000001"), a);
+        assertEquals(new Location("A", LocationType.DR, 0.0, 0.0, "A", "A", "MA", "01001", "0000000000"), a);
+        assertEquals(a, a);
     }
-    @Test
-    public void names() {
-        User sarah = new User("sarah", "branham", "sarah@gmail.com", "password", USER);
-        String sarahName = sarah.getName();
-        assertNotNull(sarahName);
-    }
-    @Test
-    public void emailCheck() {
-        User sarah = new User("sarah", "branham", "sarah@gmail.com", "password", USER);
-        String email = sarah.getEmail();
-        assertEquals("sarah@gmail.com", email);
-    }
-    
 }
