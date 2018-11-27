@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
+import firebase_admin
+import firebase_admin.credentials
 
 
 class Location:
@@ -70,6 +72,7 @@ class Location:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("csv")
+    parser.add_argument("service_account_key")
     args = parser.parse_args()
 
     with open(args.csv, encoding="utf-8-sig") as csv_file:
@@ -82,6 +85,9 @@ def main():
 
     for location in locations:
         print(location)
+
+    cred = firebase_admin.credentials.Certificate(args.service_account_key)
+    firebase_admin.initialize_app(cred)
 
 
 main()
