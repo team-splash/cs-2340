@@ -8,10 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.User;
 import com.example.teamsplash.donationtracker.model.Users;
-import com.example.teamsplash.donationtracker.R;
 
 /**
  * makes the main menu into a fragment object for formatting
@@ -47,18 +46,18 @@ public class MainFragment extends Fragment {
         });
 
 
-
-        Users users = Users.getInstance();
-        User currentUser = users.getCurrentUser();
-
-        TextView userName = fragment.findViewById(R.id.userName);
-        userName.setText(currentUser.getName());
-
-        TextView userEmail = fragment.findViewById(R.id.userEmail);
-        userEmail.setText(currentUser.getEmail());
-
-        TextView userType = fragment.findViewById(R.id.userType);
-        userType.setText(currentUser.getUserType().toString());
+//
+//        Users users = Users.getInstance();
+//        User currentUser = users.getCurrentUser();
+//
+//        TextView userName = fragment.findViewById(R.id.userName);
+//        userName.setText(currentUser.getName());
+//
+//        TextView userEmail = fragment.findViewById(R.id.userEmail);
+//        userEmail.setText(currentUser.getEmail());
+//
+//        TextView userType = fragment.findViewById(R.id.userType);
+//        userType.setText(currentUser.getUserType().toString());
 
         return fragment;
     }

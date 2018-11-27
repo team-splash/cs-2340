@@ -7,9 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
-
-import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.R;
+import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.UserType;
 import com.example.teamsplash.donationtracker.model.Users;
 
@@ -18,7 +17,7 @@ import java.util.Objects;
 /**
  * Location detail keeps track of the locations in a listAdapter.
  */
-@SuppressWarnings("ALL")
+//@SuppressWarnings("ALL")
 public class LocationDetail extends AppCompatActivity {
 
     private Location location;

@@ -29,16 +29,21 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.teamsplash.donationtracker.R;
+import com.example.teamsplash.donationtracker.model.User;
+import com.example.teamsplash.donationtracker.model.Users;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.teamsplash.donationtracker.model.User;
-import com.example.teamsplash.donationtracker.model.Users;
-import com.example.teamsplash.donationtracker.R;
-
 import static android.Manifest.permission.READ_CONTACTS;
-
 /**
  * A login screen that offers login via email/password.
  */
@@ -118,6 +123,7 @@ public class LoginActivity extends AppCompatActivity implements
         mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 attemptLogin();
             }
         });
@@ -180,9 +186,11 @@ public class LoginActivity extends AppCompatActivity implements
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
+        Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
+
+        //if (mAuthTask != null) {
+          //  return;
+        //}
 
         // Reset errors.
         mEmailView.setError(null);
@@ -196,6 +204,7 @@ public class LoginActivity extends AppCompatActivity implements
 
         boolean cancel = false;
         View focusView = null;
+        AllowAccessToAccount(email, password);
 
         // Check for a valid password, if the user entered one.
         if (TextUtils.isEmpty(password) || !isPasswordValid(email, password)) {
@@ -207,6 +216,7 @@ public class LoginActivity extends AppCompatActivity implements
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
+
             focusView.requestFocus();
         }
 
@@ -218,22 +228,56 @@ public class LoginActivity extends AppCompatActivity implements
         } else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
+
             cancel = true;
         }
+
+
+
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
+
             focusView.requestFocus();
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-
-
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            AllowAccessToAccount(email, password);
+            //showProgress(true);
+           // mAuthTask = new UserLoginTask(email, password);
+            //mAuthTask.execute((Void) null);
         }
+    }
+    public static String EncodeString(String string) {
+        return string.replace(".", ",");
+    }
+    private void AllowAccessToAccount(final String email, final String password) {
+        final DatabaseReference RootRef;
+        RootRef = FirebaseDatabase.getInstance().getReference();
+
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String newEmail = EncodeString(email);
+                if (dataSnapshot.child("Users").child(newEmail).exists()) {
+                    User userData = dataSnapshot.child("Users").child(newEmail).getValue(User.class);
+                    String compEmail = EncodeString(userData.getEmail());
+                    if (userData.getPassword().equals(password)) {
+                            Intent toMainMenu =  new Intent(LoginActivity.this, MainMenu.class);
+                            startActivity(toMainMenu);
+                    }
+
+                } else {
+                    Toast.makeText(LoginActivity.this, "Please make a new account", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private boolean isEmailValid(String email) {
@@ -241,8 +285,8 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     private boolean isPasswordValid(String email, String password) {
-        Users accounts = Users.getInstance();
-        return accounts.contains(email, password);
+        //Users accounts = Users.getInstance();
+        return (password.length() > 8);
     }
 
     /**

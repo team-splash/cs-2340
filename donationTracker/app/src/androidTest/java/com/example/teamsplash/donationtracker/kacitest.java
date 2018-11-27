@@ -18,10 +18,15 @@ import java.util.Arrays;
  */
 @RunWith(AndroidJUnit4.class)
 public class kacitest extends TestCase{
+    /**
+     * tests the names of locations
+     */
     @Test
     public void testLocationsGetNames() {
-        Location a = new Location("A", LocationType.DR, 0.0, 0.0, "A", "A", "MA", "01001", "0000000000");
-        Location b = new Location("B", LocationType.DR, 0.0, 0.0, "B", "B", "MA", "01001", "0000000001");
+        Location a = new Location("A", LocationType.DR, 0.0, 0.0, "A", "A", "MA", "01001",
+                "0000000000");
+        Location b = new Location("B", LocationType.DR, 0.0, 0.0, "B", "B", "MA", "01001",
+                "0000000001");
         String[] emptyLocationNames = {};
         String[] aLocationNames = {"A"};
         String[] abLocationNames = {"A", "B"};

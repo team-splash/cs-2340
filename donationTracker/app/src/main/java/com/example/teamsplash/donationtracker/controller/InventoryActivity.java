@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * this is the way to add items into inventory
  */
-@SuppressWarnings("ALL")
+//@SuppressWarnings("ALL")
 public class InventoryActivity extends AppCompatActivity {
 
     private ItemListAdapter adapter;

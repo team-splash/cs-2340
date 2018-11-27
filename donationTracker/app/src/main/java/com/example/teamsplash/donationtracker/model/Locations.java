@@ -5,6 +5,7 @@ import android.util.Log;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -51,8 +52,8 @@ public final class Locations implements Serializable {
     /**
      * @return list of the names of all of the lcoations we are getting
      */
-    public List<String> getNames() {
-        List<String> tempLoc = new ArrayList<>();
+    public Collection<String> getNames() {
+        Collection<String> tempLoc = new ArrayList<>();
         for (Location l : locations) {
             tempLoc.add(l.getName());
         }

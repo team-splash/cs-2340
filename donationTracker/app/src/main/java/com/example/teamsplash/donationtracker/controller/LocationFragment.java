@@ -14,10 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
-import com.example.teamsplash.donationtracker.R;
 
 /**
  * makes a fragment type for locations. So it can display correctly in the way the app is formated

@@ -5,7 +5,7 @@ import android.annotation.SuppressLint;
 import java.io.PrintWriter;
 import java.io.Serializable;
 
-@SuppressWarnings("ALL")
+//@SuppressWarnings("ALL")
 public class Location implements Serializable {
 
     private final String name;

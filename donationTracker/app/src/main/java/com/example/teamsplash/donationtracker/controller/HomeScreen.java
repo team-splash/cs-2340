@@ -15,7 +15,7 @@ import java.util.Scanner;
 /**
  * Home screen holds all the stuff to access different parts of the app
  */
-@SuppressWarnings("ALL")
+//@SuppressWarnings("ALL")
 public class HomeScreen extends AppCompatActivity implements View.OnClickListener {
 
     @Override

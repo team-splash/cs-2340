@@ -4,7 +4,7 @@ import android.util.Log;
 
 import java.io.PrintWriter;
 
-@SuppressWarnings("ALL")
+//@SuppressWarnings("ALL")
 public class User {
     private final String firstname;
     private final String lastname;
@@ -32,6 +32,13 @@ public class User {
         this.password = password;
         this.usertype = usertype;
     }
+    public User(){
+        firstname = "k";
+        lastname = "l";
+        password = "aaaaaaaa";
+        email = "k@gmail.com";
+        usertype = UserType.USER;
+    }
 
     /**
      * @param o an object that is being compared
@@ -39,7 +46,8 @@ public class User {
      */
     @Override
     public boolean equals(Object o) {
-        return o == this || o instanceof User && (((User) o).getFirstName().equals(this.firstname) && ((User) o).getLastName().equals(this.lastname) && ((User) o).getEmail().equals(this.email) && ((User) o).getPassword().equals(this.password) && ((User) o).getUserType().equals(this.usertype));
+        return o == this ||  ((User) o).getEmail().equals(this.email) && ((User) o).getPassword().equals(this.password);
+               // && ((User) o).getUserType().equals(this.usertype));
 
     }
 

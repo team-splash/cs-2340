@@ -20,9 +20,13 @@ import static org.junit.Assert.assertNotEquals;
  */
 @RunWith(AndroidJUnit4.class)
 public class shreyasTest extends TestCase {
+    /**
+     * test to see if the item equal method works
+     */
     @Test
     public void testItemEquals() {
-        Location location = new Location("A", LocationType.DR, 0.0, 0.0, "A", "A", "MA", "01001", "0000000000");
+        Location location = new Location("A", LocationType.DR, 0.0, 0.0, "A", "A", "MA", "01001",
+                "0000000000");
         Item a = new Item("00:00:00", location, "A", "a", 0.0, ItemType.CLO);
         assertNotEquals(null, a);
         assertNotEquals(new Object(), a);

@@ -6,16 +6,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.Location;
+import com.example.teamsplash.donationtracker.R;
 
 import java.util.Locale;
 
 /**
  * descriptions and attributes about item objects
  */
-@SuppressWarnings("ALL")
+//@SuppressWarnings("ALL")
 public class ItemDetail extends AppCompatActivity {
 
     @Override

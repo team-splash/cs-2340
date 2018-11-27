@@ -26,7 +26,7 @@ import java.util.Date;
 /**
  * AddItemActivity class that has functionality for actually adding items.
  */
-@SuppressWarnings("ALL")
+//@SuppressWarnings("ALL")
 public class AddItemActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Location loc;

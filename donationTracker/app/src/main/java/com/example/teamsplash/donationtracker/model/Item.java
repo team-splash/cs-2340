@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.Arrays;
 
-@SuppressWarnings("ALL")
+//@SuppressWarnings("ALL")
 public class Item implements Serializable {
     private final String time;
     private final Location location;

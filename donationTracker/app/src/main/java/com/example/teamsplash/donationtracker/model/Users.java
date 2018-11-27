@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
-@SuppressWarnings("ALL")
+//@SuppressWarnings("ALL")
 public class Users {
 
     private static final Users _instance = new Users();
