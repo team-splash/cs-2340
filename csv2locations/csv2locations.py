@@ -33,7 +33,7 @@ class Location:
 
     @classmethod
     def from_row(cls, field_column_indexes, row):
-        cls(
+        return cls(
             **{
                 field_name: row[field_column_indexes[field_name]]
                 for field_name in cls.FIELD_NAMES
@@ -41,7 +41,7 @@ class Location:
 
     def __init__(self, name, latitude, longitude, street_address, city_name,
                  usps_state_code, zip_code, location_type, phone_number, url):
-        super().__init__(self)
+        super().__init__()
         self.__name = name
         self.__latitude = latitude
         self.__longitude = longitude
@@ -53,6 +53,19 @@ class Location:
         self.__phone_number = phone_number
         self.__url = url
 
+    def str_address(self):
+        return (
+            f"{self.__street_address}, "
+            f"{self.__city_name}, {self.__usps_state_code} {self.__zip_code}")
+
+    def __str__(self):
+        return (f"{self.__name}\n"
+                f"{self.__location_type}\n"
+                f"{self.str_address()}\n"
+                f"{self.__latitude}, {self.__longitude}\n"
+                f"{self.__url}\n"
+                f"{self.__phone_number}")
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -61,7 +74,14 @@ def main():
 
     with open(args.csv, encoding="utf-8-sig") as csv_file:
         csv = [line.split(",") for line in csv_file.read().splitlines()]
-        print(Location.get_field_column_indexes(csv[0]))
+
+    field_column_indexes = Location.get_field_column_indexes(csv[0])
+    locations = [
+        Location.from_row(field_column_indexes, row) for row in csv[1:]
+    ]
+
+    for location in locations:
+        print(location)
 
 
 main()
