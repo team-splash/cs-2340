@@ -54,6 +54,7 @@ public final class Locations extends Observable {
     private Locations() {
         keyLocations = new HashMap<>();
         locationsLock = new Object();
+        locations = Collections.unmodifiableList(new ArrayList<Location>());
         locationsReference = FirebaseDatabase.getInstance().getReference().child("locations");
         locationsReference.addChildEventListener(new ChildEventListener() {
             @Override

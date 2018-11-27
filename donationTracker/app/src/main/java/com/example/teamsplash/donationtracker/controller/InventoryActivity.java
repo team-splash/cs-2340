@@ -87,6 +87,9 @@ public class InventoryActivity extends AppCompatActivity implements Observer {
         final Spinner categorySpinner = findViewById(R.id.categorySpinner);
         EditText searchBar = findViewById(R.id.searchFilter);
         final List<Item> itemList = Items.getInstance().get();
+        final Locations locationsInstance = Locations.getInstance();
+        locationsInstance.addObserver(this);
+        update(locationsInstance);
         locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             /**
              * @param parentView an adapterview item
