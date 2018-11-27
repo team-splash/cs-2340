@@ -205,7 +205,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                Toast.makeText(RegisterActivity.this, "Error: " + databaseError, Toast.LENGTH_SHORT).show();
             }
         });
 

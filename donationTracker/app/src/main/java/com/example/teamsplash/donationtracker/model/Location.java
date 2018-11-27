@@ -19,6 +19,10 @@ public class Location extends Observable implements Serializable {
     private final String zipCode;
     private final String phoneNumber;
 
+    Location() {
+        this(null, null, 0.0, 0.0, null, null, null, null, null);
+    }
+
     /**
      * @param name name of the location of donation center
      * @param locationType type of donation center

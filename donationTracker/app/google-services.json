@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "174682855383",
-    "firebase_url": "https://donation-tracker-1541491317316.firebaseio.com",
-    "project_id": "donation-tracker-1541491317316",
-    "storage_bucket": "donation-tracker-1541491317316.appspot.com"
+    "project_number": "859178883575",
+    "firebase_url": "https://donation-tracker-4e04d.firebaseio.com",
+    "project_id": "donation-tracker-4e04d",
+    "storage_bucket": "donation-tracker-4e04d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:174682855383:android:3931a283d176cf24",
+        "mobilesdk_app_id": "1:859178883575:android:3931a283d176cf24",
         "android_client_info": {
           "package_name": "com.example.teamsplash.donationtracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "174682855383-i1ae8kl9iusdcsk1iikq1lduqohu76mi.apps.googleusercontent.com",
+          "client_id": "859178883575-lu65a6f7htd4ac1ebsto2p1ot19ai72f.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.teamsplash.donationtracker",
-            "certificate_hash": "5863f8580ded9738675d136a01182d96376a2955"
+            "certificate_hash": "d20e104ab0259876cdd693aeea5d9c5e085e184f"
           }
         },
         {
-          "client_id": "174682855383-daqusr6424rnejtn434ot40lrkr795l7.apps.googleusercontent.com",
+          "client_id": "859178883575-u97nov611j0smd58cq6khl20csoqe886.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDO7auScTRbdHfJedk0_Te3CD2fo7O5UEc"
+          "current_key": "AIzaSyD8_tX0rk3W6zP8kB4KsfeiFziir4wBDY0"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "174682855383-daqusr6424rnejtn434ot40lrkr795l7.apps.googleusercontent.com",
+              "client_id": "859178883575-u97nov611j0smd58cq6khl20csoqe886.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -264,6 +264,8 @@ public class LoginActivity extends AppCompatActivity implements
                     User userData = dataSnapshot.child("Users").child(newEmail).getValue(User.class);
                     String compEmail = EncodeString(userData.getEmail());
                     if (userData.getPassword().equals(password)) {
+                            final Users users = Users.getInstance();
+                            users.setCurrentUser(userData);
                             Intent toMainMenu =  new Intent(LoginActivity.this, MainMenu.class);
                             startActivity(toMainMenu);
                     }

@@ -2,6 +2,7 @@
 
 import argparse
 import collections
+import enum
 import firebase_admin
 import firebase_admin.credentials
 import firebase_admin.db
@@ -9,18 +10,35 @@ import firebase_admin.db
 Field = collections.namedtuple("Field", ["name", "field_type"])
 
 
+class LocationType(enum.Enum):
+    DR = "Drop Off"
+    ST = "Store"
+    WA = "Warehouse"
+
+
 class Location:
     COLUMN_FIELDS = {
-        "Name": Field("name", str),
-        "Latitude": Field("latitude", float),
-        "Longitude": Field("longitude", float),
-        "Street Address": Field("streetAddress", str),
-        "City": Field("cityName", str),
-        "State": Field("uspsStateCode", str),
-        "Zip": Field("zipCode", int),
-        "Type": Field("locationType", str),
-        "Phone": Field("phoneNumber", str),
-        "Website": Field("url", str)
+        "Name":
+        Field("name", str),
+        "Latitude":
+        Field("latitude", float),
+        "Longitude":
+        Field("longitude", float),
+        "Street Address":
+        Field("streetAddress", str),
+        "City":
+        Field("cityName", str),
+        "State":
+        Field("uspsStateCode", str),
+        "Zip":
+        Field("zipCode", str),
+        "Type":
+        Field("locationType",
+              lambda location_type: LocationType(location_type).name),
+        "Phone":
+        Field("phoneNumber", str),
+        "Website":
+        Field("url", str)
     }
     COLUMN_FIELD_NAMES = {
         column_name: field.name

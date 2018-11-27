@@ -45,12 +45,6 @@ public final class Locations extends Observable {
         notifyObservers();
     }
 
-    public List<Location> getLocations() {
-        synchronized (locationsLock) {
-            return locations;
-        }
-    }
-
     private Locations() {
         keyLocations = new HashMap<>();
         locationsLock = new Object();
@@ -83,6 +77,12 @@ public final class Locations extends Observable {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    public List<Location> getLocations() {
+        synchronized (locationsLock) {
+            return locations;
+        }
     }
 
     /**
