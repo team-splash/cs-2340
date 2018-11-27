@@ -14,8 +14,12 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@SuppressWarnings("SpellCheckingInspection")
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+    /**
+     * Creating method to use the context of the app within text.
+     */
     @Test
     public void useAppContext() {
         // Context of the app under test.

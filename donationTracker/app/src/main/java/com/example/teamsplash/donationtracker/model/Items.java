@@ -5,39 +5,62 @@ import android.util.Log;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class Items implements Serializable {
+/**
+ * item object, items has all attributes of item
+ */
+@SuppressWarnings("SameReturnValue")
+public final class Items implements Serializable {
     private static final Items _instance = new Items();
+
+    /**
+     * @return instance of that item
+     */
     public static Items getInstance() {
         return _instance;
     }
-    private ArrayList<Item> ItemData;
+    private final List<Item> ItemData;
 
     private Items() {
         ItemData = new ArrayList<>();
     }
 
-    public boolean add(Item item) {
+    /**
+     * @param item what we want to add to items from list
+     */
+    public void add(Item item) {
         ItemData.add(item);
-        return true;
     }
 
+    /**
+     * @return the item from the list of items that we want to grab
+     */
     public List<Item> get() {
-        return ItemData;
+        return Collections.unmodifiableList(ItemData);
     }
 
+    /**
+     * @param loc location of the item in the list
+     * @return a list of items by location
+     */
     public List<Item> getByLocation(Location loc) {
         List<Item> locItems = new ArrayList<>();
         for (Item item: ItemData) {
-            if (item.getLocation().equals(loc)) {
+            Location ofItem = item.getLocation();
+            if (ofItem.equals(loc)) {
                 locItems.add(item);
             }
         }
         return locItems;
     }
 
+    /**
+     * @param it item type of each item in list
+     * @return list by category
+     */
     public List<Item> getByCategory(ItemType it) {
         List<Item> catItems = new ArrayList<>();
         for (Item item: ItemData) {
@@ -48,23 +71,29 @@ public class Items implements Serializable {
         return catItems;
     }
 
-    public boolean contains(Item item) {
-        for (Item i : ItemData) {
-            if (i.getLocation().equals(item.getLocation()) && i.getDesc().equals(item.getDesc())) {
-                return true;
-            }
-        }
-        return false;
-    }
+// --Commented out by Inspection START (11/15/18, 9:13 PM):
+//    public boolean contains(Item item) {
+//        for (Item i : ItemData) {
+//            if (i.getLocation().equals(item.getLocation()) && i.getDesc().equals(item.getDesc()))
+// {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:13 PM)
 
 
+    /**
+     * @return string of each item in the lsit
+     */
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (Item i : ItemData) {
-            str += i.toString() + "\n, ";
+            str.append(i.toString()).append("\n, ");
         }
-        return str;
+        return str.toString();
     }
 
     /**

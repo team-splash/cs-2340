@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
@@ -9,7 +10,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        app:srcCompat="@drawable/teamlogo"
+        app:srcCompat="@mipmap/teamlogo"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:layout_marginEnd="96dp"
@@ -18,7 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/logostuff" />
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="250dp"

@@ -2,34 +2,30 @@ package com.example.teamsplash.donationtracker.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ArrayAdapter;
 
 import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.ItemType;
 import com.example.teamsplash.donationtracker.model.Items;
 import com.example.teamsplash.donationtracker.model.Locations;
-import com.example.teamsplash.donationtracker.model.UserType;
-import com.example.teamsplash.donationtracker.model.Users;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this is the way to add items into inventory
+ */
+//@SuppressWarnings("ALL")
 public class InventoryActivity extends AppCompatActivity {
 
     private ItemListAdapter adapter;
@@ -44,30 +40,39 @@ public class InventoryActivity extends AppCompatActivity {
         EditText searchBar = findViewById(R.id.searchFilter);
 
         final List<Item> itemList = Items.getInstance().get();
-        final List<String> categoryList = new ArrayList<>();
 
         List<String> locationsList = new ArrayList<>();
         locationsList.add("Search by name");
-        for (String s : Locations.getInstance().getNames()) {
-            locationsList.add(s);
-        }
+        locationsList.addAll(Locations.getInstance().getNames());
 
-        ArrayAdapter<Enum> spinneradapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, locationsList);
+        ArrayAdapter<? extends String> spinneradapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, locationsList);
         spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         locationSpinner.setAdapter(spinneradapter);
         locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            /**
+             * @param parentView an adapterview item
+             * @param selectedItemView what was selected
+             * @param position where it's locted
+             * @param id the id of the inventory item
+             */
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
+                                       int position, long id) {
                 if (position == 0) {
                     adapter = new ItemListAdapter(InventoryActivity.this, itemList);
                     list.setAdapter(adapter);
                 } else {
-                    final List<Item> locItemsList = Items.getInstance().getByLocation(Locations.getInstance().getPosition(position - 1));
+                    final List<Item> locItemsList = Items.getInstance().getByLocation(
+                            Locations.getInstance().getPosition(position - 1));
                     adapter = new ItemListAdapter(InventoryActivity.this, locItemsList);
                     list.setAdapter(adapter);
                 }
             }
 
+            /**
+             * @param parentView the adapterview item
+             */
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 adapter = new ItemListAdapter(InventoryActivity.this, itemList);
@@ -75,23 +80,34 @@ public class InventoryActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<Enum> spinneradapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ItemType.values());
+        ArrayAdapter<Enum<ItemType>> spinneradapter2 = new ArrayAdapter<Enum<ItemType>>(this,
+                android.R.layout.simple_spinner_item, ItemType.values());
         spinneradapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(spinneradapter2);
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            /*
+              @param parentView an adapterview item
+             * @param selectedItemView what was selected
+             * @param position where it's locted
+             * @param id the id of the inventory item
+             */
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
+                                       int position, long id) {
                 if (position == 0) {
                     adapter = new ItemListAdapter(InventoryActivity.this, itemList);
                     list.setAdapter(adapter);
                 } else {
-                    final Spinner categorySpin = categorySpinner;
-                    final List<Item> catItemsList = Items.getInstance().getByCategory((ItemType) categorySpin.getSelectedItem());
+                    final List<Item> catItemsList = Items.getInstance().getByCategory(
+                            (ItemType) categorySpinner.getSelectedItem());
                     adapter = new ItemListAdapter(InventoryActivity.this, catItemsList);
                     list.setAdapter(adapter);
                 }
             }
 
+            /**
+             * @param parentView parent view item
+             */
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 adapter = new ItemListAdapter(InventoryActivity.this, itemList);
@@ -100,11 +116,23 @@ public class InventoryActivity extends AppCompatActivity {
         });
 
         searchBar.addTextChangedListener(new TextWatcher() {
+            /**
+             * @param charSequence the sequence for search
+             * @param i  first one
+             * @param i1 second one
+             * @param i2 third one
+             */
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
+            /**
+             * @param cs the character sequence
+             * @param i  first one
+             * @param i1 second one
+             * @param i2 third one
+             */
             @Override
             public void onTextChanged(CharSequence cs, int i, int i1, int i2) {
                 int textlength = cs.length();
@@ -116,12 +144,13 @@ public class InventoryActivity extends AppCompatActivity {
                         }
                     }
                     if (textlength <= c.getLocation().toString().length()) {
-                        if (c.getLocation().toString().toLowerCase().contains(cs.toString().toLowerCase())) {
+                        String csToLowerCase = cs.toString().toLowerCase();
+                        if (c.getLocation().toString().toLowerCase().contains(csToLowerCase)) {
                             tempArrayList.add(c);
                         }
                     }
                 }
-                if (tempArrayList.size() == 0) {
+                if (tempArrayList.isEmpty()) {
                     Toast toast = Toast.makeText(getApplicationContext(),
                             "No items match your search",
                             Toast.LENGTH_SHORT);
@@ -132,6 +161,9 @@ public class InventoryActivity extends AppCompatActivity {
                 list.setAdapter(adapter);
             }
 
+            /**
+             * @param editable what it is after search
+             */
             @Override
             public void afterTextChanged(Editable editable) {
 
@@ -146,7 +178,8 @@ public class InventoryActivity extends AppCompatActivity {
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("ITEM", itemClicked);
-                Intent listDetails = new Intent(InventoryActivity.this, ItemDetail.class);
+                Intent listDetails = new Intent(InventoryActivity.this,
+                        ItemDetail.class);
                 listDetails.putExtras(bundle);
                 startActivity(listDetails);
             }

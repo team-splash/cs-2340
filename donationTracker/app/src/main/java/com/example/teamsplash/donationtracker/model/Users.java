@@ -2,13 +2,11 @@ package com.example.teamsplash.donationtracker.model;
 
 import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.Console;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Scanner;
 
+//@SuppressWarnings("ALL")
 public class Users {
 
     private static final Users _instance = new Users();
@@ -16,7 +14,7 @@ public class Users {
         return _instance;
     }
 
-    public static HashMap<User, String> UserData;
+    private static HashMap<User, String> UserData;
     private User currUser;
 
     private Users() {
@@ -26,16 +24,23 @@ public class Users {
         UserData.put(new User("Chris", "Obando", "chrisjobando@gmail.com", "250797", UserType.ADMINISTRATOR), "250797");
     }
 
-    public boolean add(User user) {
+    /**
+     * @param user the user we want to add to our keyset for login
+     */
+    public void add(User user) {
         for (User u : UserData.keySet()) {
             if (user.getEmail().equals(u.getEmail())) {
-                return false;
+                return;
             }
         }
         UserData.put(user, user.getPassword());
-        return true;
     }
 
+    /**
+     * @param email the email of the user we are retrieving
+     * @param password the password of the user we are retrieving
+     * @return the user that we are looking for
+     */
     public User get(String email, String password) {
         for (User u : UserData.keySet()) {
             Log.i(u.getEmail() + ":" + u.getPassword(), "EACH TIME: LINE 41, USERS.JAVA");
@@ -49,25 +54,37 @@ public class Users {
         return null;
     }
 
-    public boolean contains(User user) {
+// --Commented out by Inspection START (11/15/18, 9:10 PM):
+//    public boolean contains(User user) {
+//
+//        for (User u: UserData.keySet()) {
+//            if (user.equals(u)) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:10 PM)
 
-        for (User u: UserData.keySet()) {
-            if (user.equals(u)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    /**
+     * @param email the email we are searching for
+     * @param password the password we are serching for
+     * @return true or false if the email password combo matches
+     */
     public boolean contains(String email, String password) {
         return (get(email, password) != null);
     }
 
-    public boolean remove(User user) {
-        UserData.remove(user);
-        return true;
-    }
+// --Commented out by Inspection START (11/15/18, 9:10 PM):
+//    public boolean remove(User user) {
+//        UserData.remove(user);
+//        return true;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:10 PM)
 
+    /**
+     * @return the user that is loging in
+     */
     // Getter and setter for current user
     public User getCurrentUser() {
         return currUser;
@@ -76,19 +93,24 @@ public class Users {
         currUser = user;
     }
 
+    /**
+     * @return string of the information of the user
+     */
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (User u : UserData.keySet()) {
-            str += u + "\n, ";
+            str.append(u).append("\n, ");
         }
-        return str;
+        return str.toString();
     }
 
     /**
      * How we write all the users to a text file, if i'm not mistaken.
-     * Read through the HashMap and add accordingly,
+     * Read through the User HashMap and add accordingly,
      * using the saveAsText command we defined in the USER class.
+     * The PrintWriter will write the contents of a User (a string) to the actual file.
+     * We save the data!
      * @param writer - A PrintWriter which is a buffer for an actual file.
      */
     public void saveAsText(PrintWriter writer) {
@@ -102,9 +124,9 @@ public class Users {
 
 
     /**
-     * How do we READ FROM A file? We have a BufferedReader
-     * and we clear out our HashMap. Then, we add back in again.
-     * @param reader - A bufferedReader on our file.
+     * How do we READ FROM A file? We have a Scanner that reads from the file.
+     * and we clear out our HashMap. Then, we add back in again. It's inefficient, but it works.
+     * @param reader - A Scanner on our file.
      */
     public void loadAsText(Scanner reader) {
         UserData.clear();

@@ -10,20 +10,22 @@
     <Spinner
         android:id="@+id/locationSpinner"
         android:layout_width="match_parent"
-        android:layout_height="40dp"></Spinner>
+        android:layout_height="40dp" />
 
     <Spinner
         android:id="@+id/categorySpinner"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/locationSpinner"></Spinner>
+        android:layout_below="@+id/locationSpinner" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/searchFilter"
         android:hint="@string/search"
-        android:layout_below="@+id/categorySpinner"/>
+        android:layout_below="@+id/categorySpinner"
+        android:inputType=""
+        android:importantForAutofill="no" />
 
     <ListView
         android:layout_width="match_parent"

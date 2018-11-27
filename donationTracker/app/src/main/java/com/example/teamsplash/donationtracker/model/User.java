@@ -4,13 +4,21 @@ import android.util.Log;
 
 import java.io.PrintWriter;
 
+//@SuppressWarnings("ALL")
 public class User {
-    private String firstname;
-    private String lastname;
-    private String email;
-    private String password;
-    private UserType usertype;
+    private final String firstname;
+    private final String lastname;
+    private final String email;
+    private final String password;
+    private final UserType usertype;
 
+    /**
+     * @param firstname name of the user
+     * @param lastname last name of the user
+     * @param email email of the user
+     * @param password password of the user
+     * @param usertype type of user that the user is
+     */
     public User(String firstname, String lastname, String email, String password, UserType usertype) {
         String s1 = firstname.substring(0, 1).toUpperCase();
         firstname = s1 + firstname.substring(1);
@@ -24,67 +32,90 @@ public class User {
         this.password = password;
         this.usertype = usertype;
     }
+    public User(){
+        firstname = "k";
+        lastname = "l";
+        password = "aaaaaaaa";
+        email = "k@gmail.com";
+        usertype = UserType.USER;
+    }
 
+    /**
+     * @param o an object that is being compared
+     * @return boolean that gives true if items compared are equal
+     */
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (!(o instanceof User)) {
-            return false;
-        }
-
-        return (((User) o).getFirstName().equals(this.firstname)
-                && ((User) o).getLastName().equals(this.lastname)
-                && ((User) o).getEmail().equals(this.email)
-                && ((User) o).getPassword().equals(this.password)
-                && ((User) o).getUserType().equals(this.usertype));
+        return o == this ||  ((User) o).getEmail().equals(this.email) && ((User) o).getPassword().equals(this.password);
+               // && ((User) o).getUserType().equals(this.usertype));
 
     }
 
     // Getter and Setter for first name
-    public String getFirstName() {
+    private String getFirstName() {
         return firstname;
     }
 
-    public void setFirstName(String name) {
-        this.firstname = name;
-    }
+// --Commented out by Inspection START (11/15/18, 9:08 PM):
+//    public void setFirstName(String name) {
+//        this.firstname = name;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
     // Getter and setter for last name
     private String getLastName() {
         return lastname;
     }
 
-    private void setLastName(String name) {
-        this.lastname = name;
-    }
+// --Commented out by Inspection START (11/15/18, 9:08 PM):
+//    private void setLastName(String name) {
+//        this.lastname = name;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
+    /**
+     * @return string of the name put together in first and last
+     */
     public String getName() { return firstname + " " + lastname; }
 
+    /**
+     * @return the email in string form
+     */
     // Getter and Setter for email
     public String getEmail() {
         return email;
     }
-    public void setEmail(String address) {
-        this.email = address;
-    }
+// --Commented out by Inspection START (11/15/18, 9:08 PM):
+//    public void setEmail(String address) {
+//        this.email = address;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
+    /**
+     * @return the password in string form
+     */
     // Getter and Setter for password
     public String getPassword() {
         return password;
     }
-    public void setPassword(String updated) {
-        this.password = updated;
-    }
+// --Commented out by Inspection START (11/15/18, 9:08 PM):
+//    public void setPassword(String updated) {
+//        this.password = updated;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
+    /**
+     * @return usertype, so what type of user of the user we are seeking
+     */
     // Getter and Setter for User Type
     public UserType getUserType() {
         return usertype;
     }
-    public void setUserType(UserType type) {
-        usertype = type;
-    }
+// --Commented out by Inspection START (11/15/18, 9:08 PM):
+//    public void setUserType(UserType type) {
+//        usertype = type;
+//    }
+// --Commented out by Inspection STOP (11/15/18, 9:08 PM)
 
     /**
      * Using water's code here. Essentially, I want to
@@ -113,8 +144,8 @@ public class User {
         Log.d("We have figured out line isn't null in our parseEntry", "LINE 113: USER.JAVA");
         Log.d("line in file: " + line, "LINE 114, parseEntry: USER.JAVA");
         String[] tokens = line.split(":");
-        assert tokens.length == 5;
-        String actualString = tokens[4].substring(0, tokens[4].length() - 1);
+        { if( !(tokens.length == 5) ) throw new AssertionError( "Failure message" ); }
+        //String actualString = tokens[4].substring(0, tokens[4].length() - 1);
         UserType type = tokens[4].equals("User") ? UserType.USER
                 : tokens[4].equals("Location Employee") ? UserType.LOCATION_EMPLOYEE
                 : tokens[4].equals("Manager") ? UserType.MANAGER
@@ -123,6 +154,10 @@ public class User {
         System.out.println("This works, line 123, parseEntry: USER.JAVA");
         return user;
     }
+
+    /**
+     * @return string version of the email and password together
+     */
     @Override
     public String toString() {
         return (email + ": " + password);
@@ -134,7 +169,7 @@ public class User {
      * to storing all data.
      * @return a representation of a User that we can save to a text file.
      */
-    public String getFullRep() {
+    private String getFullRep() {
         return (firstname + ":" + lastname + ":" + email + ":" + password + ":" + usertype);
     }
 }

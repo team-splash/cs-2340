@@ -2,59 +2,86 @@ package com.example.teamsplash.donationtracker.model;
 
 import android.util.Log;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-public class Locations implements Serializable {
+/**
+ * takes care of location objects in a list
+ */
+public final class Locations implements Serializable {
     private static final Locations _instance = new Locations();
+
+    /**
+     * @return locations returns all the different locations when we ask for
+     * the instances of them
+     */
     public static Locations getInstance() { return _instance; }
-    private List<Location> locations;
+    private final List<Location> locations;
     private Locations() {
         locations = new ArrayList<>();
     }
 
-    public boolean add(Location place) {
+    /**
+     * @param place adds the place we want to the location
+     */
+    @SuppressWarnings("SameReturnValue")
+    public void add(Location place) {
         locations.add(place);
-        return true;
-    }
-    public List<Location> get() {
-        return locations;
     }
 
+    /**
+     * @return list of locations that we want
+     */
+    public List<Location> get() {
+        return Collections.unmodifiableList(locations);
+    }
+
+    /**
+     * @param position of item in list of location we want
+     * @return the location that's in that place of the list
+     */
     public Location getPosition(int position) {
         return locations.get(position);
     }
 
-    public List<String> getNames() {
-        List<String> tempLoc = new ArrayList<>();
+    /**
+     * @return list of the names of all of the lcoations we are getting
+     */
+    public Collection<String> getNames() {
+        Collection<String> tempLoc = new ArrayList<>();
         for (Location l : locations) {
             tempLoc.add(l.getName());
         }
         return tempLoc;
     }
 
-    public boolean contains(String name, String address) {
-        for (Location place : locations) {
-            if (place.getName().equals(name) && place.getAddress().equals(address))
-                return true;
-        }
-        return false;
-    }
-    public boolean contains(Location location) {
-        return locations.contains(location);
-    }
+//    @SuppressWarnings("contains method check")
+//    public boolean contains(String name, String address) {
+//        for (Location place : locations) {
+//            if (place.getName().equals(name) && place.getAddress().equals(address))
+//                return true;
+//        }
+//        return false;
+//    }
+//    @SuppressWarnings("contains method check")
+//    public boolean contains(Location location) {
+//        return locations.contains(location);
+//    }
 
+    /**
+     * @return string form of the location we want
+     */
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (Location location : locations) {
-            str += location + "\n, ";
+            str.append(location).append("\n, ");
         }
-        return str;
+        return str.toString();
     }
 
     /**
@@ -83,14 +110,16 @@ public class Locations implements Serializable {
      * But I don't want to mess things up so I'm not changing the name of the method,
      * and in some ways I'm not really amending its functionality, but I'm making it more in line
      * with what has been written for persistence in User(s) and soon Item(s).
-     * @param reader - Scanner object that reads our File.
-     * @throws IOException
+     * @param reader a readline reader
+
+     //* @throws IOException -if it doesn't exist
      */
-    public void readFromCsv(Scanner reader) throws IOException {
+    public void readFromCsv(Scanner reader){
         //locations.clear(); //potentially don't use this as it may lead to overwriting.
         while (reader.hasNext()) {
             String nextLine = reader.nextLine();
-            Log.i("THIS IS THE LINE, LINE 91, READ FROM CSV: " + nextLine, "THE MEDIUM IS THE MESSAGE.");
+            Log.i("THIS IS THE LINE, LINE 91, READ FROM CSV: " + nextLine,
+                    "THE MEDIUM IS THE MESSAGE.");
             Location newLoc = Location.parseEntry(nextLine);
             locations.add(newLoc); // add to ArrayList.
         }
