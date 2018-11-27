@@ -44,8 +44,9 @@ class Location:
     def __init__(self, field_column_indexes, row, **kwargs):
         super().__init__(**kwargs)
         self.__fields = {
-            field.name: field.field_type(row[field_column_indexes[field.name]])
-            for field in self.FIELDS
+            field_name: field.field_type(row[field_column_indexes[field_name]])
+            for field, field_name in ((field, field.name)
+                                      for field in self.FIELDS)
         }
 
     def str_address(self):
