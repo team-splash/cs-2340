@@ -3,6 +3,7 @@
 import argparse
 import firebase_admin
 import firebase_admin.credentials
+import firebase_admin.db
 
 
 class Location:
@@ -68,6 +69,13 @@ class Location:
                 f"{self.__url}\n"
                 f"{self.__phone_number}")
 
+    def to_json(self):
+        return self.__dict__
+
+
+DATABASE_NAME = "donation-tracker-4e04d"
+DATABASE_URL = f"https://{DATABASE_NAME}.firebaseio.com"
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -82,12 +90,13 @@ def main():
     locations = [
         Location.from_row(field_column_indexes, row) for row in csv[1:]
     ]
+    print("\n\n".join([str(location) for location in locations]))
+    cred = firebase_admin.credentials.Certificate(args.service_account_key)
+    firebase_admin.initialize_app(cred, {"databaseURL": DATABASE_URL})
+    locations_ref = firebase_admin.db.reference().child("locations")
 
     for location in locations:
-        print(location)
-
-    cred = firebase_admin.credentials.Certificate(args.service_account_key)
-    firebase_admin.initialize_app(cred)
+        locations_ref.push().set(location.to_json())
 
 
 main()
