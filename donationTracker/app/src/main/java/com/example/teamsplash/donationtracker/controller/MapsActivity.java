@@ -30,12 +30,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Observer;
 
 /**
  * mapsactivity are all the activities needed to pull up the maps
  */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, LocationListener {
+                                                              GoogleApiClient.OnConnectionFailedListener, LocationListener
+                                                              {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
-        final List<Location> locationList = Locations.getInstance().get();
+        final List<Location> locationList = Locations.getInstance().getLocations();
         for (Location loc : locationList){
             googleMap.addMarker(new MarkerOptions()
                     .position(new LatLng(loc.getLatitude(), loc.getLongitude()))

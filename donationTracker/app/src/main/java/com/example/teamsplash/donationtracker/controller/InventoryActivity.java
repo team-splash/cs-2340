@@ -17,38 +17,79 @@ import com.example.teamsplash.donationtracker.R;
 import com.example.teamsplash.donationtracker.model.Item;
 import com.example.teamsplash.donationtracker.model.ItemType;
 import com.example.teamsplash.donationtracker.model.Items;
+import com.example.teamsplash.donationtracker.model.Location;
 import com.example.teamsplash.donationtracker.model.Locations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * this is the way to add items into inventory
  */
 //@SuppressWarnings("ALL")
-public class InventoryActivity extends AppCompatActivity {
-
+public class InventoryActivity extends AppCompatActivity implements Observer {
+    private List<Location> locations;
+    private Spinner locationSpinner;
     private ItemListAdapter adapter;
+
+    private void update(Locations locationsInstance) {
+        locations = locationsInstance.getLocations();
+        final List<String> locationsList = new ArrayList<>();
+        locationsList.add("Search by name");
+        locationsList.addAll(locations.stream().map(new Function<Location, String>() {
+            @Override
+            public String apply(Location location) {
+                return location.getName();
+            }
+        }).collect(new Supplier<List<String>>() {
+            @Override
+            public List<String> get() {
+                return new ArrayList<>();
+            }
+        }, new BiConsumer<List<String>, String>() {
+            @Override
+            public void accept(List<String> strings, String s) {
+                strings.add(s);
+            }
+        }, new BiConsumer<List<String>, List<String>>() {
+            @Override
+            public void accept(List<String> strings, List<String> strings2) {
+                strings.addAll(strings2);
+            }
+        }));
+        ArrayAdapter<? extends String> spinneradapter = new ArrayAdapter<>(this,
+                                                                           android.R.layout.simple_spinner_item, locationsList);
+        spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        locationSpinner.setAdapter(spinneradapter);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (!(o instanceof Locations))
+            return;
+
+        update((Locations) o);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inventory_activity);
         final ListView list = findViewById(R.id.itemsList);
-        Spinner locationSpinner = findViewById(R.id.locationSpinner);
+        locationSpinner = findViewById(R.id.locationSpinner);
         final Spinner categorySpinner = findViewById(R.id.categorySpinner);
         EditText searchBar = findViewById(R.id.searchFilter);
-
         final List<Item> itemList = Items.getInstance().get();
-
-        List<String> locationsList = new ArrayList<>();
-        locationsList.add("Search by name");
-        locationsList.addAll(Locations.getInstance().getNames());
-
-        ArrayAdapter<? extends String> spinneradapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, locationsList);
-        spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        locationSpinner.setAdapter(spinneradapter);
+        final Locations locationsInstance = Locations.getInstance();
+        locationsInstance.addObserver(this);
+        update(locationsInstance);
         locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             /**
              * @param parentView an adapterview item
@@ -64,7 +105,7 @@ public class InventoryActivity extends AppCompatActivity {
                     list.setAdapter(adapter);
                 } else {
                     final List<Item> locItemsList = Items.getInstance().getByLocation(
-                            Locations.getInstance().getPosition(position - 1));
+                            locations.get(position - 1));
                     adapter = new ItemListAdapter(InventoryActivity.this, locItemsList);
                     list.setAdapter(adapter);
                 }

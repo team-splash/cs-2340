@@ -40,10 +40,10 @@ public class LocationDetail extends AppCompatActivity {
         final String type = location.getLocationType().toString();
         final String longitude = Double.toString(location.getLongitude());
         final String latitude = Double.toString(location.getLatitude());
-        final String address = location.getAddress();
-        final String city = location.getCity();
-        final String state = location.getState();
-        final String zip = location.getZip();
+        final String address = location.getStreetAddress();
+        final String city = location.getCityName();
+        final String state = location.getUspsStateCode();
+        final String zip = location.getZipCode();
         final String phone = location.getPhoneNumber();
 
         final String wholeAddress = address + "\n" + city + ", " + state + ", " + zip;
