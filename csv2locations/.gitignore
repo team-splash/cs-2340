@@ -1,4 +1,6 @@
 # Vim swap files
 *.swp
 
+/serviceAccountKey.json
+
 /csv
