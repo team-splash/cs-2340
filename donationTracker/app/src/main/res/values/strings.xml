@@ -10,7 +10,7 @@
     <string name="action_sign_in">Sign in</string>
     <string name="action_register">Don\'t have an account? Register here</string>
     <string name="error_user_exists">This user already exists</string>
-    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_email">This email streetAddress is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_password_mismatch">Passwords must match</string>
     <string name="error_incorrect_password">Your username or password is incorrect</string>

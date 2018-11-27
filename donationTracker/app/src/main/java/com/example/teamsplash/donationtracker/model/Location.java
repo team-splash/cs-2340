@@ -4,18 +4,19 @@ import android.annotation.SuppressLint;
 
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.util.Observable;
 
 //@SuppressWarnings("ALL")
-public class Location implements Serializable {
+public class Location extends Observable implements Serializable {
 
     private final String name;
     private final LocationType locationType;
     private final double longitude;
     private final double latitude;
-    private final String address;
-    private final String city;
-    private final String state;
-    private final String zip;
+    private final String streetAddress;
+    private final String cityName;
+    private final String uspsStateCode;
+    private final String zipCode;
     private final String phoneNumber;
 
     /**
@@ -23,22 +24,22 @@ public class Location implements Serializable {
      * @param locationType type of donation center
      * @param longitude longitude of donation center
      * @param latitude latitude of donation center
-     * @param address address of donation center
-     * @param city city donation center is located in
-     * @param state state donation location is in
-     * @param zip zip code of donation center
+     * @param streetAddress streetAddress of donation center
+     * @param cityName cityName donation center is located in
+     * @param uspsStateCode uspsStateCode donation location is in
+     * @param zipCode zipCode code of donation center
      * @param phoneNumber phone number of donation center
      */
     public Location(String name, LocationType locationType, double longitude, double latitude,
-                    String address, String city, String state, String zip, String phoneNumber) {
+                    String streetAddress, String cityName, String uspsStateCode, String zipCode, String phoneNumber) {
         this.name = name;
         this.locationType = locationType;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
+        this.streetAddress = streetAddress;
+        this.cityName = cityName;
+        this.uspsStateCode = uspsStateCode;
+        this.zipCode = zipCode;
         this.phoneNumber = phoneNumber;
     }
 
@@ -48,7 +49,7 @@ public class Location implements Serializable {
      */
     @Override
     public boolean equals(Object o) {
-        return o == this || o instanceof Location && (((Location) o).getName().equals(this.name) && ((Location) o).getLocationType().equals(this.locationType) && (((Location) o).getLongitude() == this.longitude)) && ((Location) o).getLatitude() == (this.latitude) && ((Location) o).getAddress().equals(this.address) && ((Location) o).getCity().equals(this.city) && ((Location) o).getState().equals(this.state) && ((Location) o).getZip().equals(this.zip) && ((Location) o).getPhoneNumber().equals(this.phoneNumber);
+        return o == this || o instanceof Location && (((Location) o).getName().equals(this.name) && ((Location) o).getLocationType().equals(this.locationType) && (((Location) o).getLongitude() == this.longitude)) && ((Location) o).getLatitude() == (this.latitude) && ((Location) o).getStreetAddress().equals(this.streetAddress) && ((Location) o).getCityName().equals(this.cityName) && ((Location) o).getUspsStateCode().equals(this.uspsStateCode) && ((Location) o).getZipCode().equals(this.zipCode) && ((Location) o).getPhoneNumber().equals(this.phoneNumber);
 
     }
 
@@ -77,10 +78,10 @@ public class Location implements Serializable {
     // --Commented out by Inspection (11/15/18, 9:00 PM):public void setLatitude(double laty) {latitude = laty;}
 
     /**
-     * @return address of of location we are getting
+     * @return streetAddress of of location we are getting
      */
-    public String getAddress() {return address;}
-    // --Commented out by Inspection (11/15/18, 9:00 PM):public void setAddress(String place) {address = place;}
+    public String getStreetAddress() {return streetAddress;}
+    // --Commented out by Inspection (11/15/18, 9:00 PM):public void setAddress(String place) {streetAddress = place;}
 
     /**
      * @return phone number of location we are getting
@@ -89,22 +90,22 @@ public class Location implements Serializable {
     // --Commented out by Inspection (11/15/18, 9:00 PM):public void setPhoneNumber(String num) {phoneNumber = num;}
 
     /**
-     * @return city of location we are getting
+     * @return cityName of location we are getting
      */
-    public String getCity() {return city;}
-    // --Commented out by Inspection (11/15/18, 9:00 PM):public void setCity(String c) {city = c;}
+    public String getCityName() {return cityName;}
+    // --Commented out by Inspection (11/15/18, 9:00 PM):public void setCity(String c) {cityName = c;}
 
     /**
-     * @return state of location we are getting
+     * @return uspsStateCode of location we are getting
      */
-    public String getState() {return state;}
-    // --Commented out by Inspection (11/15/18, 9:00 PM):public void setState(String s) {state = s;}
+    public String getUspsStateCode() {return uspsStateCode;}
+    // --Commented out by Inspection (11/15/18, 9:00 PM):public void setState(String s) {uspsStateCode = s;}
 
     /**
-     * @return zip of location we are getting
+     * @return zipCode of location we are getting
      */
-    public String getZip() {return zip;}
-    // --Commented out by Inspection (11/15/18, 9:00 PM):public void setZip(String z) {zip = z;}
+    public String getZipCode() {return zipCode;}
+    // --Commented out by Inspection (11/15/18, 9:00 PM):public void setZip(String z) {zipCode = z;}
 
     /**
      * Using water's code here. Essentially, I want to
@@ -165,17 +166,19 @@ public class Location implements Serializable {
     }
 
     /**
-     * @return string of name, address, long, lat, and phone number attributes of location
+     * @return string of name, streetAddress, long, lat, and phone number attributes of location
      */
     @Override
     public String toString() {
-        return (name + ", " + address + " : " + longitude + "," + latitude + " : " + phoneNumber);
+        return (name + ", " + streetAddress + " : " + longitude + "," + latitude + " : " + phoneNumber);
     }
 
     /**
      * @return all of the attributes of the location into one string
      */
     public String getFullRep() {
-        return "x" + "," + name + "," + latitude + "," + longitude + "," + address + "," + city + "," + state + "," + zip + "," + locationType + "," + phoneNumber; // added the "x" so that all numberings for Location were consistent.
+        return "x" + "," + name + "," + latitude + "," + longitude + "," + streetAddress + "," + cityName + "," + uspsStateCode + "," +
+
+               zipCode + "," + locationType + "," + phoneNumber; // added the "x" so that all numberings for Location were consistent.
     }
 }

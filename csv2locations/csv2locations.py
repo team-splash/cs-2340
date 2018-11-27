@@ -14,12 +14,12 @@ class Location:
         "Name": Field("name", str),
         "Latitude": Field("latitude", float),
         "Longitude": Field("longitude", float),
-        "Street Address": Field("street_address", str),
-        "City": Field("city_name", str),
-        "State": Field("usps_state_code", str),
-        "Zip": Field("zip_code", int),
-        "Type": Field("location_type", str),
-        "Phone": Field("phone_number", str),
+        "Street Address": Field("streetAddress", str),
+        "City": Field("cityName", str),
+        "State": Field("uspsStateCode", str),
+        "Zip": Field("zipCode", int),
+        "Type": Field("locationType", str),
+        "Phone": Field("phoneNumber", str),
         "Website": Field("url", str)
     }
     COLUMN_FIELD_NAMES = {
@@ -51,18 +51,18 @@ class Location:
 
     def str_address(self):
         fields = self.__fields
-        return (f"{fields['street_address']}, "
-                f"{fields['city_name']}, {fields['usps_state_code']} "
-                f"{fields['zip_code']}")
+        return (f"{fields['streetAddress']}, "
+                f"{fields['cityName']}, {fields['uspsStateCode']} "
+                f"{fields['zipCode']}")
 
     def __str__(self):
         fields = self.__fields
         return (f"{fields['name']}\n"
-                f"{fields['location_type']}\n"
+                f"{fields['locationType']}\n"
                 f"{self.str_address()}\n"
                 f"{fields['latitude']}, {fields['longitude']}\n"
                 f"{fields['url']}\n"
-                f"{fields['phone_number']}")
+                f"{fields['phoneNumber']}")
 
     def to_json(self):
         return self.__fields

@@ -1,6 +1,8 @@
 package com.example.teamsplash.donationtracker.controller;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.example.teamsplash.donationtracker.R;
@@ -21,7 +22,26 @@ import com.example.teamsplash.donationtracker.model.Locations;
 /**
  * makes a fragment type for locations. So it can display correctly in the way the app is formated
  */
-public class LocationFragment extends Fragment {
+public class LocationFragment extends Fragment implements Observer {
+    @NonNull
+    private LayoutInflater inflater;
+
+    private List<Location> locations;
+    private ListView list;
+
+    private void update(Locations locationsInstance) {
+        locations = locationsInstance.getLocations();
+        list.setAdapter(new LocationList(inflater, locations));
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (!(o instanceof Locations))
+            return;
+
+        update((Locations) o);
+    }
+
     /**
      * @param inflater inflates makes layout come to life
      * @param container holsd  fragments
@@ -31,14 +51,12 @@ public class LocationFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        this.inflater = inflater;
         View fragment = inflater.inflate(R.layout.location_fragment, container, false);
-
-        final List<Location> locationList = Locations.getInstance().get();
-
-        ListAdapter listAdapter = new LocationList(inflater, locationList);
-        final ListView list = fragment.findViewById(R.id.location_list);
-        list.setAdapter(listAdapter);
-
+        list = fragment.findViewById(R.id.location_list);
+        final Locations locationsInstance = Locations.getInstance();
+        locationsInstance.addObserver(this);
+        update(locationsInstance);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             /**
              * @param parent adapterview object before click
@@ -49,7 +67,7 @@ public class LocationFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Location itemClicked = locationList.get(position);
+                Location itemClicked = locations.get(position);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("LOCATION", itemClicked);
                 Intent listDetails = new Intent(LocationFragment.this.getActivity(),
@@ -58,7 +76,6 @@ public class LocationFragment extends Fragment {
                 startActivity(listDetails);
             }
         });
-
         return fragment;
     }
 
@@ -98,8 +115,8 @@ public class LocationFragment extends Fragment {
             TextView cityState = rowView.findViewById(R.id.location_city_state);
 
             name.setText(location.getName());
-            address.setText(location.getAddress());
-            cityState.setText(String.format("%s, %s", location.getCity(), location.getState()));
+            address.setText(location.getStreetAddress());
+            cityState.setText(String.format("%s, %s", location.getCityName(), location.getUspsStateCode()));
             return rowView;
         }
     }
