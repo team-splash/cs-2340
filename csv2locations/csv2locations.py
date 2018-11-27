@@ -68,15 +68,13 @@ class Location:
         return self.__fields
 
 
-DATABASE_NAME = "donation-tracker-4e04d"
-DATABASE_URL = f"https://{DATABASE_NAME}.firebaseio.com"
-
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("csv")
+    parser.add_argument("database_name")
     parser.add_argument("service_account_key")
     args = parser.parse_args()
+    database_url = f"https://{args.database_name}.firebaseio.com"
 
     with open(args.csv, encoding="utf-8-sig") as csv_file:
         csv = [line.split(",") for line in csv_file.read().splitlines()]
@@ -85,7 +83,7 @@ def main():
     locations = [Location(field_column_indexes, row) for row in csv[1:]]
     print("\n\n".join([str(location) for location in locations]))
     cred = firebase_admin.credentials.Certificate(args.service_account_key)
-    firebase_admin.initialize_app(cred, {"databaseURL": DATABASE_URL})
+    firebase_admin.initialize_app(cred, {"databaseURL": database_url})
     locations_ref = firebase_admin.db.reference().child("locations")
 
     for location in locations:
